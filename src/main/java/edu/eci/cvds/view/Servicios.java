@@ -21,14 +21,14 @@ import edu.eci.cvds.samples.services.ServiciosAlquiler;
 public class Servicios extends BasePageBean {
 	public static final long MULTA_DIARIA = 5000;
 	private List<Cliente> clientes;
-	private List<ItemRentado> items;
-	private List<ItemRentado> itemsRetardados;
+	private List<RecursoRentado> Recursos;
+	private List<RecursoRentado> RecursosRetardados;
 	private Cliente clienteIngresado;
 	private long idClienteIngresado;
 	@Inject
 	private ServiciosAlquiler service;
 	
-	public List<Item> itemsAlquilados(){
+	public List<Recurso> RecursosAlquilados(){
 		return null;
 	}
 	
@@ -47,12 +47,12 @@ public class Servicios extends BasePageBean {
 		this.clientes = clientes;
 	}
 
-	public List<ItemRentado> getItems() throws ExcepcionServiciosAlquiler {
-		return items;
+	public List<RecursoRentado> getRecursos() throws ExcepcionServiciosAlquiler {
+		return Recursos;
 	}
 
-	public void setItems(List<ItemRentado> list) {
-		this.items = list;
+	public void setRecursos(List<RecursoRentado> list) {
+		this.Recursos = list;
 	}
 	public Cliente getClienteIngresado() throws ExcepcionServiciosAlquiler {
 		clienteIngresado = service.consultarCliente(idClienteIngresado);
@@ -65,12 +65,12 @@ public class Servicios extends BasePageBean {
 		return idClienteIngresado;
 	}
 	public void setIdClienteIngresado(long idClienteIngresado) throws ExcepcionServiciosAlquiler {
-		setItems(service.consultarItemsCliente(idClienteIngresado));
-		setItemsRetardados(service.consultarItemsCliente(idClienteIngresado));
+		setRecursos(service.consultarRecursosCliente(idClienteIngresado));
+		setRecursosRetardados(service.consultarRecursosCliente(idClienteIngresado));
 		this.idClienteIngresado = idClienteIngresado;
 	}
 	public void registrarCliente(String nombre, long documento, String telefono, String direccion, String correo) {
-		Cliente nuevoCliente = new Cliente(nombre,documento,telefono,direccion,correo,false,new ArrayList<ItemRentado>());
+		Cliente nuevoCliente = new Cliente(nombre,documento,telefono,direccion,correo,false,new ArrayList<RecursoRentado>());
 		try {
 			service.registrarCliente(nuevoCliente);
 		} catch (ExcepcionServiciosAlquiler e) {
@@ -79,43 +79,43 @@ public class Servicios extends BasePageBean {
 		}
 	}
 
-	public List<ItemRentado> getItemsRetardados() {
-		return itemsRetardados;
+	public List<RecursoRentado> getRecursosRetardados() {
+		return RecursosRetardados;
 	}
 
-	public void setItemsRetardados(List<ItemRentado> itemsRetardados) {
-		List<ItemRentado> itemsSuperRetardados = new ArrayList<ItemRentado>();
-		for (int i = 0; i<itemsRetardados.size();i++) {
-			LocalDate fechaEntrega=itemsRetardados.get(i).getFechafinrenta().toLocalDate();
+	public void setRecursosRetardados(List<RecursoRentado> RecursosRetardados) {
+		List<RecursoRentado> RecursosSuperRetardados = new ArrayList<RecursoRentado>();
+		for (int i = 0; i<RecursosRetardados.size();i++) {
+			LocalDate fechaEntrega=RecursosRetardados.get(i).getFechafinrenta().toLocalDate();
 	        LocalDate fechaHoy= LocalDate.now();
 	        long diasRetraso = ChronoUnit.DAYS.between(fechaHoy, fechaEntrega);
 	        if (diasRetraso < 0) {
-	        	itemsSuperRetardados.add(itemsRetardados.get(i));
+	        	RecursosSuperRetardados.add(RecursosRetardados.get(i));
 	        }
 		}
-		this.itemsRetardados = itemsSuperRetardados;
+		this.RecursosRetardados = RecursosSuperRetardados;
 	}
 	
-	public long hallarMultaItem(int id) {
+	public long hallarMultaRecurso(int id) {
 		long multa = 0;
-		for (int i = 0; i<itemsRetardados.size();i++) {
-			LocalDate fechaEntrega=itemsRetardados.get(i).getFechafinrenta().toLocalDate();
+		for (int i = 0; i<RecursosRetardados.size();i++) {
+			LocalDate fechaEntrega=RecursosRetardados.get(i).getFechafinrenta().toLocalDate();
 	        LocalDate fechaHoy= LocalDate.now();
 	        long diasRetraso = ChronoUnit.DAYS.between(fechaHoy, fechaEntrega);
-	        if (id == itemsRetardados.get(i).getId()) {
+	        if (id == RecursosRetardados.get(i).getId()) {
 	        	multa = diasRetraso*MULTA_DIARIA;
 	        }
 		}
 		return Math.abs(multa);
 	}
 	
-	public void registrarItemCliente(int id,int dias) {
-		Item itemNuevo = null;
-		ItemRentado itemRentado = null;
+	public void registrarRecursoCliente(int id,int dias) {
+		Recurso RecursoNuevo = null;
+		RecursoRentado RecursoRentado = null;
 		try {
-			itemNuevo = service.consultarItem(id);
+			RecursoNuevo = service.consultarRecurso(id);
 			
-			service.registrarAlquilerCliente(Date.valueOf(LocalDate.now()),idClienteIngresado, itemNuevo, dias);
+			service.registrarAlquilerCliente(Date.valueOf(LocalDate.now()),idClienteIngresado, RecursoNuevo, dias);
 			setIdClienteIngresado(idClienteIngresado);
 			
 		} catch (ExcepcionServiciosAlquiler e) {

@@ -28,8 +28,8 @@ public class ServiciosAlquilerFactory {
            protected void initialize() {
                setEnvironmentId(env);
                setClassPathResource(pathResource);
-               bind(ItemDAO.class).to(MyBATISItemDAO.class);
-               bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
+               bind(RecursoDAO.class).to(MyBATISItemDAO.class);
+               bind(UsuarioDAO.class).to(MyBATISClienteDAO.class);
                bind(TipoItemDAO.class).to(MyBATISTipoItemDAO.class);
                bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
            }
