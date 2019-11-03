@@ -5,8 +5,36 @@ xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://java.sun.com/jsf/core">
 
  <h:head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
  </h:head>
  	<h:body>
- 		<p>BIENVENIDOS</p>
+		 <div class="parent"> 
+			<div class="div1"> <img src="/images/logoEscuela.png"/></div> 
+			<div class="div2">
+				<p>INTOCABLES</p>
+				<!--<h:form id="login">
+					<p><p:outputLabel value="Bienvenido, rellena la siguiente información para alquilar un objeto"> </p:outputLabel></p>
+					<h3>Codigo/ID</h3>
+					<span class="ui-float-label">
+						<p:inputText id="idArticulo" binding="#{articuloID}" />
+					</span>
+					<h3>Dias de alquiler</h3>
+					<span class="ui-float-label">
+						<p:inputText id="diasAlquilerArticulo" binding="#{articuloDias}" />
+					</span>
+					<p>
+						<p:commandButton update="itemsCliente" actionListener="#{servicios.registrarItemCliente(articuloID.value,articuloDias.value)}" value="Registrar">
+							<p:confirm header="Confirmation" message="Estas seguro?" icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Si ombe" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No, es un robo" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog> 
+					</p>
+				</h:form>
+				-->
+			</div> 
+		</div>
+ 		
  	</h:body>
 </html>
