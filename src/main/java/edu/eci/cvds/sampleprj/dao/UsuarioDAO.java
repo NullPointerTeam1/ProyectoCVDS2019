@@ -14,4 +14,9 @@ public interface UsuarioDAO {
 
 	public List<Usuario> consultarUsuarios() throws PersistenceException;
 
+	void agregarRecursoRentadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin)
+			throws PersistenceException;
+
+	public List<RecursoReservado> consultarRecursosRentadosUsuario(long id) throws PersistenceException;
+
 }

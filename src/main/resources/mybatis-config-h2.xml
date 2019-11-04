@@ -16,17 +16,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
            <transactionManager type="JDBC" />
            <dataSource type="POOLED">
                <property name="driver" value="com.mysql.jdbc.Driver" />
-               <property name="url" value="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba?useSSL=false" />
-               <property name="username" value="bdprueba" />
-               <property name="password" value="prueba2019" />
+               <property name="url" value="postgres://iwwkuojbaoqwrw:df11b9bf00cf66130fc0f5c3b9b0f1c7196cdfaef488270da6446830145c41fe@ec2-17" />
+               <property name="username" value="iwwkuojbaoqwrw" />
+               <property name="password" value="df11b9bf00cf66130fc0f5c3b9b0f1c7196cdfaef488270da6446830145c41fe" />
            </dataSource>
        </environment>
    </environments>
    <mappers>
-       <mapper resource="mappers/ClienteMapper.xml"></mapper>
-       <mapper resource="mappers/ItemMapper.xml"></mapper>
-       <mapper resource="mappers/ItemRentadoMapper.xml"></mapper>
-       <mapper resource="mappers/TipoItemMapper.xml"></mapper>
+       <mapper resource="mappers/UsuarioMapper.xml"></mapper>
+       <mapper resource="mappers/RecursoMapper.xml"></mapper>
+       <mapper resource="mappers/TipoRecursoMapper.xml"></mapper>
    </mappers> 
 
 </configuration>
