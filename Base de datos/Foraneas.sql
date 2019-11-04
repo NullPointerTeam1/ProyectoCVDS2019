@@ -1,3 +1,3 @@
-alter table login
-add constraint FK_Usuario_login
-foreign key (correo) references Login(Correo);
+ALTER TABLE recursos
+ADD CONSTRAINT FK_Recurso_Tipo
+FOREIGN KEY (tiporecurso_id) references tipo_recurso(id);

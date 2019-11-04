@@ -1,15 +1,11 @@
-create table if not exists LOGIN(
-	correo varchar(20) not null primary key,
-	contrasena varchar(300) not null
-);
-
 create table if not exists USUARIOS(
-	carnet int not null primary key,
+	carnet int  primary key,
 	nombre varchar(15) not null,
-	apellido varchar not null,
+	apellido varchar(15) not null,
 	carrera varchar(16)not null,
-	correo varchar(20)not null,
-	rol varchar(1) not null
+	correo varchar(100)not null,
+	rol varchar(1) not null,
+	contrasena varchar(300) not null
 );
 
 create table if not exists RECURSOS(
@@ -23,6 +19,6 @@ create table if not exists RECURSOS(
 );
 
 CREATE TABLE IF NOT EXISTS TIPO_RECURSO (
-	id INT NOT NULL,
+	id INT primary key,
 	descripcion VARCHAR(50)  NOT NULL
 );
