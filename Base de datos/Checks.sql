@@ -9,4 +9,6 @@ CHECK ((correo NOT LIKE '%@hotmail.com' or correo NOT LIKE '%@gmail.com' or corr
 ALTER TABLE recursos
 ADD CONSTRAINT  CK_recursos_disponibilidad
 CHECK(diponibilidad ='d' or diponibilidad= 'D' or diponibilidad = 'O' or diponibilidad = 'o' or diponibilidad = 'N' or diponibilidad = 'n');
-
+ALTER TABLE Usuarios
+ADD CONSTANT CK_Usuarios_rol
+check(roll='a' or rol='u' or rol='A' or rol='U';

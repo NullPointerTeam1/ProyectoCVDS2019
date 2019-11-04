@@ -5,10 +5,11 @@ create table if not exists Login(
 
 create table if not exists Usuarios(
 	carnet int not null primary key,
-	nobre varchar(15) not null,
+	nombre varchar(15) not null,
 	apellido varchar not null,
 	carrera varchar(16)not null,
-	correo varchar(20)not null
+	correo varchar(20)not null,
+	rol varchar(1) not null
 );
 
 create table if not exists Recursos(
