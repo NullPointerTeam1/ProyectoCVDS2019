@@ -11,5 +11,10 @@ import edu.eci.cvds.samples.entities.TipoRecurso;
 public interface TipoRecursoMapper {
 	
 	public void insertarTipoRecurso(@Param("tipoRecurso") TipoRecurso ti);
+	
+	public TipoRecurso consultarTipoRecurso(@Param("id") long id);
+	
+	public List<TipoRecurso> consultarTiposRecurso();
+
 
 }

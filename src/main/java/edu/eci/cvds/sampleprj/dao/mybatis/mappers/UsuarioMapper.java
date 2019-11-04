@@ -18,9 +18,12 @@ public interface UsuarioMapper {
 
 	public List<Usuario> consultarUsuarios();
 
-	public void agregarRecursoRentadoAUsuario(@Param("idUsuario") long idUsu, @Param("idRecurso") long idRe,
-			@Param("fechaIni") Date fechaIni, @Param("fechaFin") Date fechaFin);
+	/*public void agregarRecursoRentadoAUsuario(
+			@Param("idUsuario") long idUsu, 
+			@Param("idRecurso") long idRe,
+			@Param("fechaIni") Date fechaIni, 
+			@Param("fechaFin") Date fechaFin);*/
 
-	public List<RecursoReservado> consultarRecursosRentadosUsuario(@Param("id") long id);
+	// public List<RecursoReservado> consultarRecursosRentadosUsuario(@Param("id") long id);
 
 }

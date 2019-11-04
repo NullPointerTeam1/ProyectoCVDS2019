@@ -43,10 +43,9 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 	}
 
 	@Override
-	public void agregarRecursoRentadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin)
-			throws PersistenceException {
+	public void agregarRecursoRentadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin) throws PersistenceException {
 		try {
-			usuarioMapper.agregarRecursoRentadoAUsuario(id, recurso.getId(), fechaIni, fechaFin);
+			//usuarioMapper.agregarRecursoRentadoAUsuario(id, recurso.getId(), fechaIni, fechaFin);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error al registrar el recurso al usuario:" + id, e);
 		}
@@ -55,10 +54,11 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 	@Override
 	public List<RecursoReservado> consultarRecursosRentadosUsuario(long id) throws PersistenceException {
 		try {
-			return usuarioMapper.consultarRecursosRentadosUsuario(id);
+			//return usuarioMapper.consultarRecursosRentadosUsuario(id);
 		} catch (PersistenceException e) {
 			throw new PersistenceException("Error al consultar los recursos rentados del cliente" + id, e);
 		}
+		return null;
 	}
 
 }

@@ -21,4 +21,22 @@ public class MyBATISTipoRecursoDAO implements TipoRecursoDAO {
 		}
 	}
 
+	@Override
+	public TipoRecurso consultarTipoRecurso(long id) throws PersistenceException {
+		try {
+			return tipoRecursoMapper.consultarTipoRecurso(id);
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error al consultar el tipo Recurso " + id, e);
+		}
+	}
+
+	@Override
+	public List<TipoRecurso> consultarTiposRecurso() throws PersistenceException {
+		try {
+			return tipoRecursoMapper.consultarTiposRecurso();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error al consultar los tipos del recurso", e);
+		}
+	}
+
 }
