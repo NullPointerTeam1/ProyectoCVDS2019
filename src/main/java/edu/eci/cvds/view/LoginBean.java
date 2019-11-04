@@ -3,6 +3,8 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.services.ExcepcionServiciosBiblioteca;
 import edu.eci.cvds.authenticator.SessionLogger;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -55,14 +57,17 @@ public class LoginBean extends BasePageBean{
         this.correo = correo;
     }
 
-    public void login(String correo,String password,boolean rememberMe){
+    public void login(String correo,String password,boolean rememberMe) throws ExcepcionServiciosBiblioteca{
+    	if (isLogged()) {
+    		throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.USUARIO_YA_IDENTIFICADO);
+    	}
         try {
             logger.login(correo,password,rememberMe);
             FacesContext.getCurrentInstance().getExternalContext().redirect("/servicios/index.xhtml");
         } catch (ExcepcionServiciosBiblioteca excepcionServiciosBiblioteca) {
-            ReservaRecursosBean.setErrorMessage(excepcionServiciosBiblioteca);
+            LoginBean.setErrorMessage(excepcionServiciosBiblioteca);
         }catch (IOException e) {
-        	ReservaRecursosBean.setErrorMessage(e);
+        	LoginBean.setErrorMessage(e);
         }
 
 
@@ -74,13 +79,15 @@ public class LoginBean extends BasePageBean{
     }
     
     public void logout() {
-    	System.out.println("Ey");
     	if (isLogged()) {
-    		System.out.println("Si me desconecté");
     		SecurityUtils.getSubject().logout();
     	}
     }
-
+    
+    protected static void setErrorMessage(Exception e) {
+		String message = e.getMessage();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
 
     
 
