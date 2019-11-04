@@ -30,8 +30,8 @@ public class Recurso implements Serializable {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
-		this.setHorario(horario);
-		this.setDisponibilidad(disponibilidad);
+		this.horario = horario;
+		this.disponibilidad = disponibilidad;
 	}
 
 	public TipoRecurso getTipo() {
