@@ -9,6 +9,8 @@ import org.mybatis.guice.datasource.helper.JdbcHelper;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import edu.eci.cvds.authenticator.SessionLogger;
+import edu.eci.cvds.authenticator.ShiroSession;
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
 import edu.eci.cvds.samples.services.ServiciosReserva;
@@ -35,6 +37,7 @@ public class GuiceContextListener implements ServletContextListener {
 				bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 				bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
 				bind(TipoRecursoDAO.class).to(MyBATISTipoRecursoDAO.class);
+				bind(SessionLogger.class).to(ShiroSession.class);
 
 			}
 		});

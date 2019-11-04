@@ -5,6 +5,9 @@ import edu.eci.cvds.samples.services.ExcepcionServiciosBiblioteca;
 import edu.eci.cvds.authenticator.SessionLogger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
+import org.apache.shiro.SecurityUtils;
+
 import java.io.IOException;
 
 
@@ -52,10 +55,10 @@ public class LoginBean extends BasePageBean{
         this.correo = correo;
     }
 
-    public void login(){
+    public void login(String correo,String password,boolean rememberMe){
         try {
             logger.login(correo,password,rememberMe);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("login1.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/servicios/index.xhtml");
         } catch (ExcepcionServiciosBiblioteca excepcionServiciosBiblioteca) {
             ReservaRecursosBean.setErrorMessage(excepcionServiciosBiblioteca);
         }catch (IOException e) {
@@ -68,6 +71,14 @@ public class LoginBean extends BasePageBean{
 
     public boolean isLogged(){
         return logger.isLogged();
+    }
+    
+    public void logout() {
+    	System.out.println("Ey");
+    	if (isLogged()) {
+    		System.out.println("Si me desconecté");
+    		SecurityUtils.getSubject().logout();
+    	}
     }
 
 
