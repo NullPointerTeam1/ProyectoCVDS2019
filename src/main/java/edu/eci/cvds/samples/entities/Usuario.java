@@ -10,39 +10,48 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Usuario implements Serializable{
-    
-    private String nombre;
-    private String apellido;
-    private long carnet;
-    private String carrera;
-    private String correo;
-    private String rol;
-    private ArrayList<RecursoRentado> reservados;
+public class Usuario implements Serializable {
 
-  
+	private String nombre;
+	private String apellido;
+	private long carnet;
+	private String carrera;
+	private String correo;
+	private String rol;
+	private ArrayList<RecursoReservado> reservados;
+
 	public Usuario() {
-    }
+	}
 
-    public Usuario(String nombre, String apellido,long carnet, String carrera, String correo,String rol, ArrayList<RecursoRentado> reservados) {   
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.carnet = carnet;
-        this.carrera = carrera;
-        this.correo = correo;
-        this.rol = rol;
-        this.reservados = reservados;
-    }
-   
-    public String getRol() {
+	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String rol,
+			ArrayList<RecursoReservado> reservados) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.carnet = carnet;
+		this.carrera = carrera;
+		this.correo = correo;
+		this.rol = rol;
+		this.reservados = reservados;
+	}
+
+	public Usuario(String nombre, long carnet, String carrera, String rol, String correo) {
+		this.nombre = nombre;
+		this.carnet = carnet;
+		this.carrera = carrera;
+		this.rol = rol;
+		this.correo = correo;
+		this.reservados = new ArrayList<>();
+	}
+
+	public String getRol() {
 		return rol;
 	}
-    
-    public ArrayList<RecursoRentado> getReservados() {
+
+	public ArrayList<RecursoReservado> getReservados() {
 		return reservados;
 	}
 
-	public void setReservados(ArrayList<RecursoRentado> reservados) {
+	public void setReservados(ArrayList<RecursoReservado> reservados) {
 		this.reservados = reservados;
 	}
 
@@ -53,7 +62,7 @@ public class Usuario implements Serializable{
 	public String getNombre() {
 		return nombre;
 	}
-    
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -91,11 +100,8 @@ public class Usuario implements Serializable{
 	}
 
 	@Override
-    public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", rentados = \n\t" + reservados + '}';
-    }
+	public String toString() {
+		return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", rentados = \n\t" + reservados + '}';
+	}
 
-   
-    
-    
 }

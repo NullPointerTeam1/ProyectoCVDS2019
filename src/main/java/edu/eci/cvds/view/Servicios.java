@@ -21,8 +21,8 @@ import edu.eci.cvds.samples.services.ServiciosAlquiler;
 public class Servicios extends BasePageBean {
 	public static final long MULTA_DIARIA = 5000;
 	private List<Cliente> clientes;
-	private List<RecursoRentado> Recursos;
-	private List<RecursoRentado> RecursosRetardados;
+	private List<RecursoReservado> Recursos;
+	private List<RecursoReservado> RecursosRetardados;
 	private Cliente clienteIngresado;
 	private long idClienteIngresado;
 	@Inject
@@ -47,11 +47,11 @@ public class Servicios extends BasePageBean {
 		this.clientes = clientes;
 	}
 
-	public List<RecursoRentado> getRecursos() throws ExcepcionServiciosAlquiler {
+	public List<RecursoReservado> getRecursos() throws ExcepcionServiciosAlquiler {
 		return Recursos;
 	}
 
-	public void setRecursos(List<RecursoRentado> list) {
+	public void setRecursos(List<RecursoReservado> list) {
 		this.Recursos = list;
 	}
 	public Cliente getClienteIngresado() throws ExcepcionServiciosAlquiler {
@@ -70,7 +70,7 @@ public class Servicios extends BasePageBean {
 		this.idClienteIngresado = idClienteIngresado;
 	}
 	public void registrarCliente(String nombre, long documento, String telefono, String direccion, String correo) {
-		Cliente nuevoCliente = new Cliente(nombre,documento,telefono,direccion,correo,false,new ArrayList<RecursoRentado>());
+		Cliente nuevoCliente = new Cliente(nombre,documento,telefono,direccion,correo,false,new ArrayList<RecursoReservado>());
 		try {
 			service.registrarCliente(nuevoCliente);
 		} catch (ExcepcionServiciosAlquiler e) {
@@ -79,12 +79,12 @@ public class Servicios extends BasePageBean {
 		}
 	}
 
-	public List<RecursoRentado> getRecursosRetardados() {
+	public List<RecursoReservado> getRecursosRetardados() {
 		return RecursosRetardados;
 	}
 
-	public void setRecursosRetardados(List<RecursoRentado> RecursosRetardados) {
-		List<RecursoRentado> RecursosSuperRetardados = new ArrayList<RecursoRentado>();
+	public void setRecursosRetardados(List<RecursoReservado> RecursosRetardados) {
+		List<RecursoReservado> RecursosSuperRetardados = new ArrayList<RecursoReservado>();
 		for (int i = 0; i<RecursosRetardados.size();i++) {
 			LocalDate fechaEntrega=RecursosRetardados.get(i).getFechafinrenta().toLocalDate();
 	        LocalDate fechaHoy= LocalDate.now();
@@ -111,7 +111,7 @@ public class Servicios extends BasePageBean {
 	
 	public void registrarRecursoCliente(int id,int dias) {
 		Recurso RecursoNuevo = null;
-		RecursoRentado RecursoRentado = null;
+		RecursoReservado RecursoReservado = null;
 		try {
 			RecursoNuevo = service.consultarRecurso(id);
 			

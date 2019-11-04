@@ -31,9 +31,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
-import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
-import edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;

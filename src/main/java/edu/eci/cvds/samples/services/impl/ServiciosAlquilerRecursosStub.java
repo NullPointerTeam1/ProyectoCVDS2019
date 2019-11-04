@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
+public class ServiciosAlquilerRecursosStub implements ServiciosAlquiler {
 
    private static final int MULTA_DIARIA=5000;
    private final static long MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
@@ -29,7 +29,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
 
    private final Map<Integer,Long> mapaPrestamosPorIdCliente;
 
-   public ServiciosAlquilerItemsStub() {
+   public ServiciosAlquilerRecursosStub() {
        clientes = new HashMap<>();
        itemsDisponibles = new HashMap<>();
        itemsrentados = new HashMap<>();
