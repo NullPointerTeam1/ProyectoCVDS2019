@@ -6,4 +6,4 @@ deployment:
   staging:
     branch: master
     heroku: 
-      appname: cvds-circleci-rentalClient
+      appname: cvds-circleci-biblioteca-eci
