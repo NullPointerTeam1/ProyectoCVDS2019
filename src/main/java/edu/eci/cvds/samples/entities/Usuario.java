@@ -5,31 +5,38 @@
  */
 package edu.eci.cvds.samples.entities;
 
-import java.awt.List;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 
 public class Usuario implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private String apellido;
 	private long carnet;
 	private String carrera;
 	private String correo;
+	private String contraseña;
 	private String rol;
 	private ArrayList<RecursoReservado> reservados;
 
 	public Usuario() {
 	}
 
-	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String rol,
+	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String contraseña, String rol,
 			ArrayList<RecursoReservado> reservados) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.carnet = carnet;
 		this.carrera = carrera;
 		this.correo = correo;
+		this.contraseña = contraseña;
 		this.rol = rol;
 		this.reservados = reservados;
 	}
@@ -102,6 +109,14 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", rentados = \n\t" + reservados + '}';
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
 	}
 
 }

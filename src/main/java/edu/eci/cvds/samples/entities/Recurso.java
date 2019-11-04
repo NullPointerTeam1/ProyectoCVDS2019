@@ -13,6 +13,11 @@ import java.util.Date;
  * @author NullpointerTeam
  */
 public class Recurso implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private TipoRecurso tipo;
 	private int id;
 	private String nombre;

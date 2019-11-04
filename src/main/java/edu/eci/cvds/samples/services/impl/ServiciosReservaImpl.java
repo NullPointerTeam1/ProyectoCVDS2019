@@ -1,16 +1,13 @@
 package edu.eci.cvds.samples.services.impl;
 
 import com.google.inject.Inject;
+
 import com.google.inject.Singleton;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.*;
 import edu.eci.cvds.sampleprj.dao.*;
 import org.mybatis.guice.transactional.Transactional;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 @Singleton

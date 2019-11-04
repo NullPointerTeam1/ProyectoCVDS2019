@@ -1,13 +1,8 @@
 package edu.eci.cvds.samples.services.impl;
 
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Map;
 

@@ -14,6 +14,11 @@ import java.sql.Date;
  */
 public class RecursoReservado implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int id;
 
 	private Recurso recurso;

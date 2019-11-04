@@ -12,10 +12,16 @@ import java.util.List;
 
 import java.sql.Date;
 
+@SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
 @ApplicationScoped
 public class ReservaRecursosBean extends BasePageBean {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private ServiciosReserva serviciosReserva;
 	private Usuario selectedUsuario;
@@ -117,7 +123,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		return selectedUsuario;
 	}
 
-	private void setErrorMessage(Exception e) {
+	protected static void setErrorMessage(Exception e) {
 		String message = e.getMessage();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
