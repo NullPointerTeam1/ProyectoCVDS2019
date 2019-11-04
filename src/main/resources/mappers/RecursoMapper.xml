@@ -19,6 +19,32 @@
 			)
 	</insert>
 
+	<select parameterType="map" id="consultarRecurso" resultMap="RecursoResult" >
+        SELECT    
+        r.identificador,
+        r.nombre,
+        r.ubicacion,
+        r.capacidad,
+        r.horario_disponibilidad,
+        r.diponibilidad,
+        r.tiporecurso_id
+        FROM RECURSOS AS r 
+        WHERE r.identificador=#{id}
+    </select>
+
+    
+    <select parameterType="map" id="consultarRecursos" resultMap="RecursoResult" >
+    	SELECT    
+        r.identificador,
+        r.nombre,
+        r.ubicacion,
+        r.capacidad,
+        r.horario_disponibilidad,
+        r.diponibilidad,
+        r.tiporecurso_id
+        FROM RECURSOS AS r
+    </select>
+
 	<resultMap type='Recurso' id='RecursoResult'>
 	    <id property='id' column='identificador'/>
 	    <result property='nombre' column='nombre'/>

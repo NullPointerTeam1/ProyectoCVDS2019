@@ -23,11 +23,11 @@ public class TipoRecurso implements Serializable {
 	public TipoRecurso() {
 	}
 
-	public int getID() {
+	public int getId() {
 		return id;
 	}
 
-	public void setID(int ID) {
+	public void setId(int ID) {
 		this.id = ID;
 	}
 

@@ -1,11 +1,5 @@
 package edu.eci.cvds.samples.services.impl;
 
-import edu.eci.cvds.samples.entities.Cliente;
-import edu.eci.cvds.samples.entities.Item;
-import edu.eci.cvds.samples.entities.ItemRentado;
-import edu.eci.cvds.samples.entities.TipoItem;
-import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
-import edu.eci.cvds.samples.services.ServiciosAlquiler;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -17,27 +11,85 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class ServiciosAlquilerRecursosStub implements ServiciosAlquiler {
+import edu.eci.cvds.samples.entities.*;
+import edu.eci.cvds.samples.services.*;
+
+public class ServiciosReservaRecursosStub implements ServiciosReserva {
 
    private static final int MULTA_DIARIA=5000;
    private final static long MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
-   private final Map<Long,Cliente> clientes;
-   private final Map<Integer,Item> itemsDisponibles;
-   private final Map<Integer,ItemRentado> itemsrentados;
-   private final Map<Integer,TipoItem> tipositems;
+   private final Map<Long,Usuario> usuario;
+   private final Map<Integer,Recurso> recursosDisponibles;
+   // private final Map<Integer,RecursoReservado> itemsrentados;
+   private final Map<Integer,TipoRecurso> tiposRecurso;
 
    private final Map<Integer,Long> mapaPrestamosPorIdCliente;
 
-   public ServiciosAlquilerRecursosStub() {
-       clientes = new HashMap<>();
-       itemsDisponibles = new HashMap<>();
-       itemsrentados = new HashMap<>();
-       tipositems = new HashMap<>();
+   public ServiciosReservaRecursosStub() {
+	   usuario = new HashMap<>();
+	   recursosDisponibles = new HashMap<>();
+       //itemsrentados = new HashMap<>();
+       tiposRecurso = new HashMap<>();
        mapaPrestamosPorIdCliente=new HashMap<>();
-       poblar();
+       // poblar();
    }
 
+	@Override
+	public void registrarUsuario(Usuario u) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public Usuario consultarUsuario(long docu) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<Usuario> consultarUsuarios() throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void registrarRecurso(Recurso re) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void registrarTipoRecurso(TipoRecurso re) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public Recurso consultarRecurso(long id) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<Recurso> consultarRecursos() throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public TipoRecurso consultarTipoRecurso(long id) throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<TipoRecurso> consultarTiposRecurso() throws ExcepcionServiciosBiblioteca {
+		// TODO Auto-generated method stub
+		return null;
+	}
+   
+   /*
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
        return MULTA_DIARIA;
@@ -237,6 +289,7 @@ public class ServiciosAlquilerRecursosStub implements ServiciosAlquiler {
        clientes.put(c1.getDocumento(), c1);
        clientes.put(c2.getDocumento(), c2);
        clientes.put(c3.getDocumento(), c3);
+       
 
-   }
+   }*/
 }

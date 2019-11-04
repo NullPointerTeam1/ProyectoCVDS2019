@@ -14,6 +14,22 @@
 		)
 	</insert>
 
+	<select parameterType="map" id="consultarTipoRecurso" resultMap="TipoRecursoResult" >
+        SELECT    
+        tr.id,
+        tr.descripcion,
+        FROM TIPO_RECURSO AS tr 
+        WHERE tr.id=#{id}
+    </select>
+
+    
+    <select parameterType="map" id="consultarTiposRecurso" resultMap="TipoRecursoResult" >
+    	SELECT    
+        tr.id,
+        tr.descripcion,
+        FROM TIPO_RECURSO AS tr
+    </select>
+
 	<resultMap type='TipoRecurso' id='TipoRecursoResult'>
 	    <id property='id' column='id'/>
 	    <result property='descripcion' column='descripcion'/>  

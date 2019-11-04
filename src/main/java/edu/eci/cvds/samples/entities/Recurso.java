@@ -19,17 +19,19 @@ public class Recurso implements Serializable {
 	private String ubicacion;
 	private int capacidad;
 	private Date horario;
+	private String disponibilidad;
 
 	public Recurso() {
 	}
 
-	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario) {
+	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario, String disponibilidad) {
 		this.tipo = tipo;
 		this.id = id;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
-		this.horario = horario;
+		this.setHorario(horario);
+		this.setDisponibilidad(disponibilidad);
 	}
 
 	public TipoRecurso getTipo() {
@@ -75,6 +77,22 @@ public class Recurso implements Serializable {
 	@Override
 	public String toString() {
 		return "Recurso{" + "tipo=" + tipo + ", id=" + id + ", nombre=" + nombre + '}';
+	}
+
+	public String getDisponibilidad() {
+		return disponibilidad;
+	}
+
+	public void setDisponibilidad(String disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+
+	public Date getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Date horario) {
+		this.horario = horario;
 	}
 
 }

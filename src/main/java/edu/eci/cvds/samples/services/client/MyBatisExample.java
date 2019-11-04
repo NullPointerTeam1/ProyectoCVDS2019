@@ -31,13 +31,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import edu.eci.cvds.samples.entities.Item;
-import edu.eci.cvds.samples.entities.TipoItem;
-import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
-import edu.eci.cvds.samples.services.ServiciosAlquiler;
-import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
-import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
-
+import edu.eci.cvds.samples.entities.*;
+import edu.eci.cvds.samples.services.*;
 /**
  *
  * @author hcadavid
@@ -102,7 +97,7 @@ public class MyBatisExample {
         TipoItemMapper cmti= sqlss.getMapper(TipoItemMapper.class);  
         System.out.println(cmti.getTipoItem(1));
         TipoItem tipo = new TipoItem (69,"peli");
-        cmti.insertarTipoItem(tipo);*/
+        cmti.insertarTipoItem(tipo);
         
         
         sqlss.commit();
@@ -117,7 +112,7 @@ public class MyBatisExample {
 		} catch (ExcepcionServiciosAlquiler e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
         
         

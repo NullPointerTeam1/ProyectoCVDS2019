@@ -13,8 +13,22 @@
             #{usuario.carrera},
             #{usuario.correo},
             #{usuario.rol}
-            );
+            )
     </insert>
+
+    <select parameterType="map" id="consultarUsuario" resultMap="UsuarioResult" >
+        SELECT    
+        u.nombre,
+        u.apellido,
+        u.carnet,
+        u.carrera,
+        u.correo,
+        u.rol
+        FROM USUARIOS AS u 
+        WHERE u.carnet=#{id}
+    </select>
+
+    
     <select parameterType="map" id="consultarUsuarios" resultMap="UsuarioResult" >
     	SELECT    
         u.nombre,
@@ -24,18 +38,6 @@
         u.correo,
         u.rol
         FROM USUARIOS AS u 
-    </select>
-
-    <select parameterType="map" id="consultarUsuario" resultMap="UsuarioResult" >
-    	SELECT    
-        u.nombre,
-        u.apellido,
-        u.carnet,
-        u.carrera,
-        u.correo,
-        u.rol
-        FROM USUARIOS AS u 
-        WHERE u.carnet=#{id}
     </select>
 
     <resultMap type='Usuario' id='UsuarioResult' >

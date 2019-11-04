@@ -7,5 +7,8 @@ public interface TipoRecursoDAO {
 
 	public void insertarTipoRecurso(TipoRecurso ti) throws PersistenceException;
 
+	public TipoRecurso consultarTipoRecurso(long id) throws PersistenceException;
+
+	public List<TipoRecurso> consultarTiposRecurso() throws PersistenceException;
 
 }

@@ -23,7 +23,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 	}
 
 	@Override
-	public Recurso consultarRecurso(int id) throws PersistenceException {
+	public Recurso consultarRecurso(long id) throws PersistenceException {
 		try {
 			return recursoMapper.consultarRecurso(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {

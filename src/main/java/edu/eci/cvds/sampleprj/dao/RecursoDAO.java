@@ -7,4 +7,8 @@ public interface RecursoDAO {
 
 	public void insertarRecurso(Recurso it) throws PersistenceException;
 
+	public Recurso consultarRecurso(long id) throws PersistenceException;
+
+	public List<Recurso> consultarRecursos() throws PersistenceException;
+
 }
