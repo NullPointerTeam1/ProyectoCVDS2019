@@ -55,7 +55,7 @@ create function public.BU_Recursos_Dano()
 	language 'plpgsql'
 as $BODY$
 begin
-	IF (new.diponibilidad != 'N' or new.diponibilidad != 'n')then
+	IF (new.diponibilidad != 'N' or new.diponibilidad != 'n' and (old.diponibilidad!= 'n' or old.diponibilidad!='N')then
 		insert into no_disponibles(id_recurso)values(new.identificador);
 	end if;
 end;

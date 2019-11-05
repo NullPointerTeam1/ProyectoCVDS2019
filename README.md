@@ -1,11 +1,37 @@
-# proyectoCVDS
+# Biblioteca ECI
+## Proyecto final de Ciclos de Vida Del Desarrollo de Software. Periodo 2019-2
+## Escuela Colombiana de Ingeniería Julio Garavito
 
-**Insignias**
+### Integrantes:
+* Orlando Antonio Gelves Kerguelen
+* Johann Sebastian Páez Campos
+* 	
+* Jose Luis Gomez Camacho
 
-[![CircleCI](https://circleci.com/gh/NullPointerTeam1/ProyectoCVDS2019.svg?style=svg)](https://circleci.com/gh/NullPointerTeam1/ProyectoCVDS2019)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/48a154668669463aae0098daa9ab056d)](https://www.codacy.com/manual/orlandoagk/ProyectoCVDS2019?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NullPointerTeam1/ProyectoCVDS2019&amp;utm_campaign=Badge_Grade)
-# Modelo Relacional del entidades
+### Profesor:
+* Julián Velasco
+
+
+## Descripción del producto
+
+## Arquitectura y diseño detallado
+
+### Modelo E-R (Entidad-Relación)
 ![](img/MODEL.png)
+
+### Diagrama de clases
+
+
+### Enlace de la aplicación en Heroku
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/48a154668669463aae0098daa9ab056d)](https://www.codacy.com/manual/orlandoagk/ProyectoCVDS2019?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NullPointerTeam1/ProyectoCVDS2019&amp;utm_campaign=Badge_Grade)
+### Integración continua
+[![CircleCI](https://circleci.com/gh/NullPointerTeam1/ProyectoCVDS2019.svg?style=svg)](https://circleci.com/gh/NullPointerTeam1/ProyectoCVDS2019)
+
+### Calidad del código
+
+## Descripción del proceso
+
+
 
 
 **Conexion POSTGRESQL**
