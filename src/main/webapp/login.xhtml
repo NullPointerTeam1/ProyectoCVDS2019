@@ -29,7 +29,7 @@ lang="es">
 </h:head>
 
 <body>
-
+  <shiro:authenticated><script>location.href="/index.xhtml"</script></shiro:authenticated>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -134,8 +134,7 @@ lang="es">
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
-  <shiro:authenticated><p><script >location.href="/index.xhtml"</script></p>
-  </shiro:authenticated>
+  
 
 </body>
 
