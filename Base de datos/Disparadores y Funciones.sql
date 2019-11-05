@@ -33,6 +33,24 @@ before update of carnet on usuarios
 for each row
 execute procedure BU_USUARIOS_CARNET();
 ------------------------------------------ Recursos ---------------------------------------------
+---------------Identificador---------------------------------------------------------------------
+create function public.BU_Recursos_Identificador()
+	returns trigger
+	language 'plpgsql'
+as $BODY$
+declare
+x int;
+begin
+	select count(*) into x from recursos;
+	new.identificador:= x;
+end;
+$BODY$
+
+create trigger BU_Recursos_Identificador
+before insert on recursos
+for each row
+execute procedure BU_Recursos_Identificador();
+
 ---------------diponibilidad---------------------------------------------------------------------
 
 create function public.BU_Recursos_Disponibilidad()
@@ -95,6 +113,7 @@ declare
 x int;
 begin
 	select count(*) into x from no_disponibles;
+	new.id:=x;
 end;
 $BODY$
 
