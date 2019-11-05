@@ -17,7 +17,10 @@ create table if not exists RECURSOS(
 	diponibilidad varchar(1) not null,
 	tiporecurso_id int NOT NULL
 );
-
+create table if not exists No_Disponibles(
+	id int primary key,
+	id_recurso int
+);
 CREATE TABLE IF NOT EXISTS TIPO_RECURSO (
 	id INT primary key,
 	descripcion VARCHAR(50)  NOT NULL
