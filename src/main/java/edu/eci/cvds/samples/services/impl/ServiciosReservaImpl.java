@@ -83,7 +83,16 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar los recursos", e);
 		}
 	}
-
+	
+	@Override
+	public void actualizarEstadoRecurso(long id, String estado) throws ExcepcionServiciosBiblioteca {
+		try {
+			recursoDAO.actualizarEstadoRecurso(id, estado);
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al cambiar el estado del recurso", e);
+		}
+	}
+	
 	@Override
 	@Transactional
 	public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws ExcepcionServiciosBiblioteca {

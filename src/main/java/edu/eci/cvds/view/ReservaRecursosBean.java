@@ -85,6 +85,30 @@ public class ReservaRecursosBean extends BasePageBean {
 		}
 		return recursos;
 	}
+	
+	public List<Recurso> consultarRecursosDisponibles() {
+		List<Recurso> recursos = null;
+		try {
+			recursos = serviciosReserva.consultarRecursos();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		List<Recurso> disponibles = null;
+		for (Recurso r: recursos) {
+			if (r.getDisponibilidad().equals("d")) {
+				disponibles.add(r);
+			}
+		}
+		return disponibles;
+	}
+	
+	public void actualizarEstadoRecurso(long id, String estado) {
+		try {
+			serviciosReserva.actualizarEstadoRecurso(id, estado);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+	}
 
 	public void registrarTipoRecurso(int id, String descripcion) {
 		try {
