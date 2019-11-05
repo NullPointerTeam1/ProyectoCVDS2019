@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 
 import java.io.IOException;
 
@@ -56,14 +57,12 @@ public class LoginBean extends BasePageBean{
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
+    
+    @RequiresGuest
     public void login(String correo,String password,boolean rememberMe) throws ExcepcionServiciosBiblioteca{
-    	if (isLogged()) {
-    		throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.USUARIO_YA_IDENTIFICADO);
-    	}
         try {
             logger.login(correo,password,rememberMe);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/servicios/index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/index.xhtml");
         } catch (ExcepcionServiciosBiblioteca excepcionServiciosBiblioteca) {
             LoginBean.setErrorMessage(excepcionServiciosBiblioteca);
         }catch (IOException e) {

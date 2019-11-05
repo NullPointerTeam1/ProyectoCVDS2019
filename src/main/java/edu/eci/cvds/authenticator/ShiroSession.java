@@ -18,7 +18,8 @@ public class ShiroSession implements SessionLogger {
             UsernamePasswordToken token = new UsernamePasswordToken(correo, new Sha256Hash(password).toHex(),hist);
      
             currentUser.getSession().setAttribute("Correo",correo);
-            currentUser.login( token );    
+            
+            currentUser.login( token ); 
         } catch ( UnknownAccountException a ) {
             throw new ExcepcionServiciosBiblioteca("User not found",a);
         } catch ( IncorrectCredentialsException b ) {

@@ -3,10 +3,10 @@
 xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://java.sun.com/jsf/core"
+xmlns:shiro="http://shiro.apache.org/tags"
 lang="es">
 
 <h:head>
-
   <meta charset="utf-8"/>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -38,22 +38,7 @@ lang="es">
         Menu
         <i class="fas fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="post.html">Sample Post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
-        </ul>
-      </div>
+    
     </div>
   </nav>
 
@@ -76,12 +61,7 @@ lang="es">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <p>Ingresa el correo institucional seguido de tu contrasena para poder ingresar</p>
-        <h:form name="sentMessage" id="logoutForm">
-          
-          <div class="form-group">
-            <p:commandButton actionListener="#{LoginBean.logout}" value="Logout"></p:commandButton>
-          </div>
-        </h:form>
+        
         <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
         <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
         <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
@@ -99,9 +79,14 @@ lang="es">
             </div>
           </div>
           <br/>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <p:selectBooleanCheckbox value="true" itemLabel="Recuerdame" binding="#{recuerdame}"/>
+            </div>
+          </div>
           <h:messages/>
           <div class="form-group">
-            <p:commandButton actionListener="#{LoginBean.login(superCorreo.value,superContrasena.value,true)}" value="Ingresar"></p:commandButton>
+            <p:commandButton actionListener="#{LoginBean.login(superCorreo.value,superContrasena.value,recuerdame.value)}" value="Ingresar"></p:commandButton>
           </div>
         </h:form>
       </div>
@@ -116,24 +101,9 @@ lang="es">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
+            
             <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
+              <a href="https://github.com/NullPointerTeam1/ProyectoCVDS2019#">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-github fa-stack-1x fa-inverse"></i>
@@ -141,7 +111,11 @@ lang="es">
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright Your Website 2019</p>
+          <p class="copyright text-muted">Copyright Escuela Colombiana de Ingeniería Julio Garavito</p>
+          <p class="copyright text-muted">Plantilla obtenida de: <a href="https://startbootstrap.com/themes/clean-blog/"> StartBootstrap</a></p>
+          <p class="copyright text-muted">Integrantes</p>
+          <p class="copyright text-muted">Johan Arias - Jose Gomez - Sebastian Paez - Orlando Gelves</p> 
+           
         </div>
       </div>
     </div>
@@ -157,6 +131,8 @@ lang="es">
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
+  <shiro:authenticated><p><script >location.href="/index.xhtml"</script></p>
+  </shiro:authenticated>
 
 </body>
 
