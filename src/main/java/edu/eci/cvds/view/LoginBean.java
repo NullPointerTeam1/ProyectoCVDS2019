@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
+
 import edu.eci.cvds.samples.services.ExcepcionServiciosBiblioteca;
 import edu.eci.cvds.authenticator.SessionLogger;
 
@@ -9,11 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.apache.shiro.SecurityUtils;
-<<<<<<< HEAD
 import org.apache.shiro.subject.Subject;
-=======
 import org.apache.shiro.authz.annotation.RequiresGuest;
->>>>>>> 746cf2b0fd4103bc8b38dc7b3943972b78fab61f
+
 
 import java.io.IOException;
 

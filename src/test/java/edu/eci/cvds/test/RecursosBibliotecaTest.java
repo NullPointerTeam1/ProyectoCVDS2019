@@ -51,8 +51,12 @@ public class RecursosBibliotecaTest {
 	public void nodeberiaRegistrarUnRecursoPorPK() throws ExcepcionServiciosBiblioteca {
 		
 		Recurso re = new Recurso((new TipoRecurso(10,"MULTIMEDIA")),50,"PRUEBA","Biblioteca",30,java.sql.Date.valueOf("2019-05-11"),"d");
-		try
-		serviciosB.registrarRecurso(re);
+		try {
+			serviciosB.registrarRecurso(re);
+			assertTrue(false);
+		}catch (PersistenceException e) {
+			assertTrue(true);
+		}
 			
 	
 	}
