@@ -32,3 +32,19 @@ create trigger BU_USUARIOS_CARNET
 before update of carnet on usuarios
 for each row
 execute procedure BU_USUARIOS_CARNET();
+------------------------------------------ Recursos ---------------------------------------------
+---------------diponibilidad---------------------------------------------------------------------
+
+create function public.BU_Recursos_Disponibilidad()
+	returns trigger
+	language 'plpgsql'
+as $BODY$
+begin
+	new.diponibilidad:='d';
+end;
+$BODY$
+
+create trigger BU_Recursos_Disponibilidad
+before insert on recursos
+for each row
+execute procedure BU_Recursos_Disponibilidad();

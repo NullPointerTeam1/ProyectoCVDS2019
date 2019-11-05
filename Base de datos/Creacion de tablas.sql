@@ -22,3 +22,7 @@ CREATE TABLE IF NOT EXISTS TIPO_RECURSO (
 	id INT primary key,
 	descripcion VARCHAR(50)  NOT NULL
 );
+create table if not exists user_roles(
+	correo varchar(100) primary key,
+	role_name varchar(30) not null
+);
