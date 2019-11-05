@@ -66,6 +66,9 @@ lang="es">
         <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
         <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
         <h:form name="sentMessage" id="contactForm">
+        <p:messages id="messages" showDetail="true" closable="true">
+          <p:autoUpdate />
+        </p:messages>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Correo</label>
@@ -84,7 +87,7 @@ lang="es">
               <p:selectBooleanCheckbox value="true" itemLabel="Recuerdame" binding="#{recuerdame}"/>
             </div>
           </div>
-          <h:messages/>
+          
           <div class="form-group">
             <p:commandButton actionListener="#{LoginBean.login(superCorreo.value,superContrasena.value,recuerdame.value)}" value="Ingresar"></p:commandButton>
           </div>

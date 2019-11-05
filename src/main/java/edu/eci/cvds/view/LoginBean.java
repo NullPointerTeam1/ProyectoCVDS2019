@@ -67,6 +67,8 @@ public class LoginBean extends BasePageBean{
             LoginBean.setErrorMessage(excepcionServiciosBiblioteca);
         }catch (IOException e) {
         	LoginBean.setErrorMessage(e);
+        }catch(Exception e) {
+        	LoginBean.setErrorMessage(e);
         }
 
 
