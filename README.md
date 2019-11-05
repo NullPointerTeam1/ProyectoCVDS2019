@@ -19,8 +19,9 @@
 ### Modelo E-R (Entidad-Relación)
 ![](img/MODEL.png)
 
-### Diagrama de clases
 
+### Diagrama de clases
+![](img/DIAGRAMA PROJECT CVDS.png)
 
 ### Enlace de la aplicación en Heroku
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/48a154668669463aae0098daa9ab056d)](https://www.codacy.com/manual/orlandoagk/ProyectoCVDS2019?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NullPointerTeam1/ProyectoCVDS2019&amp;utm_campaign=Badge_Grade)
