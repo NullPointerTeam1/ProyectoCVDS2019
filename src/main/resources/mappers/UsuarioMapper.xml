@@ -39,7 +39,7 @@
         u.rol
         FROM USUARIOS AS u 
     </select>
-
+    
     <resultMap type='Usuario' id='UsuarioResult' >
         <id property='carnet' column='carnet'/>
         <result property='nombre' column='nombre'/>

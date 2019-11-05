@@ -22,5 +22,6 @@ public interface ServiciosReserva {
 	public abstract TipoRecurso consultarTipoRecurso(long id) throws ExcepcionServiciosBiblioteca;
 
 	public abstract List<TipoRecurso> consultarTiposRecurso() throws ExcepcionServiciosBiblioteca;
+	
 
 }

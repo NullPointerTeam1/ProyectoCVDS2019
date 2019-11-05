@@ -7,11 +7,11 @@
 
 
 	<insert parameterType="map" id="insertarTipoRecurso" >
-		INSERT INTO TIPO_RECURSO
+		INSERT INTO tipo_recurso
 		VALUES (
 		#{tipo.id},
 		#{tipo.descripcion}
-		)
+		);
 	</insert>
 
 	<select parameterType="map" id="consultarTipoRecurso" resultMap="TipoRecursoResult" >

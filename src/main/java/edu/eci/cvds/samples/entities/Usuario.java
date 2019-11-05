@@ -29,6 +29,7 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
+	
 	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String contraseña, String rol,
 			ArrayList<RecursoReservado> reservados) {
 		this.nombre = nombre;

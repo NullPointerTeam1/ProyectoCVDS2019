@@ -81,7 +81,7 @@ public class Recurso implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Recurso{" + "tipo=" + tipo + ", id=" + id + ", nombre=" + nombre + '}';
+		return "Recurso{" + "tipo=" + tipo.toString() + ", id=" + id + ", nombre=" + nombre + '}';
 	}
 
 	public String getDisponibilidad() {

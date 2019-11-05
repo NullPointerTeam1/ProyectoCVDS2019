@@ -5,6 +5,7 @@ import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
 import edu.eci.cvds.samples.services.impl.ServiciosReservaImpl;
 import org.mybatis.guice.XMLMyBatisModule;
+import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import java.util.Optional;
 
@@ -20,8 +21,9 @@ public class ServiciosReservaFactory {
         return createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
-                setEnvironmentId(env);
-                setClassPathResource(pathResource);
+            	setEnvironmentId(env);
+            	install(JdbcHelper.PostgreSQL);
+            	setClassPathResource(pathResource);
                 bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(TipoRecursoDAO.class).to(MyBATISTipoRecursoDAO.class);
@@ -34,7 +36,7 @@ public class ServiciosReservaFactory {
         optInjector = Optional.empty();
     }
 
-    public ServiciosReserva getServiciosAlquiler(){
+    public ServiciosReserva getServiciosBiblioteca(){
         if (!optInjector.isPresent()) {
             optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
         }
@@ -43,9 +45,9 @@ public class ServiciosReservaFactory {
     }
 
 
-    public ServiciosReserva getServiciosAlquilerTesting(){
+    public ServiciosReserva getServiciosBibliotecaTesting(){
         if (!optInjector.isPresent()) {
-            optInjector = Optional.of(myBatisInjector("test","mybatis-config-h2.xml"));
+            optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
         }
 
         return optInjector.get().getInstance(ServiciosReserva.class);

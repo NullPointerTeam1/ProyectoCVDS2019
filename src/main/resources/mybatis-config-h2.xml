@@ -15,10 +15,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
        <environment id="test">
            <transactionManager type="JDBC" />
            <dataSource type="POOLED">
-               <property name="driver" value="com.mysql.jdbc.Driver" />
-               <property name="url" value="postgres://iwwkuojbaoqwrw:df11b9bf00cf66130fc0f5c3b9b0f1c7196cdfaef488270da6446830145c41fe@ec2-17" />
-               <property name="username" value="iwwkuojbaoqwrw" />
-               <property name="password" value="df11b9bf00cf66130fc0f5c3b9b0f1c7196cdfaef488270da6446830145c41fe" />
+               <property name="driver" value="org.h2.Driver" />
+               <property name="url" value="jdbc:h2:file:./target/db/testdb;MODE=PostgreSQL" />
+               <property name="username" value="lo" />
+               <property name="password" value="" />
            </dataSource>
        </environment>
    </environments>

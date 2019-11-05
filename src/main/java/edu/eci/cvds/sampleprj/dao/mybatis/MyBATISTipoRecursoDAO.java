@@ -40,3 +40,4 @@ public class MyBATISTipoRecursoDAO implements TipoRecursoDAO {
 	}
 
 }
+

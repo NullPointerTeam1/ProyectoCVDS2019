@@ -9,7 +9,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.apache.shiro.SecurityUtils;
+<<<<<<< HEAD
+import org.apache.shiro.subject.Subject;
+=======
 import org.apache.shiro.authz.annotation.RequiresGuest;
+>>>>>>> 746cf2b0fd4103bc8b38dc7b3943972b78fab61f
 
 import java.io.IOException;
 
@@ -29,11 +33,17 @@ public class LoginBean extends BasePageBean{
 	private String correo;
     private String password;
     private boolean rememberMe;
+    private Subject currentUser;
+    
     @Inject
     private SessionLogger logger;
 
-   
-
+    public Subject getCurrentUser(){
+    	Subject currentUser = SecurityUtils.getSubject();
+		return currentUser;
+    }
+    
+  
     public boolean isRememberMe() {
         return rememberMe;
     }

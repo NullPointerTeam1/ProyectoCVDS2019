@@ -28,10 +28,9 @@ public class GuiceContextListener implements ServletContextListener {
 		Injector injector = Guice.createInjector(new XMLMyBatisModule() {
 			@Override
 			protected void initialize() {
-				install(JdbcHelper.MySQL);
+				install(JdbcHelper.PostgreSQL);
 				setEnvironmentId("development");
 				setClassPathResource("mybatis-config.xml");
-
 				// TODO Add service class associated to Stub implementation
 				bind(ServiciosReserva.class).to(ServiciosReservaImpl.class);
 				bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
@@ -45,3 +44,4 @@ public class GuiceContextListener implements ServletContextListener {
 		servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);
 	}
 }
+

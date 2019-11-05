@@ -19,4 +19,9 @@ public class ExcepcionServiciosBiblioteca extends Exception {
 	public ExcepcionServiciosBiblioteca(String mensaje, Throwable cause) {
 		super(mensaje);
 	}
+	
+	public ExcepcionServiciosBiblioteca(String message, Exception e) {
+		super(message,e);
+	}
 }
+

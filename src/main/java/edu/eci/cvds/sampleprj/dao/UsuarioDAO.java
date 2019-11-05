@@ -19,4 +19,5 @@ public interface UsuarioDAO {
 
 	public List<RecursoReservado> consultarRecursosRentadosUsuario(long id) throws PersistenceException;
 
+
 }
