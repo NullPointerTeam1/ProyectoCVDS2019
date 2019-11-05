@@ -5,7 +5,7 @@
 ### Integrantes:
 * Orlando Antonio Gelves Kerguelen
 * Johann Sebastian Páez Campos
-* 	
+* Johan Sebastian Arias Amador	
 * Jose Luis Gomez Camacho
 
 ### Profesor:
