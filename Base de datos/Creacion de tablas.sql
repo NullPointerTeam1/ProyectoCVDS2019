@@ -10,8 +10,8 @@ create table if not exists USUARIOS(
 
 create table if not exists RECURSOS(
 	identificador int primary key,
-	nombre varchar(15)not null,
-	ubicacion varchar(15)not null,
+	nombre varchar(100)not null,
+	ubicacion varchar(50)not null,
 	capacidad int,
 	horario_disponibilidad date,
 	disponibilidad varchar(1) not null,
