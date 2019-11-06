@@ -14,7 +14,7 @@ lang="es">
   <meta name="author" content=""></meta>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-  <title>Reserva de Recursos ECI</title>
+  <title>Registrar Recurso - ECI</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -30,7 +30,8 @@ lang="es">
 </h:head>
 
 <h:body>
-
+  <shiro:notAuthenticated><script>location.href="/index.xhtml"</script></shiro:notAuthenticated>
+  <shiro:hasRole name="U"><script>location.href="/index.xhtml"</script></shiro:hasRole>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -44,11 +45,9 @@ lang="es">
           <li class="nav-item">
             <a class="nav-link" href="/index.xhtml">Home</a>
           </li>
-          <shiro:hasRole name="A">
-            <li class="nav-item">
-              <a class="nav-link" href="/registrarRecurso.xhtml">Registrar Recurso</a>
-            </li>
-          </shiro:hasRole>
+          <shiro:hasRole name="A"><li class="nav-item">
+            <a class="nav-link" href="/registrarRecurso.xhtml">Registrar recurso</a>
+          </li></shiro:hasRole>
           <li class="nav-item">
             <a class="nav-link" href="post.html">Sample Post</a>
           </li>
@@ -87,63 +86,42 @@ lang="es">
     </div>
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
-            </h2>
-            <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
-        </div>
-        <hr/>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-            </h2>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
-        </div>
-        <hr/>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Science has not yet mastered prophecy
-            </h2>
-            <h3 class="post-subtitle">
-              We predict too much for the next year and yet far too little for the next ten.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on August 24, 2019</p>
-        </div>
-        <hr/>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Failure is not an option
-            </h2>
-            <h3 class="post-subtitle">
-              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
-        </div>
-        <hr/>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts</a>
-        </div>
+          <h:form name="sentMessage" id="contactForm">
+        <p:messages id="messages" showDetail="true" closable="true">
+          <p:autoUpdate />
+        </p:messages>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Nombre</label>
+              <p:inputText type="text" class="form-control" placeholder="Nombre" id="nombre" data-validation-required-message="Ingresa el nombre del recurso" binding="#{superNombre}"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Ubicacion</label>
+              <p:inputText type="text" class="form-control" placeholder="Ubicacion" id="ubicacion" data-validation-required-message="Entra la ubicacion" binding="#{superUbicacion}"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Capacidad</label>
+              <p:inputText type="text" class="form-control" placeholder="Capacidad" id="capacidad" data-validation-required-message="Entra la capacidad" binding="#{superCapacidad}"/>
+            </div>
+          </div>
+          <p:outputLabel for="tipoRecurso" value="Tipo del Recurso:" />
+          <p:selectOneRadio id="tipoRecurso" binding="#{superTipo}" unselectable="true">
+              <f:selectItem itemLabel="Equipo de Computo" itemValue="1" />
+              <f:selectItem itemLabel="Sala de Estudio" itemValue="2" />
+              <f:selectItem itemLabel="Equipo de Multimedia" itemValue="3" />
+          </p:selectOneRadio>
+
+          <div class="form-group">
+            <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value)}" value="Registrar"></p:commandButton>
+          </div>
+        </h:form>
+        
+        
       </div>
     </div>
   </div>
