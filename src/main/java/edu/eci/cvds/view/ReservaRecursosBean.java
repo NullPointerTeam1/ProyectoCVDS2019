@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
@@ -55,12 +56,29 @@ public class ReservaRecursosBean extends BasePageBean {
 		return usuarios;
 	}
 
-	public void registrarRecurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario,
-			String disponibilidad) {
+	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad) {
 		try {
+			TipoRecurso tipoRecurso = null;
+			switch(tipo) {
+				case "1":{
+					tipoRecurso = new TipoRecurso(1,"Equipo de Computo");
+					capacidad = "0";
+					break;
+				} case "2":{
+					tipoRecurso = new TipoRecurso(2,"Sala de Estudio");
+					
+					break;
+				} case "3":{
+					tipoRecurso = new TipoRecurso(3,"Equipo de Multimedia");
+					capacidad = "0";
+					break;
+				}
+			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipo, id, nombre, ubicacion, capacidad, horario, disponibilidad));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Date.valueOf(LocalDate.now()),"d"));
 		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		} catch(Exception e) {
 			setErrorMessage(e);
 		}
 
