@@ -76,6 +76,7 @@ public class ReservaRecursosBean extends BasePageBean {
 			}
 			serviciosReserva
 					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Date.valueOf(LocalDate.now()),"d"));
+			setErrorMessage("El registro de "+ nombre+" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		} catch(Exception e) {
@@ -167,6 +168,10 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	protected static void setErrorMessage(Exception e) {
 		String message = e.getMessage();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
+	
+	protected static void setErrorMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 
