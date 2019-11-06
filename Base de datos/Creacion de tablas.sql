@@ -14,7 +14,7 @@ create table if not exists RECURSOS(
 	ubicacion varchar(15)not null,
 	capacidad int,
 	horario_disponibilidad date,
-	diponibilidad varchar(1) not null,
+	disponibilidad varchar(1) not null,
 	tiporecurso_id int NOT NULL
 );
 create table if not exists No_Disponibles(
