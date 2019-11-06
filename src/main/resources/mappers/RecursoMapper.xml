@@ -26,7 +26,7 @@
         r.ubicacion,
         r.capacidad,
         r.horario_disponibilidad,
-        r.diponibilidad,
+        r.disponibilidad,
         r.tiporecurso_id
         FROM RECURSOS AS r 
         WHERE r.identificador=#{id}
@@ -40,13 +40,13 @@
         r.ubicacion,
         r.capacidad,
         r.horario_disponibilidad,
-        r.diponibilidad,
+        r.disponibilidad,
         r.tiporecurso_id
         FROM RECURSOS AS r
     </select>
 
     <update parameterType="map" id="actualizarEstadoRecurso">
-    	UPDATE RECURSOS SET diponibilidad = #{estado}
+    	UPDATE RECURSOS SET disponibilidad = #{estado}
     	WHERE identificador = #{id}
     </update>
 
