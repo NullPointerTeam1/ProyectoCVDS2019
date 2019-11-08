@@ -8,7 +8,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.util.List;
+import java.util.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	@Inject
 	private ServiciosReserva serviciosReserva;
 	private Usuario selectedUsuario;
+	private List<Recurso> recursosDisponibles;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -34,6 +35,10 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 
+	}
+
+	public List<Recurso> getRecursosDisponibles(){
+		return recursosDisponibles;
 	}
 
 	public Usuario consultarUsuario(long documento) {
@@ -106,18 +111,20 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public List<Recurso> consultarRecursosDisponibles() {
-		List<Recurso> recursos = null;
+		List<Recurso> recursos = new ArrayList<Recurso>();
 		try {
 			recursos = serviciosReserva.consultarRecursos();
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
-		List<Recurso> disponibles = null;
+		List<Recurso> disponibles = new ArrayList<Recurso>();
 		for (Recurso r: recursos) {
 			if (r.getDisponibilidad().equals("d")) {
 				disponibles.add(r);
 			}
 		}
+
+		recursosDisponibles = disponibles;
 		return disponibles;
 	}
 	
