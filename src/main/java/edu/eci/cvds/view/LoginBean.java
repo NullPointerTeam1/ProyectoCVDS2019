@@ -90,7 +90,7 @@ public class LoginBean extends BasePageBean{
     
     public void logout() throws IOException {
     	if (isLogged()) {
-    		FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
+    		FacesContext.getCurrentInstance().getExternalContext().redirect("/login.xhtml");
     		SecurityUtils.getSubject().logout();
     	}
     }

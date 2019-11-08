@@ -46,14 +46,18 @@ lang="es">
           </li>
           <shiro:hasRole name="A">
             <li class="nav-item">
-              <a class="nav-link" href="/registrarRecurso.xhtml">Registrar Recurso</a>
+              <a class="nav-link" href="/registrarRecurso.xhtml">Administrar Recursos</a>
             </li>
           </shiro:hasRole>
           <li class="nav-item">
             <a class="nav-link" href="post.html">Sample Post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <h:form name="sentMessage" id="logoutForm" class="nav-item">
+                <p:commandLink id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
+                  <h:outputText value="LOGOUT"/>
+                </p:commandLink>
+            </h:form>
           </li>
         </ul>
       </div>
@@ -77,14 +81,7 @@ lang="es">
 
   <!-- Main Content -->
   <div class="container">
-    <div class="row">
-      <h:form name="sentMessage" id="logoutForm">
-          
-          <div class="form-group">
-            <p:commandButton actionListener="#{LoginBean.logout}" value="Logout" ajax="true" oncomplete="javascript:window.location.reload()"></p:commandButton>
-          </div>
-        </h:form>
-    </div>
+    
     <div class="row">
       <h:form id="recursosDisponibles">
       <p:dataTable id="itemRentadoRetarded" var="recurso" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
@@ -100,7 +97,6 @@ lang="es">
                 <p:column headerText="Nombre">
                     <h:outputText value="#{recurso.nombre}" />
                 </p:column>
-
 
                 <p:column headerText="Ubicacion">
                     <h:outputText value="#{recurso.ubicacion}" />
