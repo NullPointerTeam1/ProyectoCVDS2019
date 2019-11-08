@@ -8,6 +8,9 @@ package edu.eci.cvds.samples.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import edu.eci.cvds.samples.services.ServiciosReserva;
+import edu.eci.cvds.view.Inject;
+
 /**
  *
  * @author NullpointerTeam
@@ -16,6 +19,10 @@ public class Recurso implements Serializable {
 	/**
 	 * 
 	 */
+	
+	@Inject
+	private ServiciosReserva serviciosReserva;
+	
 	private static final long serialVersionUID = 1L;
 	
 	private TipoRecurso tipo;
@@ -25,12 +32,12 @@ public class Recurso implements Serializable {
 	private int capacidad;
 	private Date horario;
 	private String disponibilidad;
-
+	
 	public Recurso() {
 	}
 
 	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario, String disponibilidad) {
-		this.tipo = tipo;
+		this.tipo = serviciosReserva.consultarTipoRecurso(tipo.getId());
 		this.id = id;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
