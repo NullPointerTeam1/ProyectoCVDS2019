@@ -64,21 +64,23 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	public Recurso consultarRecurso(long id) throws ExcepcionServiciosBiblioteca {
+		Recurso recurso = null;
 		try {
-			Recurso recurso = recursoDAO.consultarRecurso(id);
-			if (recurso == null)
-				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.ERROR_CONSULTAR);
-			return recurso;
-
+			recurso = recursoDAO.consultarRecurso(id);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar el recurso" + id, e);
 		}
+		
+		if (recurso == null) throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.ERROR_CONSULTAR);
+		return recurso;
 	}
 
 	@Override
 	public List<Recurso> consultarRecursos() throws ExcepcionServiciosBiblioteca {
 		try {
+			System.out.println(recursoDAO.consultarRecursos());
 			return recursoDAO.consultarRecursos();
+			
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar los recursos", e);
 		}
