@@ -6,6 +6,10 @@ ALTER TABLE recursos
 ADD CONSTRAINT  CK_recursos_disponibilidad
 CHECK(diponibilidad ='d' or diponibilidad= 'D' or diponibilidad = 'O' or diponibilidad = 'o' or diponibilidad = 'N' or diponibilidad = 'n');
 
+ALTER TABLE recursos
+ADD CONSTRAINT  CK_recursos_capacidad
+CHECK (capacidad >= 0);
+
 ALTER TABLE Usuarios
 ADD constraint CK_Usuarios_rol
 check(rol='a' or rol='u' or rol='A' or rol='U');
