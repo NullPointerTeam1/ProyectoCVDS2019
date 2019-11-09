@@ -40,8 +40,8 @@ create function public.BU_Recursos_Identificador()
 as $BODY$
 DECLARE x INTEGER;
 begin
-	select count(*) into x from recursos;
-	new.identificador:= x;
+	select max(identificador) into x from recursos;
+	new.identificador:= x + 1;
 	return new;
 end;
 $BODY$
