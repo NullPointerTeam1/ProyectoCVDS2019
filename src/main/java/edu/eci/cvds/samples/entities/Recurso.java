@@ -8,6 +8,8 @@ package edu.eci.cvds.samples.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import edu.eci.cvds.samples.services.ServiciosReserva;
+
 /**
  *
  * @author NullpointerTeam
@@ -16,6 +18,7 @@ public class Recurso implements Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private TipoRecurso tipo;
@@ -25,7 +28,7 @@ public class Recurso implements Serializable {
 	private int capacidad;
 	private Date horario;
 	private String disponibilidad;
-
+	
 	public Recurso() {
 	}
 

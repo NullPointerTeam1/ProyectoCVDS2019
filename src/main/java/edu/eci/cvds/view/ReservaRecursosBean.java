@@ -8,9 +8,10 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.util.List;
+import java.util.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
@@ -25,6 +26,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	@Inject
 	private ServiciosReserva serviciosReserva;
 	private Usuario selectedUsuario;
+	private List<Recurso> recursosDisponibles;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -33,6 +35,10 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 
+	}
+
+	public List<Recurso> getRecursosDisponibles(){
+		return recursosDisponibles;
 	}
 
 	public Usuario consultarUsuario(long documento) {
@@ -55,12 +61,30 @@ public class ReservaRecursosBean extends BasePageBean {
 		return usuarios;
 	}
 
-	public void registrarRecurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario,
-			String disponibilidad) {
+	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad) {
 		try {
+			TipoRecurso tipoRecurso = null;
+			switch(tipo) {
+				case "1":{
+					tipoRecurso = new TipoRecurso(1,"Equipo de Computo");
+					capacidad = "0";
+					break;
+				} case "2":{
+					tipoRecurso = new TipoRecurso(2,"Sala de Estudio");
+					
+					break;
+				} case "3":{
+					tipoRecurso = new TipoRecurso(3,"Equipo de Multimedia");
+					capacidad = "0";
+					break;
+				}
+			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipo, id, nombre, ubicacion, capacidad, horario, disponibilidad));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Date.valueOf(LocalDate.now()),"d"));
+			setErrorMessage("El registro de "+ nombre+" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		} catch(Exception e) {
 			setErrorMessage(e);
 		}
 
@@ -87,18 +111,20 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public List<Recurso> consultarRecursosDisponibles() {
-		List<Recurso> recursos = null;
+		List<Recurso> recursos = new ArrayList<Recurso>();
 		try {
 			recursos = serviciosReserva.consultarRecursos();
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
-		List<Recurso> disponibles = null;
+		List<Recurso> disponibles = new ArrayList<Recurso>();
 		for (Recurso r: recursos) {
 			if (r.getDisponibilidad().equals("d")) {
 				disponibles.add(r);
 			}
 		}
+
+		recursosDisponibles = disponibles;
 		return disponibles;
 	}
 	
@@ -149,6 +175,10 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	protected static void setErrorMessage(Exception e) {
 		String message = e.getMessage();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
+	
+	protected static void setErrorMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 

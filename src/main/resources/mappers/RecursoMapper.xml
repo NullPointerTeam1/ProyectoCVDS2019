@@ -26,7 +26,7 @@
         r.ubicacion,
         r.capacidad,
         r.horario_disponibilidad,
-        r.diponibilidad,
+        r.disponibilidad,
         r.tiporecurso_id
         FROM RECURSOS AS r 
         WHERE r.identificador=#{id}
@@ -34,19 +34,21 @@
 
     
     <select parameterType="map" id="consultarRecursos" resultMap="RecursoResult" >
-    	SELECT    
-        r.identificador,
+    	SELECT r.identificador,
         r.nombre,
         r.ubicacion,
         r.capacidad,
         r.horario_disponibilidad,
-        r.diponibilidad,
-        r.tiporecurso_id
-        FROM RECURSOS AS r
+        r.disponibilidad,
+        r.tiporecurso_id,
+        tr.descripcion
+        FROM recursos AS r, 
+        tipo_recurso as tr 
+       	WHERE r.tiporecurso_id =  tr.id
     </select>
 
     <update parameterType="map" id="actualizarEstadoRecurso">
-    	UPDATE RECURSOS SET diponibilidad = #{estado}
+    	UPDATE RECURSOS SET disponibilidad = #{estado}
     	WHERE identificador = #{id}
     </update>
 
@@ -57,6 +59,6 @@
 	    <result property='capacidad' column='capacidad'/>
 	    <result property='horario' column='horario_disponibilidad'/>  
 	    <result property='disponibilidad' column='disponibilidad'/>  
-	    <association property="tipo" javaType="TipoRecurso" columnPrefix='tipoRecurso_' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
+	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
 	</resultMap>
 </mapper> 

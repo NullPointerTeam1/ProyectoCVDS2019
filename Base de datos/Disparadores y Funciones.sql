@@ -38,11 +38,11 @@ create function public.BU_Recursos_Identificador()
 	returns trigger
 	language 'plpgsql'
 as $BODY$
-declare
-x int;
+DECLARE x INTEGER;
 begin
 	select count(*) into x from recursos;
 	new.identificador:= x;
+	return new;
 end;
 $BODY$
 
@@ -59,6 +59,7 @@ create function public.BU_Recursos_Disponibilidad()
 as $BODY$
 begin
 	new.diponibilidad:='d';
+	return new;
 end;
 $BODY$
 
@@ -73,8 +74,9 @@ create function public.BU_Recursos_Dano()
 	language 'plpgsql'
 as $BODY$
 begin
-	IF (new.diponibilidad != 'N' or new.diponibilidad != 'n' and (old.diponibilidad!= 'n' or old.diponibilidad!='N')then
-		insert into no_disponibles(id_recurso)values(new.identificador);
+	IF ((new.diponibilidad != 'N' or new.diponibilidad != 'n') and (old.diponibilidad!= 'n' or old.diponibilidad!='N'))then
+		delete from no_disponibles where id_recurso=old.identificador; 
+		
 	end if;
 end;
 $BODY$
@@ -92,7 +94,7 @@ create function public.BU_Recursos_arreglo()
 as $BODY$
 begin
 	IF ((old.diponibilidad = 'N' or old.diponibilidad = 'n') and (new.diponibilidad='d' or new.diponibilidad= 'D'))then
-		delete from no_disponibles where id_recurso=old.identificador; 
+		insert into no_disponibles(id_recurso)values(new.identificador);
 	end if;
 end;
 $BODY$
@@ -109,11 +111,11 @@ create function public.BU_No_diponibles_pk()
 	returns trigger
 	language 'plpgsql'
 as $BODY$
-declare 
-x int;
+declare x INTEGER;
 begin
 	select count(*) into x from no_disponibles;
 	new.id:=x;
+	return new;
 end;
 $BODY$
 
