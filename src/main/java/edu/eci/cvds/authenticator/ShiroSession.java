@@ -21,9 +21,9 @@ public class ShiroSession implements SessionLogger {
             
             currentUser.login( token ); 
         } catch ( UnknownAccountException a ) {
-            throw new ExcepcionServiciosBiblioteca("User not found",a);
+            throw new ExcepcionServiciosBiblioteca("Usuario o contraseña incorrectos",a);
         } catch ( IncorrectCredentialsException b ) {
-            throw new ExcepcionServiciosBiblioteca("",b);
+            throw new ExcepcionServiciosBiblioteca("Usuario o contraseña incorrectos",b);
         }
     }
 
