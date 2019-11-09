@@ -78,7 +78,6 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	public List<Recurso> consultarRecursos() throws ExcepcionServiciosBiblioteca {
 		try {
-			System.out.println(recursoDAO.consultarRecursos());
 			return recursoDAO.consultarRecursos();
 			
 		} catch (PersistenceException e) {

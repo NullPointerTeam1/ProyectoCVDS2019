@@ -27,7 +27,6 @@ public class RecursosBibliotecaTest {
 		Recurso re = new Recurso((new TipoRecurso(4,"SALOON")),200,"PRUEBATEST1","Biblioteca",30,java.sql.Date.valueOf("2019-05-11"),"d");
 		serviciosB.registrarRecurso(re);
 		Recurso pruebaRecurso = serviciosB.consultarRecurso(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
-		//System.out.println(pruebaRecurso);
 		assertTrue(pruebaRecurso.getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
 	} 
 	
@@ -42,35 +41,28 @@ public class RecursosBibliotecaTest {
 		}
 	}
 	
-	@Test
+	/**@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
 		
-		/*Recurso re = new Recurso((new TipoRecurso(10,"MULTIMEDIA")),50,"PRUEBATEST2","PRUEBATEST2",100,java.sql.Date.valueOf("2019-05-11"),"d");
+		Recurso re = new Recurso((new TipoRecurso(10,"MULTIMEDIA")),50,"PRUEBATEST2","PRUEBATEST2",100,java.sql.Date.valueOf("2019-05-11"),"d");
 		serviciosB.registrarRecurso(re);
-		//System.out.println(serviciosB.consultarRecursos());
-		System.out.println(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
-		System.out.println(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-2).getId());
+		System.out.println(serviciosB.consultarRecursos());
 		assertTrue(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-2).getId()+1);
-		*/
-		assertTrue(true);
 		
-	}
+	}**/
 	
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
 		
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
-		System.out.println(serviciosB.consultarRecurso(1).getCapacidad());
-		serviciosB.actualizarEstadoRecurso(1, "N");
-		System.out.println(serviciosB.consultarRecurso(1).getDisponibilidad());
-		assertTrue(recurPrueba.getDisponibilidad().equals("N") && recurPrueba !=null);
+		serviciosB.actualizarEstadoRecurso(1, "n");
+		assertTrue(recurPrueba.getDisponibilidad().equals("n") && recurPrueba !=null);
 	}
 	
 	@Test
 	public void deberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
-		System.out.println(serviciosB.consultarRecursos());
 		assertTrue (recurPrueba !=null);
 	}
 	
