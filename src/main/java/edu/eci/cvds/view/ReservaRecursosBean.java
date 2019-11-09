@@ -27,6 +27,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private ServiciosReserva serviciosReserva;
 	private Usuario selectedUsuario;
 	private List<Recurso> recursosDisponibles;
+	private Recurso recursoActual;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -35,6 +36,14 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 
+	}
+
+	public Recurso getRecursoActual() {
+		return recursoActual;
+	}
+
+	public void setRecursoActual(Recurso recursoActual) {
+		this.recursoActual = recursoActual;
 	}
 
 	public List<Recurso> getRecursosDisponibles(){
@@ -90,10 +99,10 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	}
 
-	public Recurso consultarRecurso(long id) {
+	public Recurso consultarRecurso(String id) {
 		Recurso recurso = null;
 		try {
-			recurso = serviciosReserva.consultarRecurso(id);
+			recurso = serviciosReserva.consultarRecurso(Long.parseLong(id));
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
@@ -102,6 +111,7 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	public List<Recurso> consultarRecursos() {
 		List<Recurso> recursos = null;
+		
 		try {
 			recursos = serviciosReserva.consultarRecursos();
 		} catch (ExcepcionServiciosBiblioteca e) {
@@ -128,9 +138,10 @@ public class ReservaRecursosBean extends BasePageBean {
 		return disponibles;
 	}
 	
-	public void actualizarEstadoRecurso(long id, String estado) {
+	public void actualizarEstadoRecurso(String id, String estado) {
 		try {
-			serviciosReserva.actualizarEstadoRecurso(id, estado);
+			
+			serviciosReserva.actualizarEstadoRecurso(Long.parseLong(id), estado);
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}

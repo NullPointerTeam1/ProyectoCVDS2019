@@ -49,9 +49,6 @@ lang="es">
             <a class="nav-link" href="/registrarRecurso.xhtml">Administrar recursos</a>
           </li></shiro:hasRole>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">Sample Post</a>
-          </li>
-          <li class="nav-item">
             <h:form name="sentMessage" id="logoutForm" class="nav-item">
                 <p:commandLink id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
                   <h:outputText value="LOGOUT"/>
@@ -83,9 +80,10 @@ lang="es">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
           <h:form name="sentMessage" id="contactForm">
-        <p:messages id="messages" showDetail="true" closable="true">
-          <p:autoUpdate />
-        </p:messages>
+            <p:outputLabel value="Registra un nuevo recurso"/>
+            <p:messages id="messages" showDetail="true" closable="true">
+              <p:autoUpdate />
+            </p:messages>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Nombre</label>
@@ -114,6 +112,60 @@ lang="es">
 
           <div class="form-group">
             <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value)}" value="Registrar"></p:commandButton>
+          </div>
+        </h:form>
+        <br/>
+        <hr/>
+        <br/>
+        <h:form name="sentMessage" id="acutalizarRecurso">
+        <p:outputLabel value="Actualiza el estado de un recurso"/>
+        <p:messages id="messages" showDetail="true" closable="true">
+          <p:autoUpdate />
+        </p:messages>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <h:outputText value="Coloca un ID"/>
+              <label>ID</label>
+              <p:inputText placeholder="ID" id="id" data-validation-required-message="Ingresa el ID del recurso" binding="#{superID}" value="0">
+              <p:ajax event="keyup" update="@form" />
+              </p:inputText>
+            </div>
+          </div>
+          <p:dataTable id="itemRentadoRetarded" var="recurso" value="#{ReservaRecursosBean.consultarRecurso(superID.value)}">
+              <f:facet name="header">
+                    Recurso seleccionado
+                </f:facet>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{recurso.disponibilidad}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{recurso.nombre}" />
+                </p:column>
+
+                <p:column headerText="Ubicacion">
+                    <h:outputText value="#{recurso.ubicacion}" />
+                </p:column>
+
+                <p:column headerText="Capacidad">
+                    <h:outputText value="#{recurso.capacidad}" />
+                </p:column>
+                
+                <p:column headerText="Tipo Recurso">
+                    <h:outputText value="#{recurso.tipo.descripcion}" />
+                </p:column>
+
+
+            </p:dataTable>
+          <p:outputLabel for="estadoRecurso" value="Estado del Recurso:" />
+          <p:selectOneRadio id="estadoRecurso" binding="#{superEstado}" unselectable="true" required="true">
+              <f:selectItem itemLabel="Disponible" itemValue="d" />
+              <f:selectItem itemLabel="Ocupado" itemValue="o" />
+              <f:selectItem itemLabel="No disponible" itemValue="n" />
+          </p:selectOneRadio>
+
+          <div class="form-group">
+            <p:commandButton actionListener="#{ReservaRecursosBean.actualizarEstadoRecurso(superID.value, superEstado.value)}" value="Registrar" update="@form"></p:commandButton>
           </div>
         </h:form>
         
