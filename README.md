@@ -35,6 +35,12 @@
 ## Descripción del proceso
 
 
+## Sprint 1
+
+
+![Burndown chart](https://ibb.co/GxSD1rS)
+![Tasks](https://ibb.co/JRvQDcp)
+
 
 
 **Conexion POSTGRESQL**
