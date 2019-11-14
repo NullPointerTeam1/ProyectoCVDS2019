@@ -6,9 +6,9 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
-import edu.eci.cvds.samples.services.ServiciosReserva;
 
 /**
  *
@@ -26,19 +26,21 @@ public class Recurso implements Serializable {
 	private String nombre;
 	private String ubicacion;
 	private int capacidad;
-	private Date horario;
+	private Date horarioI;
+	private Date horarioF;
 	private String disponibilidad;
 	
 	public Recurso() {
 	}
 
-	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horario, String disponibilidad) {
+	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Date horarioI, Date horarioF, String disponibilidad) {
 		this.tipo = tipo;
 		this.id = id;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
-		this.horario = horario;
+		this.horarioI = horarioI;
+		this.horarioF = horarioF;
 		this.disponibilidad = disponibilidad;
 	}
 
@@ -81,12 +83,7 @@ public class Recurso implements Serializable {
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
-
-	@Override
-	public String toString() {
-		return "Recurso{" + "tipo=" + tipo.toString() + ", id=" + id + ", nombre=" + nombre + '}';
-	}
-
+	
 	public String getDisponibilidad() {
 		return disponibilidad;
 	}
@@ -95,12 +92,24 @@ public class Recurso implements Serializable {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public Date getHorario() {
-		return horario;
+	public Date getHorarioI() {
+		return horarioI;
 	}
 
-	public void setHorario(Date horario) {
-		this.horario = horario;
+	public void setHorarioI(Date horarioI) {
+		this.horarioI = horarioI;
+	}
+	
+	public Date getHorarioF() {
+		return horarioF;
 	}
 
+	public void setHorarioF(Date horarioF) {
+		this.horarioF = horarioF;
+	}
+	
+	@Override
+	public String toString() {
+		return "Recurso{" + "tipo=" + tipo.toString() + ", id=" + id + ", nombre=" + nombre + '}';
+	}
 }

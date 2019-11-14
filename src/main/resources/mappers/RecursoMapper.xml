@@ -13,7 +13,8 @@
 			#{recurso.nombre},
 			#{recurso.ubicacion},
 			#{recurso.capacidad},
-			#{recurso.horario},
+			#{recurso.horarioI},
+			#{recurso.horarioF},
 			#{recurso.disponibilidad},
 			#{recurso.tipo.id}
 			)
@@ -25,7 +26,8 @@
         r.nombre,
         r.ubicacion,
         r.capacidad,
-        r.horario_disponibilidad,
+        r.horarioI,
+        r.horarioF,
         r.disponibilidad,
         r.tiporecurso_id
         FROM RECURSOS AS r 
@@ -38,7 +40,8 @@
         r.nombre,
         r.ubicacion,
         r.capacidad,
-        r.horario_disponibilidad,
+        r.horarioI,
+        r.horarioF,
         r.disponibilidad,
         r.tiporecurso_id,
         tr.descripcion
@@ -57,7 +60,8 @@
 	    <result property='nombre' column='nombre'/>
 	    <result property='ubicacion' column='ubicacion'/>
 	    <result property='capacidad' column='capacidad'/>
-	    <result property='horario' column='horario_disponibilidad'/>  
+	    <result property='horarioI' column='horarioI'/>
+	    <result property='horarioF' column='horarioF'/>
 	    <result property='disponibilidad' column='disponibilidad'/>  
 	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
 	</resultMap>

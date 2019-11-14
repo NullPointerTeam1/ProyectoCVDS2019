@@ -51,7 +51,7 @@ lang="es">
           </shiro:hasRole>
           <li class="nav-item">
             <h:form name="sentMessage" id="logoutForm" class="nav-item">
-                <p:commandLink id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
+                <p:commandLink class="nav-link" id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
                   <h:outputText value="LOGOUT"/>
                 </p:commandLink>
             </h:form>

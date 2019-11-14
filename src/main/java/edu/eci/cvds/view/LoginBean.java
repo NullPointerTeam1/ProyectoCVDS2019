@@ -32,7 +32,6 @@ public class LoginBean extends BasePageBean{
 	private String correo;
     private String password;
     private boolean rememberMe;
-    private Subject currentUser;
     
     @Inject
     private SessionLogger logger;
