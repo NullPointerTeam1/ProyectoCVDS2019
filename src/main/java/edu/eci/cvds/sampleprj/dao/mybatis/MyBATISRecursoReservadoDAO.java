@@ -20,7 +20,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
 		try {
 			RecursoReservadoMapper.insertarReservado(recurso);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al registrar la reserva " + recurso.toString(), e);
+			throw new PersistenceException("Error (P) al registrar la reserva del recurso" + recurso.toString(), e);
 		}
 	}
 
@@ -29,16 +29,25 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
 		try {
 			return RecursoReservadoMapper.consultarReserva(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar la reserva " + id, e);
+			throw new PersistenceException("Error (P) al consultar la reserva " + id, e);
 		}
 	}
 
 	@Override
-	public List<RecursoReservado> consultarReservas(Usuario usuario) throws PersistenceException {
+	public List<RecursoReservado> consultarReservas() throws PersistenceException {
 		try {
-			return RecursoReservadoMapper.consultarReservas(usuario);
+			return RecursoReservadoMapper.consultarReservas();
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar las reservas", e);
+			throw new PersistenceException("Error (P) al consultar las reservas", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws PersistenceException {
+		try {
+			return RecursoReservadoMapper.consultarReservasDeUnUsuario(usuario);
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) al consultar las reservas del usuario " + usuario.getNombre(), e);
 		}
 	}
 }

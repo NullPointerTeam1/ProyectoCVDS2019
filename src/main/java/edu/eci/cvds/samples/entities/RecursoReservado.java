@@ -7,6 +7,7 @@ package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -20,16 +21,23 @@ public class RecursoReservado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-
+	private Date fechaInicioReserva;
+	private Time horaInicioReserva;
+	private Time horaFinReserva;
+	private Date fechaFinReserva;
 	private Recurso recurso;
-	private Date fechainiciorenta;
-	private Date fechafinrenta;
+	private Usuario usuario;
 
-	public RecursoReservado(int id, Recurso recurso, Date fechainiciorenta, Date fechafinrenta) {
+	public RecursoReservado(int id, Date fechaInicioReserva, Date fechaFinReserva, Time horaInicioReserva, Time horaFinReserva, Recurso recurso,
+						    Usuario usuario) {
 		this.id = id;
+		this.fechaInicioReserva = fechaInicioReserva;
+		this.fechaFinReserva = fechaFinReserva;
+		this.horaFinReserva = horaFinReserva;
+		this.horaInicioReserva = horaInicioReserva;
 		this.recurso = recurso;
-		this.fechainiciorenta = fechainiciorenta;
-		this.fechafinrenta = fechafinrenta;
+		this.usuario = usuario;
+		
 	}
 
 	public RecursoReservado() {
@@ -38,8 +46,8 @@ public class RecursoReservado implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RecursoRentado{" + "id=" + id + ", recurso=" + recurso + ", fechainiciorenta=" + fechainiciorenta
-				+ ", fechafinrenta=" + fechafinrenta + '}';
+		return "RecursoRentado{" + "id=" + id + ", recurso=" + recurso + ", fechaInicioReserva=" + fechaInicioReserva
+				+ ", fechaFinReserva=" + fechaFinReserva + "horaInicioReserva =" + horaInicioReserva +  "horaFinReserva =" + horaFinReserva  + '}';
 	}
 
 }

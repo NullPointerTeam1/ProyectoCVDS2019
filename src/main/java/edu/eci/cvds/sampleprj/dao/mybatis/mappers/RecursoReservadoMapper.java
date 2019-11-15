@@ -12,11 +12,14 @@ import edu.eci.cvds.samples.entities.Usuario;
 */
 
 public interface RecursoReservadoMapper {
+	
 	public void insertarReservado(@Param("recurso") RecursoReservado recurso);
 
 	public RecursoReservado consultarReserva(@Param("id") long id);
 	
-	public List<RecursoReservado> consultarReservas(@Param("usuario") Usuario usuario);
+	public List<RecursoReservado> consultarReservasDeUnUsuario(@Param("usuario") Usuario usuario);
 	
-	public void actualizarEstadoRecurso(@Param("id") long id, @Param("estado") String estado);
+	public List<RecursoReservado> consultarReservas();
+	
+
 }

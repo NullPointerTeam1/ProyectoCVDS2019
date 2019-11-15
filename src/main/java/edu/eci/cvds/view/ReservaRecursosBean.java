@@ -12,7 +12,9 @@ import javax.inject.Inject;
 import java.util.*;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
@@ -90,7 +92,7 @@ public class ReservaRecursosBean extends BasePageBean {
 				}
 			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Date.valueOf(LocalDate.now()),null, "d"));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Time.valueOf(LocalTime.now()),null, "d"));
 			setErrorMessage("El registro de "+ nombre+" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);

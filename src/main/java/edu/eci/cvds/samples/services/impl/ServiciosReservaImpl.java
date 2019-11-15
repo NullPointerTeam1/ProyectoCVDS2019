@@ -19,6 +19,8 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	private UsuarioDAO usuarioDAO;
 	@Inject
 	private TipoRecursoDAO tipoRecursoDAO;
+	@Inject
+	private RecursoReservadoDAO recursoReservadoDAO;
 
 	@Override
 	@Transactional
@@ -124,6 +126,29 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar los tipos de los recursos", e);
 		}
+	}
+
+	@Override
+	public void insertarReservado(RecursoReservado recurso) throws ExcepcionServiciosBiblioteca {
+		recursoReservadoDAO.insertarRecursoReservado(recurso);
+	}
+
+	@Override
+	public RecursoReservado consultarReserva(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasDeUnUsuario() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

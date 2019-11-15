@@ -17,7 +17,7 @@ public class MyBATISTipoRecursoDAO implements TipoRecursoDAO {
 		try {
 			tipoRecursoMapper.insertarTipoRecurso(ti);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al registrar el tipo recurso " + ti.toString(), e);
+			throw new PersistenceException("Error (P) al registrar el tipo recurso " + ti.toString(), e);
 		}
 	}
 
@@ -26,7 +26,7 @@ public class MyBATISTipoRecursoDAO implements TipoRecursoDAO {
 		try {
 			return tipoRecursoMapper.consultarTipoRecurso(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar el tipo Recurso " + id, e);
+			throw new PersistenceException("Error (P) al consultar el tipo Recurso " + id, e);
 		}
 	}
 
@@ -35,7 +35,7 @@ public class MyBATISTipoRecursoDAO implements TipoRecursoDAO {
 		try {
 			return tipoRecursoMapper.consultarTiposRecurso();
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar los tipos del recurso", e);
+			throw new PersistenceException("Error (P) al consultar los tipos del recurso", e);
 		}
 	}
 
