@@ -4,7 +4,7 @@ CHECK ((correo NOT LIKE '%@hotmail.com' or correo NOT LIKE '%@gmail.com' or corr
 
 ALTER TABLE recursos
 ADD CONSTRAINT  CK_recursos_disponibilidad
-CHECK(diponibilidad ='d' or diponibilidad= 'D' or diponibilidad = 'O' or diponibilidad = 'o' or diponibilidad = 'N' or diponibilidad = 'n');
+CHECK(disponibilidad= 'Disponible' or disponibilidad = 'Ocupado'  or disponibilidad = 'No Disponible');
 
 ALTER TABLE recursos
 ADD CONSTRAINT  CK_recursos_capacidad
@@ -12,7 +12,7 @@ CHECK (capacidad >= 0);
 
 ALTER TABLE Usuarios
 ADD constraint CK_Usuarios_rol
-check(rol='a' or rol='u' or rol='A' or rol='U');
+check(rol='A' or rol='U');
 
 ALTER TABLE tipo_recurso
 add constraint CK_recurso_Descripcion
