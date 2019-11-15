@@ -17,7 +17,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 		try {
 			recursoMapper.insertarRecurso(it);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al insertar el recurso " + it.toString(), e);
+			throw new PersistenceException("Error (P) al insertar el recurso " + it.toString(), e);
 		}
 
 	}
@@ -27,7 +27,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 		try {
 			return recursoMapper.consultarRecurso(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar el Recurso " + id, e);
+			throw new PersistenceException("Error (P) al consultar el Recurso " + id, e);
 		}
 	}
 
@@ -36,7 +36,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 		try {
 			return recursoMapper.consultarRecursos();
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar los recursos", e);
+			throw new PersistenceException("Error (P) al consultar los recursos", e);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 		try {
 			recursoMapper.actualizarEstadoRecurso(id, estado);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al actualizar el estado del recurso" + id, e);
+			throw new PersistenceException("Error (P) al actualizar el estado del recurso" + id, e);
 		}
 	}
 	

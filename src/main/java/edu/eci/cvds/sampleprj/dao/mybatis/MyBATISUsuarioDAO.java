@@ -18,7 +18,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 		try {
 			usuarioMapper.insertarUsuario(usuario);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al registrar el usuario " + usuario.toString(), e);
+			throw new PersistenceException("Error (P) al registrar el usuario " + usuario.toString(), e);
 		}
 
 	}
@@ -28,7 +28,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 		try {
 			return usuarioMapper.consultarUsuario(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar el usuario: " + id, e);
+			throw new PersistenceException("Error (P) al consultar el usuario: " + id, e);
 		}
 
 	}
@@ -38,7 +38,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 		try {
 			return usuarioMapper.consultarUsuarios();
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al consultar los Usuarios ", e);
+			throw new PersistenceException("Error (P) al consultar los Usuarios ", e);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 		try {
 			//usuarioMapper.agregarRecursoRentadoAUsuario(id, recurso.getId(), fechaIni, fechaFin);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
-			throw new PersistenceException("Error al registrar el recurso al usuario:" + id, e);
+			throw new PersistenceException("Error (P) al registrar el recurso al usuario:" + id, e);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 		try {
 			//return usuarioMapper.consultarRecursosRentadosUsuario(id);
 		} catch (PersistenceException e) {
-			throw new PersistenceException("Error al consultar los recursos rentados del cliente" + id, e);
+			throw new PersistenceException("Error (P) al consultar los recursos rentados del cliente" + id, e);
 		}
 		return null;
 	}

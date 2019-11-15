@@ -13,6 +13,8 @@ public interface RecursoReservadoDAO {
 
 	RecursoReservado consultarReservado(long id) throws PersistenceException;
 
-	List<RecursoReservado> consultarReservas(Usuario usuario) throws PersistenceException;
+	List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws PersistenceException;
+	
+	List<RecursoReservado> consultarReservas() throws PersistenceException;
 
 }
