@@ -13,8 +13,9 @@ create table if not exists RECURSOS(
 	nombre varchar(100)not null,
 	ubicacion varchar(50)not null,
 	capacidad int,
-	horario_disponibilidad date,
-	disponibilidad varchar(1) not null,
+	horarioI time,
+	horarioF time,
+	disponibilidad varchar(13) not null,
 	tiporecurso_id int NOT NULL
 );
 create table if not exists No_Disponibles(
@@ -29,3 +30,16 @@ create table if not exists user_roles(
 	correo varchar(100) primary key,
 	role_name varchar(30) not null
 );
+create table if not exists reserva(
+	id int primary key,
+	fechainiciorenta date not null,
+	horainiciorenta time not null,
+	horafinrenta time not not null,
+	fechafinrenta date not null,
+	
+	carnet int not null,
+	identificador int not null,
+	
+	
+	
+)
