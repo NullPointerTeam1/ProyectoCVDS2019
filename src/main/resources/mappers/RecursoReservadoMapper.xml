@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservado">
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
     <insert id="insertarReservado" parameterType="map">
             INSERT INTO reservadoS 
             VALUES (

@@ -27,6 +27,7 @@ public class ServiciosReservaFactory {
                 bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(TipoRecursoDAO.class).to(MyBATISTipoRecursoDAO.class);
+                bind(RecursoReservadoDAO.class).to(MyBATISRecursoReservadoDAO.class);
                 bind(ServiciosReserva.class).to(ServiciosReservaImpl.class);
             }
         });
