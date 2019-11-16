@@ -16,7 +16,7 @@ public class ShiroSession implements SessionLogger {
             Subject currentUser = SecurityUtils.getSubject();
 
             UsernamePasswordToken token = new UsernamePasswordToken(correo, new Sha256Hash(password).toHex(),hist);
-            System.out.println(new Sha256Hash(password));
+			
             currentUser.getSession().setAttribute("Correo",correo);
             
             currentUser.login( token ); 

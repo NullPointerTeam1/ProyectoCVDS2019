@@ -38,11 +38,11 @@ create function public.BU_Recursos_Identificador()
 	returns trigger
 	language 'plpgsql'
 as $BODY$
-DECLARE x INTEGER;
+DECLARE x INT;
 begin
 	select max(identificador) into x from recursos;
 	new.identificador:= x + 1;
-	return new;
+	return new.identificador;
 end;
 $BODY$
 
@@ -58,7 +58,7 @@ create function public.BU_Recursos_Disponibilidad()
 	language 'plpgsql'
 as $BODY$
 begin
-	new.diponibilidad:='d';
+	new.disponibilidad:='Disponible';
 	return new;
 end;
 $BODY$
@@ -67,60 +67,22 @@ create trigger BU_Recursos_Disponibilidad
 before insert on recursos
 for each row
 execute procedure BU_Recursos_Disponibilidad();
----------------NO Disponibles---------------------------------------------------------------------
-
-create function public.BU_Recursos_Dano()
+------------------------------------------ reservados--------------------------------------------
+---------------Identificador---------------------------------------------------------------------
+create function public.BU_Reservados_Identificador()
 	returns trigger
 	language 'plpgsql'
 as $BODY$
+DECLARE x INTEGER;
 begin
-	IF ((new.diponibilidad != 'N' or new.diponibilidad != 'n') and (old.diponibilidad!= 'n' or old.diponibilidad!='N'))then
-		delete from no_disponibles where id_recurso=old.identificador; 
-		
-	end if;
-end;
-$BODY$
-
-create trigger BU_Recursos_Dano
-before update on recursos
-for each row
-execute procedure BU_Recursos_Dano();
-
----------------Reparados---------------------------------------------------------------------
-
-create function public.BU_Recursos_arreglo()
-	returns trigger
-	language 'plpgsql'
-as $BODY$
-begin
-	IF ((old.diponibilidad = 'N' or old.diponibilidad = 'n') and (new.diponibilidad='d' or new.diponibilidad= 'D'))then
-		insert into no_disponibles(id_recurso)values(new.identificador);
-	end if;
-end;
-$BODY$
-
-create trigger BU_Recursos_arreglo
-before update on recursos
-for each row
-execute procedure BU_Recursos_arreglo();
-
------------------------------------------- No diponibles ------------------------------------------
------------------------------------------- Automatizar id-------------------------------------------
-
-create function public.BU_No_diponibles_pk()
-	returns trigger
-	language 'plpgsql'
-as $BODY$
-declare x INTEGER;
-begin
-	select count(*) into x from no_disponibles;
-	new.id:=x;
+	select max(id) into x from reservados;
+	new.id:= x + 1;
 	return new;
 end;
 $BODY$
 
-create trigger BU_No_diponibles_pk
-before insert
-on no_disponibles
+create trigger BU_Reservados_Identificador
+before insert on reservados
 for each row
-execute procedure BU_No_diponibles_pk();
+execute procedure BU_Reservados_Identificador();
+
