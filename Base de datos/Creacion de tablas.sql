@@ -1,4 +1,4 @@
-create table  USUARIOS(
+create table if not exists USUARIOS(
 	carnet int  primary key,
 	nombre varchar(15) not null,
 	apellido varchar(15) not null,
@@ -8,8 +8,8 @@ create table  USUARIOS(
 	contrasena varchar(300) not null
 );
 
-create table RECURSOS(
-	identificador int primary key,
+create table if not exists RECURSOS(
+	identificador  Serial primary key,
 	nombre varchar(100)not null,
 	ubicacion varchar(50)not null,
 	capacidad int,
@@ -18,12 +18,12 @@ create table RECURSOS(
 	disponibilidad varchar(13) not null,
 	tiporecurso_id int NOT NULL
 );
-CREATE TABLE  TIPO_RECURSO (
-	id INT primary key,
+CREATE table if not exists TIPO_RECURSO (
+	id serial primary key,
 	descripcion VARCHAR(50)  NOT NULL
 );
-create table  reservados(
-	id int primary key,
+create table if not exists reservados(
+	id serial primary key,
 	fechaInicioReserva date not null,
 	horaInicioReserva time not null,
 	fechaFinReserva date not null,

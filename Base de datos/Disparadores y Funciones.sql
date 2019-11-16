@@ -33,24 +33,9 @@ before update of carnet on usuarios
 for each row
 execute procedure BU_USUARIOS_CARNET();
 ------------------------------------------ Recursos ---------------------------------------------
----------------Identificador---------------------------------------------------------------------
-create function public.BU_Recursos_Identificador()
-	returns trigger
-	language 'plpgsql'
-as $BODY$
-DECLARE x INT;
-begin
-	select max(identificador) into x from recursos;
-	new.identificador:= x + 1;
-	return new.identificador;
-end;
-$BODY$
-
-create trigger BU_Recursos_Identificador
-before insert on recursos
-for each row
-execute procedure BU_Recursos_Identificador();
-
+CREATE SEQUENCE recurso_sequence
+  start 1
+  increment 1;
 ---------------diponibilidad---------------------------------------------------------------------
 
 create function public.BU_Recursos_Disponibilidad()
@@ -68,21 +53,11 @@ before insert on recursos
 for each row
 execute procedure BU_Recursos_Disponibilidad();
 ------------------------------------------ reservados--------------------------------------------
----------------Identificador---------------------------------------------------------------------
-create function public.BU_Reservados_Identificador()
-	returns trigger
-	language 'plpgsql'
-as $BODY$
-DECLARE x INTEGER;
-begin
-	select max(id) into x from reservados;
-	new.id:= x + 1;
-	return new;
-end;
-$BODY$
+CREATE SEQUENCE TIPO_RECURSO_sequence
+  start 1
+  increment 1;
 
-create trigger BU_Reservados_Identificador
-before insert on reservados
-for each row
-execute procedure BU_Reservados_Identificador();
+ CREATE SEQUENCE reservados_sequence
+  start 1
+  increment 1;
 
