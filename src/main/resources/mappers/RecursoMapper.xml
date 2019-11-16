@@ -60,8 +60,8 @@
 	    <result property='nombre' column='nombre'/>
 	    <result property='ubicacion' column='ubicacion'/>
 	    <result property='capacidad' column='capacidad'/>
-	    <result property='horarioI' column='horarioI'/>
-	    <result property='horarioF' column='horarioF'/>
+	    <result property='horarioI' column='horarioi'/>
+	    <result property='horarioF' column='horariof'/>
 	    <result property='disponibilidad' column='disponibilidad'/>  
 	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
 	</resultMap>

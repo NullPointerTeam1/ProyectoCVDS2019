@@ -30,7 +30,8 @@
     <mappers>
         <mapper resource="mappers/UsuarioMapper.xml"></mapper>
 		<mapper resource="mappers/RecursoMapper.xml"></mapper>
-		<mapper resource="mappers/TipoRecursoMapper.xml"></mapper>     
+		<mapper resource="mappers/TipoRecursoMapper.xml"></mapper>
+		<mapper resource="mappers/RecursoReservadoMapper.xml"></mapper>     
     </mappers> 
         
         

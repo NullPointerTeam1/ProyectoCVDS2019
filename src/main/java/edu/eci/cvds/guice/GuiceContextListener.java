@@ -2,6 +2,7 @@ package edu.eci.cvds.guice;
 
 import javax.servlet.ServletContext;
 
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.mybatis.guice.XMLMyBatisModule;
@@ -36,6 +37,7 @@ public class GuiceContextListener implements ServletContextListener {
 				bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 				bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
 				bind(TipoRecursoDAO.class).to(MyBATISTipoRecursoDAO.class);
+				bind(RecursoReservadoDAO.class).to(MyBATISRecursoReservadoDAO.class);
 				bind(SessionLogger.class).to(ShiroSession.class);
 
 			}

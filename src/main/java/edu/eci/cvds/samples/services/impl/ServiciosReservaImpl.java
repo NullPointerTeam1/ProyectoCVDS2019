@@ -74,7 +74,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		}
 		
 		if (recurso == null) throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.ERROR_CONSULTAR);
-		return recurso;
+			return recurso;
 	}
 
 	@Override
