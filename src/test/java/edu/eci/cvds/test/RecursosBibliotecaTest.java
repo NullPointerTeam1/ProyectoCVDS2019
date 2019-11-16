@@ -61,7 +61,7 @@ public class RecursosBibliotecaTest {
 	
 	@Test
 	public void deberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
-		
+
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
 		assertTrue (recurPrueba !=null);
 	}

@@ -47,7 +47,7 @@
         <result property='carrera' column='carrera'/>
         <result property='correo' column='correo'/>  
         <result property='rol' column='rol'/> 
-        <collection property='reservados' ofType='RecursoReservado'  resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservado.reservadoResult'>
+        <collection property='reservados' ofType='RecursoReservado'  resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper.reservadoResult'>
             
         </collection>
     </resultMap>

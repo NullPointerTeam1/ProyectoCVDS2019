@@ -5,12 +5,14 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
     <insert id="insertarReservado" parameterType="map">
-            INSERT INTO reservadoS 
+            INSERT INTO reservados 
             VALUES (
-            #{reservado.id}, 
-            #{reservado.fechainiciorenta},
-            #{reservado.fechafinrenta},
-            #{reservado.carrera},
+            #{reservado.id},
+            #{reservado.fechainicioReserva},
+            #{reservado.horaInicioReserva},
+            #{reservado.fechafinReserva},
+            #{reservado.horaFinReserva},
+            #{reservado.usuario.id},
             #{reservado.item.id}
             )
     </insert>
@@ -18,7 +20,7 @@
     <select parameterType="map" id="consultarReserva" resultMap="reservadoResult" >
         SELECT    
 		*
-   		FROM reservadoS AS r
+   		FROM reservados AS r
         WHERE r.id=#{id}
     </select>
 
@@ -26,14 +28,17 @@
     <select parameterType="map" id="consultarReservas" resultMap="reservadoResult" >
     	SELECT    
        	*
-        FROM reservadoS AS r 
+        FROM reservados AS r 
     </select>
     
-    <resultMap type='reservado' id='reservadoResult' >
+    <resultMap type='RecursoReservado' id='reservadoResult' >
         <id property='id' column='id'/>
-        <result property='fechainiciorenta' column='fechainiciorenta'/>
-        <result property='fechafinrenta' column='fechafinrenta'/>
-        <association property="Recurso" javaType="Recurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
+        <result property='fechaInicioReserva' column='fechainicioreserva'/>
+        <result property='horaInicioReserva' column='horainicioreserva'/>
+        <result property='fechaFinReserva' column='fechafinreserva'/>
+        <result property='horaFinReserva' column='horainicioreserva'/>
+        <association property="recurso" javaType="Recurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
+        <association property="usuario" javaType="Usuario" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper.UsuarioResult'></association>
     </resultMap>
          
 </mapper>
