@@ -47,7 +47,8 @@ public class RecursoReservado implements Serializable {
 	@Override
 	public String toString() {
 		return "RecursoRentado{" + "id=" + id + ", recurso=" + recurso + ", fechaInicioReserva=" + fechaInicioReserva
-				+ ", fechaFinReserva=" + fechaFinReserva + "horaInicioReserva =" + horaInicioReserva +  "horaFinReserva =" + horaFinReserva  + '}';
+				+ ", fechaFinReserva=" + fechaFinReserva + "horaInicioReserva =" + horaInicioReserva +  
+				"horaFinReserva =" + horaFinReserva  + "usuario =" + usuario  +'}';
 	}
 
 }

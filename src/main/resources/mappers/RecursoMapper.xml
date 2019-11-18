@@ -9,7 +9,7 @@
 	<insert parameterType="map" id="insertarRecurso" >
 			INSERT INTO RECURSOS
 			VALUES (
-			#{recurso.id},
+			nextval('recurso_sequence'),
 			#{recurso.nombre},
 			#{recurso.ubicacion},
 			#{recurso.capacidad},

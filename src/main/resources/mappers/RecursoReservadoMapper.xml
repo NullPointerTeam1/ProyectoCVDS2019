@@ -8,12 +8,12 @@
             INSERT INTO reservados 
             VALUES (
             #{reservado.id},
-            #{reservado.fechainicioReserva},
+            #{reservado.fechaInicioReserva},
             #{reservado.horaInicioReserva},
-            #{reservado.fechafinReserva},
+            #{reservado.fechaFinReserva},
             #{reservado.horaFinReserva},
-            #{reservado.usuario.id},
-            #{reservado.item.id}
+            #{reservado.usuario.carnet},
+            #{reservado.recurso.id}
             )
     </insert>
 

@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
 	private long carnet;
 	private String carrera;
 	private String correo;
-	private String contraseña;
+	private String contrasena;
 	private String rol;
 	private ArrayList<RecursoReservado> reservados;
 
@@ -30,14 +30,14 @@ public class Usuario implements Serializable {
 	}
 
 	
-	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String contraseña, String rol,
+	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String contrasena, String rol,
 			ArrayList<RecursoReservado> reservados) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.carnet = carnet;
 		this.carrera = carrera;
 		this.correo = correo;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.rol = rol;
 		this.reservados = reservados;
 	}
@@ -112,12 +112,12 @@ public class Usuario implements Serializable {
 		return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", rentados = \n\t" + reservados + '}';
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getcontrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setcontrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 }
