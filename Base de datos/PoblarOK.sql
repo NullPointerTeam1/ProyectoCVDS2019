@@ -23,5 +23,3 @@ insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, hora
 
 
 
-select * from recursos;
-

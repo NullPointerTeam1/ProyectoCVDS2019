@@ -1,9 +1,8 @@
 package edu.eci.cvds.samples.services;
 
 import edu.eci.cvds.samples.entities.*;
-import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 public interface ServiciosReserva {
 	
@@ -35,7 +34,7 @@ public interface ServiciosReserva {
 	
 	// Reservas
 	
-	public void registrarRecursoReservado(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca;
+	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca;
 
 	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	

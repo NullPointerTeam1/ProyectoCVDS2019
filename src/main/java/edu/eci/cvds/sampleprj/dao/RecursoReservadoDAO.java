@@ -9,7 +9,7 @@ import edu.eci.cvds.samples.entities.Usuario;
 
 public interface RecursoReservadoDAO {
 
-	public void insertarRecursoReservado(RecursoReservado recurso) throws PersistenceException;
+	public void insertarReserva(RecursoReservado recurso) throws PersistenceException;
 
 	public RecursoReservado consultarReservado(long id) throws PersistenceException;
 

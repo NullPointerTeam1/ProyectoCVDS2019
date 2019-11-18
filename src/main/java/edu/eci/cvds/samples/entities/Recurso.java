@@ -7,7 +7,6 @@ package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Date;
 
 
 /**

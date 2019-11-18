@@ -32,6 +32,7 @@
         r.tiporecurso_id
         FROM RECURSOS AS r 
         WHERE r.identificador=#{id}
+       
     </select>
 
     
@@ -48,6 +49,7 @@
         FROM recursos AS r, 
         tipo_recurso as tr 
        	WHERE r.tiporecurso_id =  tr.id
+       	ORDER BY r.identificador;
     </select>
 
     <update parameterType="map" id="actualizarEstadoRecurso">

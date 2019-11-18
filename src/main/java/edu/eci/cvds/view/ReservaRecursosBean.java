@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import edu.eci.cvds.samples.entities.*;
 
+
 import edu.eci.cvds.samples.services.*;
 
 import javax.faces.application.FacesMessage;
@@ -10,9 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.util.*;
-
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -185,7 +183,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    Usuario usuario) {
 		RecursoReservado recursoReservado = new RecursoReservado(id, fechaInicioReserva, fechaFinReserva, horaInicioReserva, horaFinReserva, recurso, usuario);
 		try {
-			serviciosReserva.registrarRecursoReservado(recursoReservado);
+			serviciosReserva.registrarReserva(recursoReservado);
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}

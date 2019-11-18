@@ -69,17 +69,14 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	public Recurso consultarRecurso(long id) throws ExcepcionServiciosBiblioteca {
-		Recurso recurso = null;
+		
 		try {
-			recurso = recursoDAO.consultarRecurso(id);
+			return recursoDAO.consultarRecurso(id);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar el recurso" + id, e);
 		}
 		
-		if (recurso == null) throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.ERROR_CONSULTAR);
-			return recurso;
 	}
-
 	@Override
 	public List<Recurso> consultarRecursos() throws ExcepcionServiciosBiblioteca {
 		try {
@@ -137,9 +134,9 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	@Transactional
-	public void registrarRecursoReservado(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
+	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
 		if (recursoReservado == null) throw new ExcepcionServiciosBiblioteca("La reserva no puede ser nula");
-		recursoReservadoDAO.insertarRecursoReservado(recursoReservado);
+		recursoReservadoDAO.insertarReserva(recursoReservado);
 	}
 
 	@Override

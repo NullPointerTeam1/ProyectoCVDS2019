@@ -13,7 +13,7 @@ import edu.eci.cvds.samples.entities.Usuario;
 
 public interface RecursoReservadoMapper {
 	
-	public void insertarReservado(@Param("reservado") RecursoReservado reservado);
+	public void registrarReserva(@Param("reservado") RecursoReservado reservado);
 
 	public RecursoReservado consultarReserva(@Param("id") long id);
 	

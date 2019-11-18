@@ -18,9 +18,9 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 	private RecursoReservadoMapper recursoReservadoMapper;
 	
 	@Override
-	public void insertarRecursoReservado(RecursoReservado recurso) throws PersistenceException {
+	public void insertarReserva(RecursoReservado recurso) throws PersistenceException {
 		try {
-			recursoReservadoMapper.insertarReservado(recurso);
+			recursoReservadoMapper.registrarReserva(recurso);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al registrar la reserva del recurso" + recurso.toString(), e);
 		}

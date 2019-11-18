@@ -17,7 +17,7 @@
 	<select parameterType="map" id="consultarTipoRecurso" resultMap="TipoRecursoResult" >
         SELECT    
         tr.id,
-        tr.descripcion,
+        tr.descripcion
         FROM TIPO_RECURSO AS tr 
         WHERE tr.id=#{id}
     </select>
