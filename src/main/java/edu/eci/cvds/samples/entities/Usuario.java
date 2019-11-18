@@ -107,17 +107,17 @@ public class Usuario implements Serializable {
 		this.correo = correo;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", rentados = \n\t" + reservados + '}';
-	}
-
 	public String getcontrasena() {
 		return contrasena;
 	}
 
 	public void setcontrasena(String contrasena) {
 		this.contrasena = contrasena;
+	}
+	
+	@Override
+	public String toString() {
+		return "Usuario{" + "nombre=" + nombre + ", carnet=" + carnet + ", reservados = \n\t" + reservados + '}';
 	}
 
 }

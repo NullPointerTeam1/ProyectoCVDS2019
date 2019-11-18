@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 
 
@@ -185,7 +186,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public void registrarRecursoReservado(int id, LocalDate fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
-		    Usuario usuario) {
+		    Usuario usuario) throws PersistenceException {
 		RecursoReservado recursoReservado = new RecursoReservado(id, fechaInicioReserva, fechaFinReserva, horaInicioReserva, horaFinReserva, recurso, usuario);
 		try {
 			serviciosReserva.registrarReserva(recursoReservado);

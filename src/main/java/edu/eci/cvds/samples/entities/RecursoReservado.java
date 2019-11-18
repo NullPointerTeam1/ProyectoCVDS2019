@@ -40,6 +40,62 @@ public class RecursoReservado implements Serializable {
 		
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDate getFechaInicioReserva() {
+		return fechaInicioReserva;
+	}
+
+	public void setFechaInicioReserva(LocalDate fechaInicioReserva) {
+		this.fechaInicioReserva = fechaInicioReserva;
+	}
+
+	public LocalTime getHoraInicioReserva() {
+		return horaInicioReserva;
+	}
+
+	public void setHoraInicioReserva(LocalTime horaInicioReserva) {
+		this.horaInicioReserva = horaInicioReserva;
+	}
+
+	public LocalTime getHoraFinReserva() {
+		return horaFinReserva;
+	}
+
+	public void setHoraFinReserva(LocalTime horaFinReserva) {
+		this.horaFinReserva = horaFinReserva;
+	}
+
+	public LocalDate getFechaFinReserva() {
+		return fechaFinReserva;
+	}
+
+	public void setFechaFinReserva(LocalDate fechaFinReserva) {
+		this.fechaFinReserva = fechaFinReserva;
+	}
+
+	public Recurso getRecurso() {
+		return recurso;
+	}
+
+	public void setRecurso(Recurso recurso) {
+		this.recurso = recurso;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public RecursoReservado() {
 
 	}

@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface ServiciosReserva {
 	
 	// Reservas
 	
-	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca;
+	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca, PersistenceException;
 
 	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	

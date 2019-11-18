@@ -134,9 +134,13 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	@Transactional
-	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
-		if (recursoReservado == null) throw new ExcepcionServiciosBiblioteca("La reserva no puede ser nula");
+	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca, PersistenceException {
+		
+		if (recursoReservado == null) {
+			throw new ExcepcionServiciosBiblioteca("La reserva no puede ser nula");
+		}
 		recursoReservadoDAO.insertarReserva(recursoReservado);
+		recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"No Disponible");
 	}
 
 	@Override
