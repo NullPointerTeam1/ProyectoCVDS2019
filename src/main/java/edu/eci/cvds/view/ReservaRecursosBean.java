@@ -92,8 +92,8 @@ public class ReservaRecursosBean extends BasePageBean {
 				}
 			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), LocalTime.now(), LocalTime.now(), "d"));
-			setErrorMessage("El registro de "+ nombre+" se hizo correctamente");
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), LocalTime.now(), LocalTime.now(), "Disponible"));
+			setErrorMessage("El registro de "+ nombre +" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		} catch(NumberFormatException e) {
@@ -134,7 +134,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		}
 		List<Recurso> disponibles = new ArrayList<Recurso>();
 		for (Recurso r: recursos) {
-			if (r.getDisponibilidad().equals("d")) {
+			if (r.getDisponibilidad().equals("Disponible")) {
 				disponibles.add(r);
 			}
 		}
