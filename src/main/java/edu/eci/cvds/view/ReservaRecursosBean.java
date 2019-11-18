@@ -72,6 +72,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 
 	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad) {
+		System.out.println("ENTREWEEEE");
 		try {
 			TipoRecurso tipoRecurso = null;
 			switch(tipo) {
@@ -88,6 +89,10 @@ public class ReservaRecursosBean extends BasePageBean {
 					capacidad = "0";
 					break;
 				}
+			}
+			if (tipoRecurso == null){
+				
+				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.TIPO_RECURSONULL);
 			}
 			serviciosReserva
 					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), LocalTime.now(), LocalTime.now(), "Disponible"));

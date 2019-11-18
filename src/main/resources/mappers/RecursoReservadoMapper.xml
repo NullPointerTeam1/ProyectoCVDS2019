@@ -23,7 +23,13 @@
    		FROM reservados AS r
         WHERE r.id=#{id}
     </select>
-
+    
+	<select parameterType="map" id="consultarReserva" resultMap="ReservadoResult" >
+        SELECT    
+		*
+   		FROM reservados AS r
+        WHERE r.id=#{id}
+    </select>
     
     <select parameterType="map" id="consultarReservas" resultMap="ReservadoResult" >
     	SELECT    

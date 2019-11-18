@@ -12,6 +12,7 @@ public class ExcepcionServiciosBiblioteca extends Exception {
 	public final static String ERROR_INSERTAR = "Error al insertar";
 	public final static String ERROR_CONSULTAR = "Error al consultar";
 	public final static String USUARIO_YA_IDENTIFICADO = "Ya hay un usuario conectado";
+	public final static String TIPO_RECURSONULL = "Debe marcar el tipo del recurso";
 	
 	public ExcepcionServiciosBiblioteca(String mensaje) {
 		super(mensaje);
