@@ -49,7 +49,7 @@ public class RecursosBibliotecaTest {
 		System.out.println(serviciosB.consultarRecursos());
 		assertTrue(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-2).getId()+1);
 		
-	}**/
+	}
 	
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
@@ -57,12 +57,12 @@ public class RecursosBibliotecaTest {
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
 		serviciosB.actualizarEstadoRecurso(1, "n");
 		assertTrue(recurPrueba.getDisponibilidad().equals("n") && recurPrueba !=null);
-	}
+	}**/
 	
 	@Test
 	public void deberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 
-		Recurso recurPrueba = serviciosB.consultarRecurso(1);
+		Recurso recurPrueba = serviciosB.consultarRecurso(2);
 		assertTrue (recurPrueba !=null);
 	}
 	

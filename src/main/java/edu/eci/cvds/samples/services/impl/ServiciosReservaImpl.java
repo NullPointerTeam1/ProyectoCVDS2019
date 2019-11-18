@@ -2,7 +2,6 @@ package edu.eci.cvds.samples.services.impl;
 
 import com.google.inject.Inject;
 
-import com.google.inject.Singleton;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.*;
@@ -10,7 +9,7 @@ import edu.eci.cvds.sampleprj.dao.*;
 import org.mybatis.guice.transactional.Transactional;
 import java.util.List;
 
-@Singleton
+
 public class ServiciosReservaImpl implements ServiciosReserva {
 
 	@Inject
@@ -21,6 +20,8 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	private TipoRecursoDAO tipoRecursoDAO;
 	@Inject
 	private RecursoReservadoDAO recursoReservadoDAO;
+	
+	// Usuarios
 
 	@Override
 	@Transactional
@@ -53,7 +54,9 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar los usuarios", e);
 		}
 	}
-
+	
+	// Recursos
+	
 	@Override
 	@Transactional
 	public void registrarRecurso(Recurso recurso) throws ExcepcionServiciosBiblioteca {
@@ -96,6 +99,8 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		}
 	}
 	
+	// Tipos Recurso
+	
 	@Override
 	@Transactional
 	public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws ExcepcionServiciosBiblioteca {
@@ -127,28 +132,38 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar los tipos de los recursos", e);
 		}
 	}
-
+	
+	// Reservas
+	
 	@Override
-	public void insertarReservado(RecursoReservado recurso) throws ExcepcionServiciosBiblioteca {
-		recursoReservadoDAO.insertarRecursoReservado(recurso);
+	@Transactional
+	public void registrarRecursoReservado(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
+		if (recursoReservado == null) throw new ExcepcionServiciosBiblioteca("La reserva no puede ser nula");
+		recursoReservadoDAO.insertarRecursoReservado(recursoReservado);
 	}
 
 	@Override
-	public RecursoReservado consultarReserva(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
+		try { 
+			return recursoReservadoDAO.consultarReservado(id);
+		} catch (Exception e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar la reserva" + id);
+		}
 	}
 
 	@Override
-	public List<RecursoReservado> consultarReservas() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecursoReservado> consultarReservas() throws ExcepcionServiciosBiblioteca {
+		try { 
+			return recursoReservadoDAO.consultarReservas();
+		} catch (Exception e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar las reservas");
+		}
 	}
 
 	@Override
-	public List<RecursoReservado> consultarReservasDeUnUsuario() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca {
+		if (usuario == null) throw new ExcepcionServiciosBiblioteca("El usuario deseado no existe");
+		return recursoReservadoDAO.consultarReservasDeUnUsuario(usuario);
 	}
 
 

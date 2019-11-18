@@ -43,7 +43,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 	}
 
 	@Override
-	public void agregarRecursoRentadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin) throws PersistenceException {
+	public void agregarRecursoReservadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin) throws PersistenceException {
 		try {
 			//usuarioMapper.agregarRecursoRentadoAUsuario(id, recurso.getId(), fechaIni, fechaFin);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
@@ -52,7 +52,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
 	}
 
 	@Override
-	public List<RecursoReservado> consultarRecursosRentadosUsuario(long id) throws PersistenceException {
+	public List<RecursoReservado> consultarRecursosReservadosUsuario(long id) throws PersistenceException {
 		try {
 			//return usuarioMapper.consultarRecursosRentadosUsuario(id);
 		} catch (PersistenceException e) {

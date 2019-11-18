@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
-    <insert id="insertarReservado" parameterType="map">
+    <insert parameterType="map" id="insertarReservado">
             INSERT INTO reservados 
             VALUES (
             #{reservado.id},
@@ -17,7 +17,7 @@
             )
     </insert>
 
-    <select parameterType="map" id="consultarReserva" resultMap="reservadoResult" >
+    <select parameterType="map" id="consultarReserva" resultMap="ReservadoResult" >
         SELECT    
 		*
    		FROM reservados AS r
@@ -25,13 +25,20 @@
     </select>
 
     
-    <select parameterType="map" id="consultarReservas" resultMap="reservadoResult" >
+    <select parameterType="map" id="consultarReservas" resultMap="ReservadoResult" >
     	SELECT    
        	*
         FROM reservados AS r 
     </select>
+
+    <select parameterType="map" id="consultarReservasDeUnUsuario" resultMap="ReservadoResult" >
+        SELECT    
+        *
+        FROM reservados AS r 
+        WHERE r.usuario = #{usuario.carnet}
+    </select>
     
-    <resultMap type='RecursoReservado' id='reservadoResult' >
+    <resultMap type='RecursoReservado' id='ReservadoResult' >
         <id property='id' column='id'/>
         <result property='fechaInicioReserva' column='fechainicioreserva'/>
         <result property='horaInicioReserva' column='horainicioreserva'/>

@@ -92,7 +92,7 @@ public class ReservaRecursosBean extends BasePageBean {
 				}
 			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), Time.valueOf(LocalTime.now()),null, "d"));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), LocalTime.now(), LocalTime.now(), "d"));
 			setErrorMessage("El registro de "+ nombre+" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
@@ -179,6 +179,16 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 		return tipoRecursos;
+	}
+	
+	public void registrarRecursoReservado(int id, LocalDate fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
+		    Usuario usuario) {
+		RecursoReservado recursoReservado = new RecursoReservado(id, fechaInicioReserva, fechaFinReserva, horaInicioReserva, horaFinReserva, recurso, usuario);
+		try {
+			serviciosReserva.registrarRecursoReservado(recursoReservado);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
 	}
 
 	public void setSelectedUsuario(Usuario usuario) {

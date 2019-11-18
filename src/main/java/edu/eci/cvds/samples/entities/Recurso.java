@@ -6,7 +6,7 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -26,14 +26,14 @@ public class Recurso implements Serializable {
 	private String nombre;
 	private String ubicacion;
 	private int capacidad;
-	private Time horarioI;
-	private Time horarioF;
+	private LocalTime  horarioI;
+	private LocalTime  horarioF;
 	private String disponibilidad;
 	
 	public Recurso() {
 	}
 
-	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, Time horarioI, Time horarioF, String disponibilidad) {
+	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, LocalTime  horarioI, LocalTime  horarioF, String disponibilidad) {
 		this.tipo = tipo;
 		this.id = id;
 		this.nombre = nombre;
@@ -92,19 +92,19 @@ public class Recurso implements Serializable {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public Date getHorarioI() {
+	public LocalTime  getHorarioI() {
 		return horarioI;
 	}
 
-	public void setHorarioI(Time horarioI) {
+	public void setHorarioI(LocalTime  horarioI) {
 		this.horarioI = horarioI;
 	}
 	
-	public Date getHorarioF() {
+	public LocalTime  getHorarioF() {
 		return horarioF;
 	}
 
-	public void setHorarioF(Time horarioF) {
+	public void setHorarioF(LocalTime  horarioF) {
 		this.horarioF = horarioF;
 	}
 	

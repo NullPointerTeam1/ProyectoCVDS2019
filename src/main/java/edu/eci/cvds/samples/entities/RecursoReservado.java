@@ -6,8 +6,8 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -21,14 +21,14 @@ public class RecursoReservado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private Date fechaInicioReserva;
-	private Time horaInicioReserva;
-	private Time horaFinReserva;
-	private Date fechaFinReserva;
+	private LocalDate fechaInicioReserva;
+	private LocalTime horaInicioReserva;
+	private LocalTime horaFinReserva;
+	private LocalDate fechaFinReserva;
 	private Recurso recurso;
 	private Usuario usuario;
 
-	public RecursoReservado(int id, Date fechaInicioReserva, Date fechaFinReserva, Time horaInicioReserva, Time horaFinReserva, Recurso recurso,
+	public RecursoReservado(int id, LocalDate  fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
 						    Usuario usuario) {
 		this.id = id;
 		this.fechaInicioReserva = fechaInicioReserva;

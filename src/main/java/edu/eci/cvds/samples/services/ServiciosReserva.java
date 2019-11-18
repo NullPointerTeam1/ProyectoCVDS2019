@@ -33,15 +33,15 @@ public interface ServiciosReserva {
 
 	public abstract List<TipoRecurso> consultarTiposRecurso() throws ExcepcionServiciosBiblioteca;
 	
-	// Reserva
+	// Reservas
 	
-	public void insertarReservado(@Param("recurso") RecursoReservado recurso) throws ExcepcionServiciosBiblioteca;
+	public void registrarRecursoReservado(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca;
 
-	public RecursoReservado consultarReserva(@Param("id") long id) throws ExcepcionServiciosBiblioteca;
+	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	
 	public List<RecursoReservado> consultarReservas() throws ExcepcionServiciosBiblioteca;
 	
-	public List<RecursoReservado> consultarReservasDeUnUsuario() throws ExcepcionServiciosBiblioteca;
+	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca;
 	
 
 }

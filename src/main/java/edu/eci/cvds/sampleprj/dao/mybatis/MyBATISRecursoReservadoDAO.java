@@ -12,13 +12,15 @@ import edu.eci.cvds.samples.entities.RecursoReservado;
 import edu.eci.cvds.samples.entities.Usuario;
 
 
-public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
+public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
+	
 	@Inject
-	private RecursoReservadoMapper RecursoReservadoMapper;
+	private RecursoReservadoMapper recursoReservadoMapper;
+	
 	@Override
 	public void insertarRecursoReservado(RecursoReservado recurso) throws PersistenceException {
 		try {
-			RecursoReservadoMapper.insertarReservado(recurso);
+			recursoReservadoMapper.insertarReservado(recurso);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al registrar la reserva del recurso" + recurso.toString(), e);
 		}
@@ -27,7 +29,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
 	@Override
 	public RecursoReservado consultarReservado(long id) throws PersistenceException {
 		try {
-			return RecursoReservadoMapper.consultarReserva(id);
+			return recursoReservadoMapper.consultarReserva(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al consultar la reserva " + id, e);
 		}
@@ -36,7 +38,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
 	@Override
 	public List<RecursoReservado> consultarReservas() throws PersistenceException {
 		try {
-			return RecursoReservadoMapper.consultarReservas();
+			return recursoReservadoMapper.consultarReservas();
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al consultar las reservas", e);
 		}
@@ -45,7 +47,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO{
 	@Override
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws PersistenceException {
 		try {
-			return RecursoReservadoMapper.consultarReservasDeUnUsuario(usuario);
+			return recursoReservadoMapper.consultarReservasDeUnUsuario(usuario);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al consultar las reservas del usuario " + usuario.getNombre(), e);
 		}
