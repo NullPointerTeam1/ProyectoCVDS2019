@@ -8,7 +8,9 @@ import edu.eci.cvds.samples.services.ServiciosReserva;
 import edu.eci.cvds.samples.services.ServiciosReservaFactory;
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Test;
@@ -74,16 +76,17 @@ public class RecursosBibliotecaTest {
 		
 	}
 	
-	/**
 	@Test
 	public void deberiaRegistrarUnaReservaYCambiarEstado() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
 		
 		LocalTime localTime1 = LocalTime.of(4, 30, 45);
 		LocalTime localTime2 = LocalTime.of(6, 30, 45);
-		RecursoReservado recurPrueba = new RecursoReservado(1,null,null,localTime1,localTime2,serviciosB.consultarRecurso(5),serviciosB.consultarUsuario(2148781));
+		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
+		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
+		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(5),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
 		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(5).getDisponibilidad().equals("No Disponible"));
-	} **/
+	} 
 	
 	
 

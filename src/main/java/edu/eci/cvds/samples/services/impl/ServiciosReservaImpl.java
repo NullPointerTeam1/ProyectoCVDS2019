@@ -36,11 +36,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	public Usuario consultarUsuario(long docu) throws ExcepcionServiciosBiblioteca {
 		try {
-			Usuario usuario = usuarioDAO.consultarUsuario(docu);
-			if (usuario == null)
-				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.ERROR_CONSULTAR);
-			return usuario;
-
+			return usuarioDAO.consultarUsuario(docu);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar el usuario" + docu, e);
 		}

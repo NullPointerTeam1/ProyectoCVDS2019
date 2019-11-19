@@ -7,7 +7,7 @@
     <insert parameterType="map" id="registrarReserva">
             INSERT INTO reservados 
             VALUES (
-            #{reservado.id},
+            nextval('reservados_sequence'),
             #{reservado.fechaInicioReserva},
             #{reservado.horaInicioReserva},
             #{reservado.fechaFinReserva},
