@@ -133,12 +133,18 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca, PersistenceException {
 		
 		if (recursoReservado == null) {
-			throw new ExcepcionServiciosBiblioteca("La reserva no puede ser nula");
+			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_NULA);
+		}else if (recursoReservado.getRecurso().getDisponibilidad().equals("No Disponible")) {
+			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_NO_DISPONIBLE);
+		}else {
+			if (recursoReservado.getRecurso().getTipo().getDescripcion().equals("Equipo de Computo") || recursoReservado.getRecurso().getTipo().getDescripcion().equals("Sala de Estudio")) {
+				recursoReservado.setHoraFinReserva(recursoReservado.getHoraInicioReserva().plusHours(2));
+			}
+			recursoReservadoDAO.insertarReserva(recursoReservado);
+			recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"No Disponible");
 		}
-		recursoReservadoDAO.insertarReserva(recursoReservado);
-		recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"No Disponible");
 	}
-
+	
 	@Override
 	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
 		try { 
