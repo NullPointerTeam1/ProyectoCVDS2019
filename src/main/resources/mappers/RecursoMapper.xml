@@ -21,17 +21,19 @@
 	</insert>
 
 	<select parameterType="map" id="consultarRecurso" resultMap="RecursoResult" >
-        SELECT    
-        r.identificador,
+        SELECT r.identificador,
         r.nombre,
         r.ubicacion,
         r.capacidad,
         r.horarioI,
         r.horarioF,
         r.disponibilidad,
-        r.tiporecurso_id
-        FROM RECURSOS AS r 
-        WHERE r.identificador=#{id}
+        r.tiporecurso_id,
+        tr.descripcion
+        FROM recursos AS r, 
+        tipo_recurso as tr 
+        WHERE r.tiporecurso_id =  tr.id
+        AND r.identificador=#{id}
        
     </select>
 

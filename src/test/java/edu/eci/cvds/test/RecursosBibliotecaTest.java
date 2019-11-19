@@ -32,6 +32,7 @@ public class RecursosBibliotecaTest {
 		serviciosB.registrarRecurso(re);
 		Recurso pruebaRecurso = serviciosB.consultarRecurso(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
 		assertTrue(pruebaRecurso.getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
+		System.out.println(serviciosB.consultarRecursos());
 	} 
 	
 	@Test
