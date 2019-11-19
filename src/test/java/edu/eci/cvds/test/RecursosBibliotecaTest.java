@@ -78,18 +78,35 @@ public class RecursosBibliotecaTest {
 		
 	}
 	
+	
 	@Test
-	public void deberiaRegistrarUnaReservaYCambiarEstado() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
+	public void deberiaRegistrarUnaReservaYCambiarEstado()  {
 		
 		LocalTime localTime1 = LocalTime.of(4, 30, 45);
 		LocalTime localTime2 = LocalTime.of(6, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
-		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
-		serviciosB.registrarReserva(recurPrueba);
-		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(5).getDisponibilidad().equals("No Disponible"));
+		RecursoReservado recurPrueba = null;
+		try {
+			recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
+		} catch (ExcepcionServiciosBiblioteca e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			serviciosB.registrarReserva(recurPrueba);
+		} catch (ExcepcionServiciosBiblioteca | edu.eci.cvds.sampleprj.dao.PersistenceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(5).getDisponibilidad().equals("No Disponible"));
+		} catch (ExcepcionServiciosBiblioteca e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} 
-	/**
+	
 	@Test
 	public void deberiaRegistrarReservaConHoraEstablecida() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
 		
@@ -97,9 +114,11 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime2 = null;
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(0,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
+		System.out.println(serviciosB.consultarRecurso(10));
+		System.out.println(serviciosB.consultarReservas());
 		serviciosB.registrarReserva(recurPrueba);
 		//assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("No Disponible"));
-	} **/
+	} 
 	
 	
 	

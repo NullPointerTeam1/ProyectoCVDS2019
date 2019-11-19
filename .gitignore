@@ -1,4 +1,9 @@
-/target/
-.#*
-*.log
-/bin/
+target/
+.project
+bin/
+.classpath
+.vscode/
+.settings/
+.idea/
+*.iml
+.vs/
