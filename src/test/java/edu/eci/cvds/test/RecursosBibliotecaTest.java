@@ -2,6 +2,7 @@ package edu.eci.cvds.test;
 
 import org.mybatis.guice.transactional.Transactional;
 
+
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.ExcepcionServiciosBiblioteca;
 import edu.eci.cvds.samples.services.ServiciosReserva;
@@ -83,10 +84,23 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime2 = LocalTime.of(6, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
-		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(5),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
 		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(5).getDisponibilidad().equals("No Disponible"));
 	} 
+	/**
+	@Test
+	public void deberiaRegistrarReservaConHoraEstablecida() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
+		
+		LocalTime localTime1 = LocalTime.of(5, 30, 00);
+		LocalTime localTime2 = null;
+		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
+		RecursoReservado recurPrueba = new RecursoReservado(0,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
+		serviciosB.registrarReserva(recurPrueba);
+		//assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("No Disponible"));
+	} **/
+	
+	
 	
 	
 
