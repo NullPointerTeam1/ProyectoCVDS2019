@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
@@ -30,6 +31,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Usuario selectedUsuario;
 	private List<Recurso> recursosDisponibles;
 	private Recurso recursoActual;
+	private Date fechaInicio;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -72,7 +74,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		return usuarios;
 	}
 
-	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad) {
+	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad, Date FechaI, Date FechaF) {
 		System.out.println("ENTREWEEEE");
 		try {
 			TipoRecurso tipoRecurso = null;
@@ -96,7 +98,7 @@ public class ReservaRecursosBean extends BasePageBean {
 				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.TIPO_RECURSONULL);
 			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), LocalTime.now(), LocalTime.now(), "Disponible"));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), FechaI.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), FechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), "Disponible"));
 			setErrorMessage("El registro de "+ nombre +" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
@@ -210,6 +212,14 @@ public class ReservaRecursosBean extends BasePageBean {
 	
 	protected static void setErrorMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
 }

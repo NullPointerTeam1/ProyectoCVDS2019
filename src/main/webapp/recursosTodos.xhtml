@@ -49,13 +49,15 @@ lang="es">
               <a class="nav-link" href="/registrarRecurso.xhtml">Administrar Recursos</a>
             </li>
           </shiro:hasRole>
-          <li class="nav-item">
-            <h:form name="sentMessage" id="logoutForm" class="nav-item">
-                <p:commandLink class="nav-link" id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
-                  <h:outputText value="LOGOUT"/>
-                </p:commandLink>
-            </h:form>
-          </li>
+          <shiro:user>
+            <li class="nav-item">
+              <h:form name="sentMessage" id="logoutForm" class="nav-item">
+                  <p:commandLink class="nav-link" id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
+                    <h:outputText value="LOGOUT"/>
+                  </p:commandLink>
+              </h:form>
+            </li>
+          </shiro:user>
         </ul>
       </div>
     </div>
@@ -81,11 +83,11 @@ lang="es">
     
     <div class="row">
       <h:form id="recursosDisponibles">
-      <p:dataTable id="itemRentadoRetarded" var="recurso" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
+      <p:dataTable id="itemRentadoRetarded" var="recurso" value="#{ReservaRecursosBean.consultarRecursos()}"
                          paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                          rows="10">
               <f:facet name="header">
-                    Recursos disponibles
+                    Recursos existentes
                 </f:facet>
                 <p:column headerText="ID">
                     <h:outputText value="#{recurso.id}" />
@@ -107,14 +109,6 @@ lang="es">
                     <h:outputText value="#{recurso.tipo.descripcion}" />
                 </p:column>
 
-                <p:column headerText="Horario">
-                    <h:outputText value="#{recurso.horarioI}-" />
-                    <h:outputText value="#{recurso.horarioF}" />
-                </p:column>
-
-                <p:column headerText="Reservar">
-                    <p:commandButton value="Reservar recurso" action="#"></p:commandButton>
-                </p:column>
 
 
             </p:dataTable>

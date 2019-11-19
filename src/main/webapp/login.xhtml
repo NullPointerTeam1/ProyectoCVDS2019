@@ -89,7 +89,8 @@ lang="es">
           </div>
           
           <div class="form-group">
-            <p:commandButton actionListener="#{LoginBean.login(superCorreo.value,superContrasena.value,recuerdame.value)}" value="Ingresar"></p:commandButton>
+            <p:commandButton actionListener="#{LoginBean.login(superCorreo.value,superContrasena.value,recuerdame.value)}" value="Ingresar"/>
+            <p:commandButton onclick="window.location.href='recursosTodos.xhtml'; return false;" value="Recursos Existentes"/>
           </div>
         </h:form>
       </div>
