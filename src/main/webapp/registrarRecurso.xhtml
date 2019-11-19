@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3c.org/1999/xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:shiro="http://shiro.apache.org/tags"
+
 lang="es">
 
 <h:head>
@@ -49,7 +51,7 @@ lang="es">
             <a class="nav-link" href="/registrarRecurso.xhtml">Administrar recursos</a>
           </li></shiro:hasRole>
           <li class="nav-item">
-            <h:form name="sentMessage" id="logoutForm" class="nav-item">
+            <h:form name="sentMessage" id="algoForm" class="nav-item">
                 <p:commandLink id="superLogout" ajax="true" action="#{LoginBean.logout}" style="color:white;font-size: 12px;font-weight: 800;">
                   <h:outputText value="LOGOUT"/>
                 </p:commandLink>
@@ -103,6 +105,21 @@ lang="es">
               <p:inputText type="text" class="form-control" placeholder="Capacidad" id="capacidad" data-validation-required-message="Entra la capacidad" binding="#{superCapacidad}"/>
             </div>
           </div>
+
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="dateInicio">Hora inicio</label>
+              <p:datePicker id="dateInicio" timeOnly="true" pattern="HH:mm" placeholder="Hora Inicio" binding="#{superFechaInicio}"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="dateFin">Hora Fin</label>
+              <p:datePicker id="dateFin" timeOnly="true" pattern="HH:mm" placeholder="Hora Fin" binding="#{superFechaFin}"/>
+            </div>
+          </div>
+
           <p:outputLabel for="tipoRecurso" value="Tipo del Recurso:" />
           <p:selectOneRadio id="tipoRecurso" binding="#{superTipo}" unselectable="true">
               <f:selectItem itemLabel="Equipo de Computo" itemValue="1" />
@@ -111,7 +128,7 @@ lang="es">
           </p:selectOneRadio>
 
           <div class="form-group">
-            <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value)}" value="Registrar"></p:commandButton>
+            <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value,superFechaInicio.value,superFechaFin.value)}" value="Registrar"></p:commandButton>
           </div>
         </h:form>
         <br/>
@@ -159,9 +176,9 @@ lang="es">
             </p:dataTable>
           <p:outputLabel for="estadoRecurso" value="Estado del Recurso:" />
           <p:selectOneRadio id="estadoRecurso" binding="#{superEstado}" unselectable="true" required="true">
-              <f:selectItem itemLabel="Disponible" itemValue="d" />
-              <f:selectItem itemLabel="Ocupado" itemValue="o" />
-              <f:selectItem itemLabel="No disponible" itemValue="n" />
+              <f:selectItem itemLabel="Disponible" itemValue="Disponible" />
+              <f:selectItem itemLabel="Ocupado" itemValue="Ocupado" />
+              <f:selectItem itemLabel="No disponible" itemValue="No Disponible" />
           </p:selectOneRadio>
 
           <div class="form-group">
