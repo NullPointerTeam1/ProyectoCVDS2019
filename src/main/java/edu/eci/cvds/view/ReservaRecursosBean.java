@@ -33,6 +33,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Recurso recursoActual;
 	private Date fechaInicio;
 	private List<Recurso> recursosFiltrados;
+	private String idRecursoActual;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -228,6 +229,15 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	public void setRecursosFiltrados(List<Recurso> recursosFiltrados) {
 		this.recursosFiltrados = recursosFiltrados;
+	}
+
+	public String getIdRecursoActual() {
+		return idRecursoActual;
+	}
+
+	public void setIdRecursoActual(String idRecursoActual) {
+		recursoActual = consultarRecurso(idRecursoActual);
+		this.idRecursoActual = idRecursoActual;
 	}
 
 }

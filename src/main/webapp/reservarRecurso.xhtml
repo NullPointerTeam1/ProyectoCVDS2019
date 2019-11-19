@@ -7,7 +7,9 @@ xmlns:shiro="http://shiro.apache.org/tags"
 lang="es">
 
 <h:head>
-
+  <f:metadata>
+    <f:viewParam id="idRecursoReservado" name="idRecurso" value="#{ReservaRecursosBean.idRecursoActual}" required="true"/>
+  </f:metadata>
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
   <meta name="description" content=""></meta>
@@ -81,7 +83,7 @@ lang="es">
     
     <div class="row">
       <h:form id="recursosDisponibles">
-      <p:dataTable id="itemRentadoRetarded" var="recurso" widgetVar="recursosTable" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
+      <p:dataTable id="itemRentadoRetarded" var="recurso" widgetVar="recursosTable" value="#{ReservaRecursosBean.recursoActual}"
                          paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                          rows="10" filterValue="#{ReservaRecursosBean.recursosFiltrados}">
               <f:facet name="header">
