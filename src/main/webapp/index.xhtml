@@ -81,21 +81,25 @@ lang="es">
     
     <div class="row">
       <h:form id="recursosDisponibles">
-      <p:dataTable id="itemRentadoRetarded" var="recurso" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
+      <p:dataTable id="itemRentadoRetarded" var="recurso" widgetVar="recursosTable" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
                          paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rows="10">
+                         rows="10" filterValue="#{ReservaRecursosBean.recursosFiltrados}">
               <f:facet name="header">
                     Recursos disponibles
+                    <p:outputPanel>
+                      <h:outputText value="Busqueda general:" />
+                      <p:inputText id="globalFilter" onkeyup="PF('recursosTable').filter()" style="width:150px" placeholder="Ingresa algun elemento"/>
+                  </p:outputPanel>
                 </f:facet>
-                <p:column headerText="ID">
+                <p:column headerText="ID" filterBy="#{recurso.id}" filterMatchMode="contains">
                     <h:outputText value="#{recurso.id}" />
                 </p:column>
 
-                <p:column headerText="Nombre">
+                <p:column headerText="Nombre" filterBy="#{recurso.nombre}" filterMatchMode="contains">
                     <h:outputText value="#{recurso.nombre}" />
                 </p:column>
 
-                <p:column headerText="Ubicacion">
+                <p:column headerText="Ubicacion" filterBy="#{recurso.ubicacion}" filterMatchMode="contains">
                     <h:outputText value="#{recurso.ubicacion}" />
                 </p:column>
 
@@ -103,7 +107,7 @@ lang="es">
                     <h:outputText value="#{recurso.capacidad}" />
                 </p:column>
                 
-                <p:column headerText="Tipo Recurso">
+                <p:column headerText="Tipo Recurso" filterBy="#{recurso.tipo.descripcion}" filterMatchMode="contains">
                     <h:outputText value="#{recurso.tipo.descripcion}" />
                 </p:column>
 

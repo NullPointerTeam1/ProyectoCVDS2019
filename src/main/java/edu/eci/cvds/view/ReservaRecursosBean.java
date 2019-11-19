@@ -32,6 +32,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private List<Recurso> recursosDisponibles;
 	private Recurso recursoActual;
 	private Date fechaInicio;
+	private List<Recurso> recursosFiltrados;
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
@@ -75,7 +76,6 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 
 	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad, Date FechaI, Date FechaF) {
-		System.out.println("ENTREWEEEE");
 		try {
 			TipoRecurso tipoRecurso = null;
 			switch(tipo) {
@@ -220,6 +220,14 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	public List<Recurso> getRecursosFiltrados() {
+		return recursosFiltrados;
+	}
+
+	public void setRecursosFiltrados(List<Recurso> recursosFiltrados) {
+		this.recursosFiltrados = recursosFiltrados;
 	}
 
 }
