@@ -20,7 +20,7 @@ public class ShiroSession implements SessionLogger {
             currentUser.getSession().setAttribute("Correo",correo);
             
             currentUser.login( token ); 
-        } catch ( UnknownAccountException a ) {
+        } catch ( UnknownAccountException a ) {   
             throw new ExcepcionServiciosBiblioteca("Usuario o contraseña incorrectos",a);
         } catch ( IncorrectCredentialsException b ) {
             throw new ExcepcionServiciosBiblioteca("Usuario o contraseña incorrectos",b);

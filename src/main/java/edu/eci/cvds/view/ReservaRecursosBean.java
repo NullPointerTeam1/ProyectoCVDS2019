@@ -94,19 +94,19 @@ public class ReservaRecursosBean extends BasePageBean {
 					break;
 				}
 			}
-			if (tipoRecurso == null){
-				
-				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.TIPO_RECURSONULL);
-			}
 			serviciosReserva
 					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), FechaI.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), FechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), "Disponible"));
 			setErrorMessage("El registro de "+ nombre +" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		} catch(NumberFormatException e) {
-			setErrorMessage(e);
+			if (capacidad == null || capacidad.equals("")) {
+				setErrorMessage("La capacidad no puede estar vacia");
+			} else {
+				setErrorMessage("La capacidad no tiene un valor númerico válido.");
+			}
 		} catch(Exception e) {
-			setErrorMessage(e);
+			setErrorMessage("Debe rellenar todos los campos.");
 		}
 
 	}

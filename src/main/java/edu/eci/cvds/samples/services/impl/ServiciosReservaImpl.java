@@ -26,7 +26,9 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	@Transactional
 	public void registrarUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca {
-		try {
+		if (usuario == null) throw new ExcepcionServiciosBiblioteca("El usuario no puede ser nulo");
+		
+		try { 
 			usuarioDAO.insertarUsuario(usuario);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al registrar al usuario " + usuario.getCarnet(), e);
@@ -35,6 +37,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 
 	@Override
 	public Usuario consultarUsuario(long docu) throws ExcepcionServiciosBiblioteca {
+		if (docu <= 0 || docu > 100000000) throw new ExcepcionServiciosBiblioteca("El numero de documento es inválido"); 
 		try {
 			return usuarioDAO.consultarUsuario(docu);
 		} catch (PersistenceException e) {
@@ -56,6 +59,13 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	@Transactional
 	public void registrarRecurso(Recurso recurso) throws ExcepcionServiciosBiblioteca {
+		if (recurso.getNombre() == null || recurso.getNombre().equals("")) 
+			throw new ExcepcionServiciosBiblioteca("Debe escribir el nombre del recurso.");
+		else if (recurso.getUbicacion() == null || recurso.getUbicacion().equals("")) 
+			throw new ExcepcionServiciosBiblioteca("La ubicación del recurso no puede ser nula");
+		else if  (recurso.getCapacidad() < 0) throw new ExcepcionServiciosBiblioteca("La capacidad del recurso no puede ser negativa.");
+		else if (recurso.getTipo() == null) throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.TIPO_RECURSONULL);
+		
 		try {
 			recursoDAO.insertarRecurso(recurso);
 		} catch (PersistenceException e) {
@@ -65,7 +75,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	public Recurso consultarRecurso(long id) throws ExcepcionServiciosBiblioteca {
-		
+		if (id <= 0 || id > 100000000) throw new ExcepcionServiciosBiblioteca("El numero del recurso es inválido");		
 		try {
 			return recursoDAO.consultarRecurso(id);
 		} catch (PersistenceException e) {
@@ -85,6 +95,10 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	public void actualizarEstadoRecurso(long id, String estado) throws ExcepcionServiciosBiblioteca {
+		if (!(estado.equals("Disponible") || estado.equals("Ocupado") || estado.equals("No Disponible"))) 
+				throw new ExcepcionServiciosBiblioteca("El nuevo estado es inválido");
+		else if (id <= 0 || id > 100000000) throw new ExcepcionServiciosBiblioteca("El numero del recurso es inválido");	
+				
 		try {
 			recursoDAO.actualizarEstadoRecurso(id, estado);
 		} catch (PersistenceException e) {
@@ -97,6 +111,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	@Transactional
 	public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws ExcepcionServiciosBiblioteca {
+		if (tipoRecurso == null) throw new ExcepcionServiciosBiblioteca("El tipo recurso no puede ser nulo");
 		try {
 			tipoRecursoDAO.insertarTipoRecurso(tipoRecurso);
 		} catch (PersistenceException e) {
@@ -106,6 +121,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	
 	@Override
 	public TipoRecurso consultarTipoRecurso(long id) throws ExcepcionServiciosBiblioteca {
+		if (id <= 0 || id > 100000000) throw new ExcepcionServiciosBiblioteca("El numero del tipo recurso es inválido");	
 		try {
 			TipoRecurso tipoRecurso = tipoRecursoDAO.consultarTipoRecurso(id);
 			if (tipoRecurso == null)

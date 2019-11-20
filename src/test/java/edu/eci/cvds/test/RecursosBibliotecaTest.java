@@ -60,6 +60,7 @@ public class RecursosBibliotecaTest {
 	
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
+		serviciosB.actualizarEstadoRecurso(1, "Disponible");
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
 		assertTrue(recurPrueba.getDisponibilidad().equals("Disponible") && recurPrueba !=null);
 		serviciosB.actualizarEstadoRecurso(1, "No Disponible");
