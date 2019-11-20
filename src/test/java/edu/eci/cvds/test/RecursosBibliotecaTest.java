@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Test;
 
 
@@ -25,7 +24,7 @@ public class RecursosBibliotecaTest {
 	public RecursosBibliotecaTest() throws ExcepcionServiciosBiblioteca {
 		serviciosB = ServiciosReservaFactory.getInstance().getServiciosBibliotecaTesting();
 	}
-	
+	/**
 	@Test
 	public void deberiaRegistrarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
@@ -36,7 +35,7 @@ public class RecursosBibliotecaTest {
 		
 	} 
 	
-	
+
 	@Test
 	public void nodeberiaRegistrarUnRecursoPorCheck() {
 		Recurso re;
@@ -48,14 +47,14 @@ public class RecursosBibliotecaTest {
 			assertTrue(true);
 		}
 	}
-	
+	**/
 	@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
 		
 		Recurso re = new Recurso(serviciosB.consultarTipoRecurso(2),50,"RecursoPrueba3","Ubiprueba3",100,null,null,"Ocupado");
 		serviciosB.registrarRecurso(re);
 		assertTrue(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-2).getId()+1);
-		
+	
 	}
 	
 	@Test
@@ -93,7 +92,8 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
 		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
-		assertTrue (recurPrueba != null && serviciosB.consultarRecurso(6).getDisponibilidad().equals("No Disponible"));
+		assertTrue (recurPrueba != null && serviciosB.consultarRecurso(6).getDisponibilidad().equals("Ocupado"));
+		serviciosB.actualizarEstadoRecurso(6, "Disponible");
 	} 
 	
 	
@@ -106,13 +106,10 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(0,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
-		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("No Disponible"));
+		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("Ocupado"));
+		serviciosB.actualizarEstadoRecurso(10, "Disponible");
 	} 
 	
-	
-	
-	
-
 	
 	
 }

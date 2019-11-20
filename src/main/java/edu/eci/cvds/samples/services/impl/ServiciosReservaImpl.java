@@ -157,7 +157,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 				recursoReservado.setHoraFinReserva(recursoReservado.getHoraInicioReserva().plusHours(2));
 			}		
 			recursoReservadoDAO.insertarReserva(recursoReservado);
-			recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"No Disponible");
+			recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"Ocupado");
 		}
 	}
 	
