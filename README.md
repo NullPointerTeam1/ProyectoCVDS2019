@@ -38,7 +38,11 @@
 ## Sprint 1
 
 
+<<<<<<< HEAD
 ![Grafica](img/GraficaSprint1.png)
+=======
+![](img/"Grafica-Sprint1.png")
+>>>>>>> 2deed76126c731fbc6a5c5c7b410730674646c79
 
 
 
