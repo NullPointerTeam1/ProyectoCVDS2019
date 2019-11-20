@@ -47,7 +47,7 @@ public class RecursosBibliotecaTest {
 			assertTrue(true);
 		}
 	}
-	**/
+	
 	@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
 		
@@ -82,33 +82,34 @@ public class RecursosBibliotecaTest {
 		
 	}
 	
-	
+	**/
+	/**
 	@Test
-	public void deberiaRegistrarUnaReservaYCambiarEstado() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
-		serviciosB.actualizarEstadoRecurso(6, "Disponible");
+	public void deberiaRegistrarUnaReserva() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
+		
 		LocalTime localTime1 = LocalTime.of(4, 30, 45);
 		LocalTime localTime2 = LocalTime.of(6, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
 		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
-		assertTrue (recurPrueba != null && serviciosB.consultarRecurso(6).getDisponibilidad().equals("Ocupado"));
-		serviciosB.actualizarEstadoRecurso(6, "Disponible");
+		assertTrue (serviciosB.consultarReservas().contains(recurPrueba));
 	} 
 	
 	
 	
 	@Test
 	public void deberiaRegistrarReservaConHoraEstablecida() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
-		serviciosB.actualizarEstadoRecurso(10, "Disponible");
+		
 		LocalTime localTime1 = LocalTime.of(5, 30, 00);
 		LocalTime localTime2 = null;
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(0,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
 		serviciosB.registrarReserva(recurPrueba);
-		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("Ocupado"));
-		serviciosB.actualizarEstadoRecurso(10, "Disponible");
+		assertTrue (recurPrueba !=null && serviciosB.consultarReserva(recurPrueba.getId()).getFechaFinReserva().equals(localTime1.plusHours(2)));
+		
 	} 
+	**/
 	
 	
 	

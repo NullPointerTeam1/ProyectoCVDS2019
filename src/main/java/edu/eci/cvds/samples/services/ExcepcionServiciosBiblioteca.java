@@ -14,7 +14,8 @@ public class ExcepcionServiciosBiblioteca extends Exception {
 	public final static String USUARIO_YA_IDENTIFICADO = "Ya hay un usuario conectado";
 	public final static String TIPO_RECURSONULL = "Debe marcar el tipo del recurso";
 	public static final String RESERVA_NULA = "La reserva no puede ser nula";
-	public static final String RECURSO_NO_DISPONIBLE = "El recurso que desea reserva no esta disponible";
+	public static final String RECURSO_NO_DISPONIBLE = "El recurso que desea reservar no esta disponible";
+	public static final String RECURSO_YA_RESERVADO = "El recurso que desea reservar ya esta reservado";
 	
 	public ExcepcionServiciosBiblioteca(String mensaje) {
 		super(mensaje);

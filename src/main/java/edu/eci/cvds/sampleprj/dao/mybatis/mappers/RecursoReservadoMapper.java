@@ -15,7 +15,7 @@ public interface RecursoReservadoMapper {
 	
 	public void registrarReserva(@Param("reservado") RecursoReservado reservado);
 
-	public RecursoReservado consultarReserva(@Param("id") long id);
+	public List<RecursoReservado> consultarReserva(@Param("id") long id);
 	
 	public List<RecursoReservado> consultarReservasDeUnUsuario(@Param("usuario") Usuario usuario);
 	

@@ -37,11 +37,12 @@ public interface ServiciosReserva {
 	
 	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca, PersistenceException;
 
-	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
+	public List<RecursoReservado> consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	
 	public List<RecursoReservado> consultarReservas() throws ExcepcionServiciosBiblioteca;
 	
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca;
+	
 	
 
 }

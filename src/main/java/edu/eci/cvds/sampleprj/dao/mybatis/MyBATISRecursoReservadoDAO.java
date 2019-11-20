@@ -27,7 +27,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 	}
 
 	@Override
-	public RecursoReservado consultarReservado(long id) throws PersistenceException {
+	public List<RecursoReservado> consultarReservado(long id) throws PersistenceException {
 		try {
 			return recursoReservadoMapper.consultarReserva(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {

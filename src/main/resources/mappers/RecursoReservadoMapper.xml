@@ -21,7 +21,8 @@
         SELECT    
 		*
    		FROM reservados AS r
-        WHERE r.id=#{id}
+        WHERE r.recurso=#{id}
+        ORDER BY r.fechainicioreserva DESC;
     </select>
     
     <select parameterType="map" id="consultarReservas" resultMap="ReservadoResult" >
@@ -36,6 +37,7 @@
         FROM reservados AS r 
         WHERE r.usuario = #{usuario.carnet}
     </select>
+    
     
     <resultMap type='RecursoReservado' id='ReservadoResult' >
         <id property='id' column='id'/>

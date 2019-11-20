@@ -11,7 +11,7 @@ public interface RecursoReservadoDAO {
 
 	public void insertarReserva(RecursoReservado recurso) throws PersistenceException;
 
-	public RecursoReservado consultarReservado(long id) throws PersistenceException;
+	public List<RecursoReservado> consultarReservado(long id) throws PersistenceException;
 
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws PersistenceException;
 	

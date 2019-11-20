@@ -7,6 +7,8 @@ import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.*;
 import edu.eci.cvds.sampleprj.dao.*;
 import org.mybatis.guice.transactional.Transactional;
+
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -150,19 +152,46 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		
 		if (recursoReservado == null) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_NULA);
-		}else if (recursoReservado.getRecurso().getDisponibilidad().equals("No Disponible")) {
+		}else if (!recursoReservado.getRecurso().getDisponibilidad().equals("Disponible")) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_NO_DISPONIBLE);
+		}else if (recursoReservado.getHoraInicioReserva().isBefore(recursoReservado.getRecurso().getHorarioI()) || recursoReservado.getHoraInicioReserva().isAfter(recursoReservado.getRecurso().getHorarioF())){
+			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_NO_DISPONIBLE);
+		}else if (isReservable(recursoReservado)) {
+			
 		}else {
-			if (recursoReservado.getRecurso().getTipo().getDescripcion().equals("Equipo de Computo") || recursoReservado.getRecurso().getTipo().getDescripcion().equals("Sala de Estudio")) {
+			if (!recursoReservado.getRecurso().getTipo().getDescripcion().equals("Equipo Multimedia")) {
 				recursoReservado.setHoraFinReserva(recursoReservado.getHoraInicioReserva().plusHours(2));
 			}		
 			recursoReservadoDAO.insertarReserva(recursoReservado);
-			recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"Ocupado");
+		
 		}
 	}
 	
+	private boolean isReservable(RecursoReservado recursoReservado) {
+		List<RecursoReservado> reservas = recursoReservadoDAO.consultarReservado(recursoReservado.getRecurso().getId());
+		LocalTime horaInicioR = recursoReservado.getHoraInicioReserva();
+		LocalTime horaFinR = recursoReservado.getHoraFinReserva();
+		boolean res = true;
+		for (RecursoReservado r : reservas) {
+			if (recursoReservado.getFechaInicioReserva().equals(r.getFechaInicioReserva())) {				
+				if (horaInicioR.isAfter(r.getHoraInicioReserva()) && horaInicioR.isBefore(r.getHoraFinReserva())) {
+					res = false;
+					break;
+				} else if (horaFinR.isAfter(r.getHoraInicioReserva()) && horaFinR.isBefore(r.getHoraFinReserva())) {
+					res = false;
+					break;
+				} else if ((horaInicioR.equals(r.getHoraInicioReserva()) || horaInicioR.equals(r.getHoraFinReserva())) || 
+						   (horaFinR.equals(r.getHoraInicioReserva()) || horaFinR.equals(r.getHoraFinReserva()))) {
+					res = false;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
 	@Override
-	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
+	public List<RecursoReservado> consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
 		try { 
 			return recursoReservadoDAO.consultarReservado(id);
 		} catch (Exception e) {
