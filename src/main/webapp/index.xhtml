@@ -83,7 +83,7 @@ lang="es">
       <h:form id="recursosDisponibles">
       <p:dataTable id="itemRentadoRetarded" var="recurso" widgetVar="recursosTable" value="#{ReservaRecursosBean.consultarRecursosDisponibles()}"
                          paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rows="10" filterValue="#{ReservaRecursosBean.recursosFiltrados}">
+                         rows="10" filterValue="#{ReservaRecursosBean.recursosFiltrados}" style="text-align: center;">
               <f:facet name="header">
                     Recursos disponibles
                     <p:outputPanel>
