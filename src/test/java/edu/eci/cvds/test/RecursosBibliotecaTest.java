@@ -22,7 +22,7 @@ public class RecursosBibliotecaTest {
 	
 	private ServiciosReserva serviciosB;
 	
-	public RecursosBibliotecaTest() {
+	public RecursosBibliotecaTest() throws ExcepcionServiciosBiblioteca {
 		serviciosB = ServiciosReservaFactory.getInstance().getServiciosBibliotecaTesting();
 	}
 	
@@ -33,16 +33,18 @@ public class RecursosBibliotecaTest {
 		serviciosB.registrarRecurso(re);
 		Recurso pruebaRecurso = serviciosB.consultarRecurso(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
 		assertTrue(pruebaRecurso.getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
-		System.out.println(serviciosB.consultarRecursos());
+		
 	} 
 	
+	
 	@Test
-	public void nodeberiaRegistrarUnRecursoPorCheck() throws ExcepcionServiciosBiblioteca{
-		Recurso re = new Recurso(serviciosB.consultarTipoRecurso(1),0,"RecursoPrueba2","Biblioteca",-30,null,null,"dee");
+	public void nodeberiaRegistrarUnRecursoPorCheck() {
+		Recurso re;
 		try {
+			re = new Recurso(serviciosB.consultarTipoRecurso(1),0,"RecursoPrueba2","Biblioteca",-30,null,null,"Disponible");
 			serviciosB.registrarRecurso(re);
-			assertTrue(false);
-		} catch (PersistenceException | ExcepcionServiciosBiblioteca e) {
+			fail("Debe fallar porque la capacidad es negativa");
+		} catch (ExcepcionServiciosBiblioteca e) {
 			assertTrue(true);
 		}
 	}
@@ -58,10 +60,12 @@ public class RecursosBibliotecaTest {
 	
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
-		
 		Recurso recurPrueba = serviciosB.consultarRecurso(1);
+		assertTrue(recurPrueba.getDisponibilidad().equals("Disponible") && recurPrueba !=null);
 		serviciosB.actualizarEstadoRecurso(1, "No Disponible");
+		recurPrueba = serviciosB.consultarRecurso(1);
 		assertTrue(recurPrueba.getDisponibilidad().equals("No Disponible") && recurPrueba !=null);
+		serviciosB.actualizarEstadoRecurso(1, "Disponible");
 	}
 	
 	@Test
@@ -74,50 +78,34 @@ public class RecursosBibliotecaTest {
 	@Test
 	public void nodeberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
-		assertTrue (serviciosB.consultarRecurso(1000) == null);
+		assertTrue (serviciosB.consultarRecurso(10000) == null);
 		
 	}
 	
 	
 	@Test
-	public void deberiaRegistrarUnaReservaYCambiarEstado()  {
-		
+	public void deberiaRegistrarUnaReservaYCambiarEstado() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
+		serviciosB.actualizarEstadoRecurso(6, "Disponible");
 		LocalTime localTime1 = LocalTime.of(4, 30, 45);
 		LocalTime localTime2 = LocalTime.of(6, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
-		RecursoReservado recurPrueba = null;
-		try {
-			recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
-		} catch (ExcepcionServiciosBiblioteca e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			serviciosB.registrarReserva(recurPrueba);
-		} catch (ExcepcionServiciosBiblioteca | edu.eci.cvds.sampleprj.dao.PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(5).getDisponibilidad().equals("No Disponible"));
-		} catch (ExcepcionServiciosBiblioteca e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		RecursoReservado recurPrueba = new RecursoReservado(1,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
+		serviciosB.registrarReserva(recurPrueba);
+		assertTrue (recurPrueba != null && serviciosB.consultarRecurso(6).getDisponibilidad().equals("No Disponible"));
 	} 
+	
+	
 	
 	@Test
 	public void deberiaRegistrarReservaConHoraEstablecida() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException {
-		
+		serviciosB.actualizarEstadoRecurso(10, "Disponible");
 		LocalTime localTime1 = LocalTime.of(5, 30, 00);
 		LocalTime localTime2 = null;
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(0,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
-		System.out.println(serviciosB.consultarRecurso(10));
-		System.out.println(serviciosB.consultarReservas());
 		serviciosB.registrarReserva(recurPrueba);
-		//assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("No Disponible"));
+		assertTrue (recurPrueba !=null && serviciosB.consultarRecurso(10).getDisponibilidad().equals("No Disponible"));
 	} 
 	
 	

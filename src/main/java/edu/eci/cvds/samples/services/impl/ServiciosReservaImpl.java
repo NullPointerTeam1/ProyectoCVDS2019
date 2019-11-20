@@ -139,7 +139,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		}else {
 			if (recursoReservado.getRecurso().getTipo().getDescripcion().equals("Equipo de Computo") || recursoReservado.getRecurso().getTipo().getDescripcion().equals("Sala de Estudio")) {
 				recursoReservado.setHoraFinReserva(recursoReservado.getHoraInicioReserva().plusHours(2));
-			}
+			}		
 			recursoReservadoDAO.insertarReserva(recursoReservado);
 			recursoDAO.actualizarEstadoRecurso(recursoReservado.getRecurso().getId(),"No Disponible");
 		}
