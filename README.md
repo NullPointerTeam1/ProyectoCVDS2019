@@ -38,8 +38,7 @@
 ## Sprint 1
 
 
-![Burndown chart](https://ibb.co/GxSD1rS)
-![Tasks](https://ibb.co/JRvQDcp)
+![Grafica](img/Grafica-Sprint1.png)
 
 
 
