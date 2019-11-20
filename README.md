@@ -38,7 +38,7 @@
 ## Sprint 1
 
 
-![Grafica](img/Grafica-Sprint1.png)
+![](img/Grafica-Sprint1.png)
 
 
 
