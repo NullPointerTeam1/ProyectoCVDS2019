@@ -6,11 +6,21 @@ import edu.eci.cvds.samples.entities.*;
 
 import edu.eci.cvds.samples.services.*;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
+import org.primefaces.event.ScheduleEntryMoveEvent;
+import org.primefaces.event.ScheduleEntryResizeEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
+
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,6 +44,93 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Date fechaInicio;
 	private List<Recurso> recursosFiltrados;
 	private String idRecursoActual;
+	private ScheduleModel eventModel = new DefaultScheduleModel();
+    
+    private ScheduleEvent event = new DefaultScheduleEvent();
+ 
+    private boolean showWeekends = true;
+    private boolean tooltip = true;
+    private boolean allDaySlot = true;
+ 
+   
+ 
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public ScheduleEvent getEvent() {
+        return event;
+    }
+ 
+    public void setEvent(ScheduleEvent event) {
+        this.event = event;
+    }
+     
+    public void addEvent() {
+        /*if (event.isAllDay()) {
+            //see https://github.com/primefaces/primefaces/issues/1164
+            if (event.getStartDate().toLocalDate().equals(event.getEndDate().toLocalDate())) {
+                event.setEndDate(event.getEndDate().plusDays(1));
+            }
+        }*/
+ 
+        if(event.getId() == null)
+            eventModel.addEvent(event);
+        else
+            eventModel.updateEvent(event);
+         
+        event = new DefaultScheduleEvent();
+    }
+     
+    public void onEventSelect(SelectEvent selectEvent) {
+        event = (ScheduleEvent) selectEvent.getObject();
+    }
+     
+    public void onDateSelect(SelectEvent selectEvent) {
+        event = new DefaultScheduleEvent();
+    }
+     
+    public void onEventMove(ScheduleEntryMoveEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Delta:");
+         
+        addMessage(message);
+    }
+     
+    public void onEventResize(ScheduleEntryResizeEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Start-Delta:"  + ", End-Delta: " );
+         
+        addMessage(message);
+    }
+     
+    private void addMessage(FacesMessage message) {
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+ 
+    public boolean isShowWeekends() {
+        return showWeekends;
+    }
+ 
+    public void setShowWeekends(boolean showWeekends) {
+        this.showWeekends = showWeekends;
+    }
+ 
+    public boolean isTooltip() {
+        return tooltip;
+    }
+ 
+    public void setTooltip(boolean tooltip) {
+        this.tooltip = tooltip;
+    }
+ 
+    public boolean isAllDaySlot() {
+        return allDaySlot;
+    }
+ 
+    public void setAllDaySlot(boolean allDaySlot) {
+        this.allDaySlot = allDaySlot;
+    }
+ 
+
 
 	public void registrarUsuario(String nombre, long carnet, String carrera, String rol, String correo) {
 		try {
