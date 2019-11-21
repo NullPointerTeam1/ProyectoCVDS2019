@@ -24,7 +24,8 @@ public class RecursosBibliotecaTest {
 	public RecursosBibliotecaTest() throws ExcepcionServiciosBiblioteca {
 		serviciosB = ServiciosReservaFactory.getInstance().getServiciosBibliotecaTesting();
 	}
-	/**
+	
+	/*
 	@Test
 	public void deberiaRegistrarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
@@ -82,8 +83,8 @@ public class RecursosBibliotecaTest {
 		
 	}
 	
-	**/
-	/**
+	
+	
 	@Test
 	public void deberiaRegistrarUnaReserva() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
 		
@@ -108,9 +109,7 @@ public class RecursosBibliotecaTest {
 		serviciosB.registrarReserva(recurPrueba);
 		assertTrue (recurPrueba !=null && serviciosB.consultarReserva(recurPrueba.getId()).getFechaFinReserva().equals(localTime1.plusHours(2)));
 		
-	} 
-	**/
-	
+	} */
 	
 	
 }
