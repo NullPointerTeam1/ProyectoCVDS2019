@@ -20,6 +20,11 @@
         </repositories>
     <dependencies>
     <dependency>
+	    <groupId>com.github.adminfaces</groupId>
+	    <artifactId>admin-theme</artifactId>
+	    <version>1.0.2</version>
+	</dependency>
+    <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-faces</artifactId>
             <!-- See the latest version on the project's homepage -->
