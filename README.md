@@ -40,7 +40,7 @@
 
 ![Grafica](img/GraficaSprint1.PNG)
 
-![Issues](img/sprint1isses.PNG)
+![Issues](img/sprint1issues.PNG)
 
 
 
