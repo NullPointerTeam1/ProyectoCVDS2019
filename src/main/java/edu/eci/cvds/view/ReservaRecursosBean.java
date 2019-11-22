@@ -44,8 +44,9 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Date fechaInicio;
 	private List<Recurso> recursosFiltrados;
 	private String idRecursoActual;
+	
+	
 	private ScheduleModel eventModel = new DefaultScheduleModel();
-    
     private ScheduleEvent event = new DefaultScheduleEvent();
  
     private boolean showWeekends = true;
@@ -66,19 +67,16 @@ public class ReservaRecursosBean extends BasePageBean {
         this.event = event;
     }
      
-    public void addEvent() {
-        /*if (event.isAllDay()) {
-            //see https://github.com/primefaces/primefaces/issues/1164
-            if (event.getStartDate().toLocalDate().equals(event.getEndDate().toLocalDate())) {
-                event.setEndDate(event.getEndDate().plusDays(1));
-            }
-        }*/
+    public void addEvent(String recurrencia) {
+        
  
-        if(event.getId() == null)
+        /*if(event.getId() == null) {
             eventModel.addEvent(event);
-        else
+        }else {
             eventModel.updateEvent(event);
-         
+        }*/
+    	System.out.println(recurrencia);
+        eventModel.addEvent(event);
         event = new DefaultScheduleEvent();
     }
      
@@ -336,6 +334,8 @@ public class ReservaRecursosBean extends BasePageBean {
 		recursoActual = consultarRecurso(idRecursoActual);
 		this.idRecursoActual = idRecursoActual;
 	}
+
+
 
 }
 
