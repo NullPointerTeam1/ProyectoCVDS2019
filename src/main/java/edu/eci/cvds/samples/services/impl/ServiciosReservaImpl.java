@@ -81,7 +81,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	public Recurso consultarRecurso(long id) throws ExcepcionServiciosBiblioteca {
 		if (id <= 0 || id > 100000000)
-			throw new ExcepcionServiciosBiblioteca("El numero del recurso es inválido");
+			throw new ExcepcionServiciosBiblioteca("Recurso no encontrado");
 		try {
 			return recursoDAO.consultarRecurso(id);
 		} catch (PersistenceException e) {
@@ -105,7 +105,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		if (!(estado.equals("Disponible") || estado.equals("Ocupado") || estado.equals("No Disponible")))
 			throw new ExcepcionServiciosBiblioteca("El nuevo estado es inválido");
 		else if (id <= 0 || id > 100000000)
-			throw new ExcepcionServiciosBiblioteca("El numero del recurso es inválido");
+			throw new ExcepcionServiciosBiblioteca("Recurso no encontrado");
 
 		try {
 			recursoDAO.actualizarEstadoRecurso(id, estado);
@@ -167,9 +167,10 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		LocalTime recursoHoraI = recursoReservado.getRecurso().getHorarioI();
 		LocalTime recursoHoraF = recursoReservado.getRecurso().getHorarioF();
 		LocalTime resta = horaFinR.minusHours(2);
+		String tipo = recursoReservado.getRecurso().getTipo().getDescripcion();
 		if (horaFinR.compareTo(horaInicioR) < 0) {
 			throw new ExcepcionServiciosBiblioteca("La hora final debe ser después de la hora inicial.");
-		} else if (horaInicioR.compareTo(resta) < 0 ) {
+		} else if ((!tipo.equals("Equipo Multimedia")) && horaInicioR.compareTo(resta) < 0 ) {
 			throw new ExcepcionServiciosBiblioteca("No puede reservar un recurso por más de dos horas");
 		} else if (!(recursoReservado.getRecurso().getDisponibilidad().equals("Disponible"))) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_NO_DISPONIBLE);
@@ -179,7 +180,6 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		} else if (isReserved(recursoReservado, horaInicioR, horaFinR)) {
 			throw new ExcepcionServiciosBiblioteca("No puede reservar el recurso en ese horario.");
 		} 
-		
 		try {
 			recursoReservadoDAO.insertarReserva(recursoReservado);
 		} catch (PersistenceException e) {

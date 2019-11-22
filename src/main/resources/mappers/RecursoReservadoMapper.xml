@@ -2,51 +2,85 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
-    <insert parameterType="map" id="registrarReserva">
-            INSERT INTO reservados 
-            VALUES (
-            nextval('reservados_sequence'),
-            #{reservado.fechaInicioReserva},
-            #{reservado.horaInicioReserva},
-            #{reservado.fechaFinReserva},
-            #{reservado.horaFinReserva},
-            #{reservado.usuario.carnet},
-            #{reservado.recurso.id}
-            )
-    </insert>
 
-    <select parameterType="map" id="consultarReserva" resultMap="ReservadoResult" >
-        SELECT    
+<mapper
+	namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
+	<insert parameterType="map" id="registrarReserva">
+		INSERT INTO reservados
+		VALUES (
+		nextval('reservados_sequence'),
+		#{reservado.fechaInicioReserva},
+		#{reservado.horaInicioReserva},
+		#{reservado.fechaFinReserva},
+		#{reservado.horaFinReserva},
+		#{reservado.usuario.carnet},
+		#{reservado.recurso.id}
+		)
+	</insert>
+
+	<select parameterType="map" id="consultarReserva"
+		resultMap="ReservadoResult">
+		SELECT
+		r.idr,
+		r.fechafinreserva,
+		r.fechainicioreserva,
+		r.horainicioreserva,
+		r.horafinreserva,
+		rc.identificador,
+		rc.nombre,
+		rc.horarioi,
+		rc.horariof,
+		rc.disponibilidad,
+		tr.id,
+		tr.descripcion
+		FROM reservados as r,recursos as rc,tipo_recurso as tr
+		WHERE r.recurso = rc.identificador
+		AND rc.tiporecurso_id = tr.id
+		AND r.recurso=#{id}
+	</select>
+
+	<select parameterType="map" id="consultarReservas"
+		resultMap="ReservadoResult">
+		SELECT
+		r.idr,
+		r.fechafinreserva,
+		r.fechainicioreserva,
+		r.horainicioreserva,
+		r.horafinreserva,
+		rc.identificador,
+		rc.nombre,
+		rc.horarioi,
+		rc.horariof,
+		rc.disponibilidad,
+		tr.id,
+		tr.descripcion
+		FROM reservados as r,recursos as rc,
+		tipo_recurso as tr
+		WHERE r.recurso = rc.identificador
+		AND rc.tiporecurso_id = tr.id;
+	</select>
+
+	<select parameterType="map" id="consultarReservasDeUnUsuario"
+		resultMap="ReservadoResult">
+		SELECT
 		*
-   		FROM reservados AS r
-        WHERE r.recurso=#{id}
-        ORDER BY r.fechainicioreserva DESC;
-    </select>
-    
-    <select parameterType="map" id="consultarReservas" resultMap="ReservadoResult" >
-    	SELECT    
-       	*
-        FROM reservados AS r 
-    </select>
+		FROM reservados AS r
+		WHERE r.usuario =
+		#{usuario.carnet}
+	</select>
 
-    <select parameterType="map" id="consultarReservasDeUnUsuario" resultMap="ReservadoResult" >
-        SELECT    
-        *
-        FROM reservados AS r 
-        WHERE r.usuario = #{usuario.carnet}
-    </select>
-    
-    
-    <resultMap type='RecursoReservado' id='ReservadoResult' >
-        <id property='id' column='id'/>
-        <result property='fechaInicioReserva' column='fechainicioreserva'/>
-        <result property='horaInicioReserva' column='horainicioreserva'/>
-        <result property='fechaFinReserva' column='fechafinreserva'/>
-        <result property='horaFinReserva' column='horainicioreserva'/>
-        <association property="recurso" javaType="Recurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
-        <association property="usuario" javaType="Usuario" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper.UsuarioResult'></association>
-    </resultMap>
-         
+
+	<resultMap type='RecursoReservado' id='ReservadoResult'>
+		<id property='id' column='idr' />
+		<result property='fechaInicioReserva'
+			column='fechainicioreserva' />
+		<result property='horaInicioReserva' column='horainicioreserva' />
+		<result property='fechaFinReserva' column='fechafinreserva' />
+		<result property='horaFinReserva' column='horafinreserva' />
+		<association property="recurso" javaType="Recurso"
+			resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
+		<association property="usuario" javaType="Usuario"
+			resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper.UsuarioResult'></association>
+	</resultMap>
+
 </mapper>
