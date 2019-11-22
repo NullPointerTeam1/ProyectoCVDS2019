@@ -40,6 +40,8 @@
 
 ![Grafica](img/GraficaSprint1.PNG)
 
+![Issues](img/sprint1 isses.PNG)
+
 
 
 **Conexion POSTGRESQL**
