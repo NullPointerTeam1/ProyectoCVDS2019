@@ -27,6 +27,17 @@ public class RecursoReservado implements Serializable {
 	private LocalDate fechaFinReserva;
 	private Recurso recurso;
 	private Usuario usuario;
+	
+	/**
+	 *  Metodo encargado de crear una reserva 
+	 * @param id Identificador de un recurso
+	 * @param fechaInicioReserva Fecha de inicio de la reserva
+	 * @param fechaFinReserva Fecha fin de la reserva
+	 * @param horaInicioReserva Hora inicio de la reserva
+	 * @param horaFinReserva Hora fin de la reserva
+	 * @param recurso El recurso que quieren reservar
+	 * @param usuario El usuario que hace la reserva
+	 */
 
 	public RecursoReservado(int id, LocalDate  fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
 						    Usuario usuario) {

@@ -14,9 +14,6 @@ import java.time.LocalTime;
  * @author NullpointerTeam
  */
 public class Recurso implements Serializable {
-	/**
-	 * 
-	 */
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -31,7 +28,17 @@ public class Recurso implements Serializable {
 	
 	public Recurso() {
 	}
-
+/**
+ * Metodo encargado de crear un recurso
+ * @param tipo Indica el tipo de un recurso
+ * @param id idica el identifacador de un recuso
+ * @param nombre El nombre del recurso
+ * @param ubicacion lugar en el cual esta el recurso
+ * @param capacidad la capacidad de uso que tiene el recurso
+ * @param horarioI Hora de inicio en la cual  el recurso estara disponible
+ * @param horarioF Hora de fin en la cual  el recurso estara disponible
+ * @param disponibilidad El estado del recuso, pude ser Disponible, Ocupado, No disponible
+ */
 	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, LocalTime  horarioI, LocalTime  horarioF, String disponibilidad) {
 		this.tipo = tipo;
 		this.id = id;
