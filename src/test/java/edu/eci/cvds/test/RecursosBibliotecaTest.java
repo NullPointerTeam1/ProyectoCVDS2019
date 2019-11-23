@@ -25,7 +25,12 @@ public class RecursosBibliotecaTest {
 		serviciosB = ServiciosReservaFactory.getInstance().getServiciosBibliotecaTesting();
 	}
 	
-	
+	/**
+	 * Registra un recurso con los requisitos estipulados, verifica que el id del recurso que insertamos coincida con el ultimo
+	 * de la lista al momento de realizar la consulta "Consultar recursos" asumiendo que esta en la ultima posición de este arreglo
+	 * gracias al ORDER BY que realizamos en la consulta.
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void deberiaRegistrarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
@@ -36,7 +41,10 @@ public class RecursosBibliotecaTest {
 		
 	} 
 	
-
+	/**
+	 * No registra un recurso debido a que intentamos registrarlo con una capacidad negativa, por lo que el check establecido en la base de datos
+	 * protege la integridad de los datos.
+	 */
 	@Test
 	public void nodeberiaRegistrarUnRecursoPorCheck() {
 		Recurso re;
@@ -49,6 +57,11 @@ public class RecursosBibliotecaTest {
 		}
 	}
 	
+	/**
+	 * A partir de esta prueba verificamos que funcione la secuencia definida para el concepto de recurso. 
+	 * Mediante el arreglo de consultar recursos verificamos que el recurso que el recurso en la ultima posicion tiene el id igual al recurso anterior mas uno.
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
 		
@@ -58,6 +71,11 @@ public class RecursosBibliotecaTest {
 	
 	}
 	
+	/**
+	 * En esta prueba se realiza un restablecimiento del estado del recurso, para la aplicación tenemos tres posibles estados
+	 * "Disponible", "No disponible" y "Ocupado". Al momento de realizar la prueba verificamos que la descripcion del Tipo del recurso sea la restablecida.
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
 		serviciosB.actualizarEstadoRecurso(1, "Disponible");
@@ -69,6 +87,10 @@ public class RecursosBibliotecaTest {
 		serviciosB.actualizarEstadoRecurso(1, "Disponible");
 	}
 	
+	/**
+	 * Esta prueba utiliza el servicio consultar recurso y verificamos que el objeto que asignamos no este vacio.
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void deberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 
@@ -76,6 +98,10 @@ public class RecursosBibliotecaTest {
 		assertTrue (recurPrueba !=null);
 	}
 	
+	/**
+	 * No consulta el recurso debido a que este id no tiene registro en nuestra base de datos
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void nodeberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
@@ -83,7 +109,12 @@ public class RecursosBibliotecaTest {
 		
 	}
 	
-	
+	/**
+	 * Registra una reserva con los requisitos establecidos, verificamos que en el arreglo de reservas la que acabamos de registrar 
+	 * se encuentre en la ultima posicion
+	 * @throws ExcepcionServiciosBiblioteca
+	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+	 */
 	@Test
 	public void deberiaRegistrarUnaReserva() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
 		
@@ -98,6 +129,11 @@ public class RecursosBibliotecaTest {
 		assertTrue(ultId == recurPrueba.getId());
 	} 
 	
+	/**
+	 * En este caso de prueba no registra una reserva debido a que el recurso ya se encuentra reservado 
+	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void nodeberiaRegistrarReservaPorRecursoReservado() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
@@ -113,6 +149,13 @@ public class RecursosBibliotecaTest {
 			assertTrue(true);
 		}		
 	} 
+	
+	/**
+	 * No se pueden registrar reservas por más de dos horas de recursos que no sean equipos de multimedia, en el ejemplo
+	 * se intenta reservar un equipo de computo por mas de dos horas
+	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	
 	@Test
 	public void nodeberiaRegistrarReservaPorLaHora() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
@@ -130,6 +173,12 @@ public class RecursosBibliotecaTest {
 		}		
 	} 
 	
+	/**
+	 * En este caso de prueba se intenta realizar la reserva de un recurso que se encuentra en estado Ocupado
+	 * No se puede realizar la reserva de un recurso que no este en estado disponible
+	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void nodeberiaRegistrarReservaPorDisponibilidad() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
@@ -145,7 +194,13 @@ public class RecursosBibliotecaTest {
 			assertTrue(true);
 		}		
 	} 
-	
+	/**
+	 * Para esta situación intentamos realizar la reserva de un recurso en un horario no permitido
+	 * Para realizar la reserva de cualquier recurso se debe tener en cuenta el horario de este mismo. 
+	 * En el ejemplo se intenta reservar un recurso a las 5 30 am cuando esta disponible desde las 7 am
+	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	@Test
 	public void nodeberiaRegistrarReservaPorHorario() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		

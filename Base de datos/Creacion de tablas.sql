@@ -22,8 +22,9 @@ CREATE table if not exists TIPO_RECURSO (
 	id serial primary key,
 	descripcion VARCHAR(50)  NOT NULL
 );
+
 create table if not exists reservados(
-	id serial primary key,
+	idr serial primary key,
 	fechaInicioReserva date not null,
 	horaInicioReserva time not null,
 	fechaFinReserva date not null,
