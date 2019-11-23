@@ -19,7 +19,11 @@ public class TipoRecurso implements Serializable {
 	
 	private int id;
 	private String descripcion;
-
+	/**
+	 *  Metodo encargado de crear un recurso
+	 * @param id Identificaro del tipo del recurso
+	 * @param descripcion De que se trata este recurso
+	 */
 	public TipoRecurso(int id, String descripcion) {
 		this.id = id;
 		this.descripcion = descripcion;

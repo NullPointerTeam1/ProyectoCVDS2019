@@ -29,7 +29,18 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	
+	/**
+	 * Metodo encargado de crear un usuario
+	 *
+	 * @param nombre Nombre del usuario 
+	 * @param apellido Apellido del usuraio 
+	 * @param carnet Numero de identificacion de la universidad 
+	 * @param carrera Programa al que esta vinculado 
+	 * @param correo Correo institucional
+	 * @param contrasena Contraseña del ususario el cual esta incriptada 
+	 * @param rol Rol que representa en la aplicacion Administrador= A Usuario = U 
+	 * @param reservados Articulos que tiene reservado el usuario
+	 */
 	public Usuario(String nombre, String apellido, long carnet, String carrera, String correo, String contrasena, String rol,
 			ArrayList<RecursoReservado> reservados) {
 		this.nombre = nombre;
