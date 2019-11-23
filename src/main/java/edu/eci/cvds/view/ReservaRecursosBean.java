@@ -6,7 +6,6 @@ import edu.eci.cvds.samples.entities.*;
 
 import edu.eci.cvds.samples.services.*;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -23,8 +22,10 @@ import org.primefaces.model.ScheduleModel;
 
 import java.util.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
@@ -56,13 +57,28 @@ public class ReservaRecursosBean extends BasePageBean {
    
  
     public ScheduleModel getEventModel() {
+    	eventModel.clear();
+    	try {
+    		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReserva(recursoActual.getId());
+			for (int i= 0;i<recursosReservados.size();i++) {
+				DefaultScheduleEvent eventico;
+				eventico = new DefaultScheduleEvent();
+		    	eventico.setStartDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaInicioReserva().toString()+"T"+recursosReservados.get(i).getHoraInicioReserva()).toInstant(ZoneOffset.ofHours(0))));
+		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
+		    	eventico.setTitle("Reservado");
+		    	eventModel.addEvent(eventico);
+			}
+		} catch (ExcepcionServiciosBiblioteca e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return eventModel;
     }
 
     public ScheduleEvent getEvent() {
         return event;
     }
- 
+    
     public void setEvent(ScheduleEvent event) {
         this.event = event;
     }
