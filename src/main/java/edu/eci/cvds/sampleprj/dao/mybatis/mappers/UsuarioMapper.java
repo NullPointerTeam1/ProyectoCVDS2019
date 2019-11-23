@@ -15,6 +15,8 @@ public interface UsuarioMapper {
 
 	public Usuario consultarUsuario(@Param("id") long id);
 
+	public Usuario consultarUsuarioPorCorreo(@Param("correo") String correo);
+
 	public List<Usuario> consultarUsuarios();
 
 	/*public void agregarRecursoRentadoAUsuario(

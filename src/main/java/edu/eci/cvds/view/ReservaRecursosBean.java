@@ -196,8 +196,7 @@ public class ReservaRecursosBean extends BasePageBean {
 					capacidad = "0";
 					break;
 				} case "2":{
-					tipoRecurso = new TipoRecurso(2,"Sala de Estudio");
-					
+					tipoRecurso = new TipoRecurso(2,"Sala de Estudio");					
 					break;
 				} case "3":{
 					tipoRecurso = new TipoRecurso(3,"Equipo de Multimedia");
@@ -299,13 +298,20 @@ public class ReservaRecursosBean extends BasePageBean {
 		return tipoRecursos;
 	}
 	
-	public void registrarRecursoReservado(int id, LocalDate fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
-		    Usuario usuario) throws PersistenceException {
-		RecursoReservado recursoReservado = new RecursoReservado(id, fechaInicioReserva, fechaFinReserva, horaInicioReserva, horaFinReserva, recurso, usuario);
+	public void registrarRecursoReservado(int id, LocalDateTime iniTime, LocalDateTime finTime, Recurso recurso, String correo, String recurrencia) {
 		try {
-			serviciosReserva.registrarReserva(recursoReservado);
+			LocalDate iniDate = iniTime.toLocalDate();
+			LocalDate finDate = finTime.toLocalDate();
+			LocalTime iniHour = iniTime.toLocalTime();
+			LocalTime finHour = finTime.toLocalTime();
+			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
+			RecursoReservado recursoReservado = new RecursoReservado(id, iniDate, finDate, iniHour, finHour, recurso, usuario);			
+			serviciosReserva.registrarReserva(recursoReservado, recurrencia);	
+			setErrorMessage("El registro de la reserva se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
+		} catch(Exception e) {
+			setErrorMessage("Debe rellenar todos los campos.");
 		}
 	}
 

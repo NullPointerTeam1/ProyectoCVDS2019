@@ -1,6 +1,8 @@
 package edu.eci.cvds.samples.services;
 
+import java.time.format.DateTimeFormatter;
 
+import edu.eci.cvds.samples.entities.RecursoReservado;
 
 public class ExcepcionServiciosBiblioteca extends Exception {
 	/**
@@ -26,6 +28,14 @@ public class ExcepcionServiciosBiblioteca extends Exception {
 	
 	public ExcepcionServiciosBiblioteca(String message, Exception e) {
 		super(message,e);
+	}
+	
+	public ExcepcionServiciosBiblioteca(RecursoReservado recursoReservado) {
+		super("No se pudo reservar el recurso en este horario: \n" 
+				+ recursoReservado.getFechaInicioReserva().format(DateTimeFormatter.ofPattern("E, dd MMM yyyy")) 
+				+ " de "
+				+ recursoReservado.getHoraInicioReserva() + " a "
+				+ recursoReservado.getHoraFinReserva());
 	}
 }
 

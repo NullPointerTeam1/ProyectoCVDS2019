@@ -121,9 +121,9 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime1 = LocalTime.of(13, 30, 45);
 		LocalTime localTime2 = LocalTime.of(15, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 16);
+		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		int ultId = serviciosB.consultarReservas().get(serviciosB.consultarReservas().size()-1).getId();
-		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(7),serviciosB.consultarUsuario(2148781));
 		recurPrueba.getRecurso().getTipo().setId(1);
 		//serviciosB.registrarReserva(recurPrueba);
 		assertTrue(ultId == recurPrueba.getId());
@@ -142,7 +142,7 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
 		try {
-			serviciosB.registrarReserva(recurPrueba);
+			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso ya reservado");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			System.out.println(e.getMessage());
@@ -156,7 +156,6 @@ public class RecursosBibliotecaTest {
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	
 	@Test
 	public void nodeberiaRegistrarReservaPorLaHora() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
@@ -165,7 +164,7 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
 		try {
-			serviciosB.registrarReserva(recurPrueba);
+			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un Equipo de computo por más de dos horas");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			System.out.println(e.getMessage());
@@ -187,7 +186,7 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(16),serviciosB.consultarUsuario(2148781));
 		try {
-			serviciosB.registrarReserva(recurPrueba);
+			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso Ocupado");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			System.out.println(e.getMessage());
@@ -209,11 +208,25 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(8),serviciosB.consultarUsuario(2148781));
 		try {
-			serviciosB.registrarReserva(recurPrueba);
+			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar este recurso en un horario no estipulado");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			System.out.println(e.getMessage());
 			assertTrue(true);
 		}		
-	} 
+	}
+	
+	/*
+	@Test
+	public void prueba () throws ExcepcionServiciosBiblioteca {
+		int id = 5;
+		LocalDate fechaInicio = LocalDate.of(2018, 1, 1);
+		LocalDate fechaFin = LocalDate.of(2018, 1, 5);
+		LocalTime horaInicio = LocalTime.of(9, 30, 00);
+		LocalTime horaFin = LocalTime.of(11, 30, 00);
+		Recurso recurso = serviciosB.consultarRecurso(1);
+		Usuario usuario = serviciosB.consultarUsuario(2148781);
+		RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario);
+		serviciosB.registrarReserva(nuevo, "Diario");
+	}*/
 }

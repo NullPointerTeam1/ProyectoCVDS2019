@@ -13,6 +13,8 @@ public interface ServiciosReserva {
 	public abstract void registrarUsuario(Usuario u) throws ExcepcionServiciosBiblioteca;
 
 	public abstract Usuario consultarUsuario(long docu) throws ExcepcionServiciosBiblioteca;
+	
+	public abstract Usuario consultarUsuarioPorCorreo(String correo) throws ExcepcionServiciosBiblioteca;
 
 	public abstract List<Usuario> consultarUsuarios() throws ExcepcionServiciosBiblioteca;
 	
@@ -35,7 +37,7 @@ public interface ServiciosReserva {
 	
 	// Reservas
 	
-	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca, PersistenceException;
+	public void registrarReserva(RecursoReservado recursoReservado, String recurrencia) throws ExcepcionServiciosBiblioteca;
 
 	public List<RecursoReservado> consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	

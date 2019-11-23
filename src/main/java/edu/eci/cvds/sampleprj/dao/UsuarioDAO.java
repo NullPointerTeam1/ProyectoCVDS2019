@@ -14,10 +14,10 @@ public interface UsuarioDAO {
 
 	public List<Usuario> consultarUsuarios() throws PersistenceException;
 
-	void agregarRecursoReservadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin)
+	public void agregarRecursoReservadoAUsuario(long id, Recurso recurso, Date fechaIni, Date fechaFin)
 			throws PersistenceException;
 
 	public List<RecursoReservado> consultarRecursosReservadosUsuario(long id) throws PersistenceException;
 
-
+	public Usuario consultarUsuarioPorCorreo(String correo) throws PersistenceException;
 }

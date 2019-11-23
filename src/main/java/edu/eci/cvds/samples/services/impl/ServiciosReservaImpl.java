@@ -8,7 +8,10 @@ import edu.eci.cvds.samples.services.*;
 import edu.eci.cvds.sampleprj.dao.*;
 import org.mybatis.guice.transactional.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ServiciosReservaImpl implements ServiciosReserva {
@@ -47,6 +50,16 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 			throw new ExcepcionServiciosBiblioteca("Error al consultar el usuario" + docu, e);
 		}
 	}
+	
+	@Override
+	public Usuario consultarUsuarioPorCorreo(String correo) throws ExcepcionServiciosBiblioteca {
+		try {
+			return usuarioDAO.consultarUsuarioPorCorreo(correo);
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar el usuario" + correo, e);
+		}
+	}
+
 
 	@Override
 	public List<Usuario> consultarUsuarios() throws ExcepcionServiciosBiblioteca {
@@ -153,32 +166,58 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	}
 
 	// Reservas
-
+	
 	@Override
 	@Transactional
-	public void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
-		
+	public void registrarReserva(RecursoReservado recursoReservado, String recurrencia) throws ExcepcionServiciosBiblioteca {
+		if (recurrencia.equals("No")) registrarReserva(recursoReservado);
+		else {
+			LocalDate ini = recursoReservado.getFechaInicioReserva();
+			LocalDate fin = recursoReservado.getFechaFinReserva();
+			while (ini.compareTo(fin) < 0 || ini.compareTo(fin) == 0) {
+				if (ini.getDayOfWeek() != DayOfWeek.SATURDAY || ini.getDayOfWeek() != DayOfWeek.SUNDAY) {
+					int id = recursoReservado.getId();
+					LocalDate fechaInicio = ini;
+					LocalDate fechaFin = ini;
+					LocalTime horaInicio = recursoReservado.getHoraInicioReserva();
+					LocalTime horaFin = recursoReservado.getHoraFinReserva();
+					Recurso recurso = recursoReservado.getRecurso();
+					Usuario usuario = recursoReservado.getUsuario();
+					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario);
+					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
+					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
+					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);
+					try {
+						registrarReserva(nuevo);
+					} catch (ExcepcionServiciosBiblioteca e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	
+	private void registrarReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
 		if (recursoReservado == null) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_NULA);
 		} 
-		
 		LocalTime horaInicioR = recursoReservado.getHoraInicioReserva();
 		LocalTime horaFinR = recursoReservado.getHoraFinReserva();
 		LocalTime recursoHoraI = recursoReservado.getRecurso().getHorarioI();
 		LocalTime recursoHoraF = recursoReservado.getRecurso().getHorarioF();
 		LocalTime resta = horaFinR.minusHours(2);
-		String tipo = recursoReservado.getRecurso().getTipo().getDescripcion();
 		if (horaFinR.compareTo(horaInicioR) < 0) {
 			throw new ExcepcionServiciosBiblioteca("La hora final debe ser después de la hora inicial.");
-		} else if ((!tipo.equals("Equipo Multimedia")) && horaInicioR.compareTo(resta) < 0 ) {
+		} else if (horaInicioR.compareTo(resta) < 0 ) {
 			throw new ExcepcionServiciosBiblioteca("No puede reservar un recurso por más de dos horas");
 		} else if (!(recursoReservado.getRecurso().getDisponibilidad().equals("Disponible"))) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_NO_DISPONIBLE);
 		} else if (horaInicioR.isBefore(recursoHoraI) || horaInicioR.isAfter(recursoHoraF) ||
 				   horaFinR.isBefore(recursoHoraI) || horaFinR.isAfter(recursoHoraF)) {
-			throw new ExcepcionServiciosBiblioteca("El recurso no está disponible en ese horario.");
+			throw new ExcepcionServiciosBiblioteca("El recurso sólo está disponible en este horario: " + recursoHoraI + " - " + recursoHoraF);
 		} else if (isReserved(recursoReservado, horaInicioR, horaFinR)) {
-			throw new ExcepcionServiciosBiblioteca("No puede reservar el recurso en ese horario.");
+			throw new ExcepcionServiciosBiblioteca(recursoReservado);
 		} 
 		try {
 			recursoReservadoDAO.insertarReserva(recursoReservado);
