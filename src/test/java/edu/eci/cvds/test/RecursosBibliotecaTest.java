@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -64,10 +65,13 @@ public class RecursosBibliotecaTest {
 	 */
 	@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
-		
-		Recurso re = new Recurso(serviciosB.consultarTipoRecurso(2),50,"RecursoPrueba3","Ubiprueba3",100,null,null,"Ocupado");
+		List<Recurso> recursos = serviciosB.consultarRecursos();
+		int identificador = recursos.get(recursos.size() - 1).getId();
+		Recurso re = new Recurso(serviciosB.consultarTipoRecurso(2),50,"RecursoPrueba4","Ubiprueba4",100,null,null,"Ocupado");
 		serviciosB.registrarRecurso(re);
-		assertTrue(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-2).getId()+1);
+		recursos = serviciosB.consultarRecursos();
+		int identificadorActual = recursos.get(recursos.size() - 1).getId();
+		assertTrue(identificador == identificadorActual - 1);
 	
 	}
 	
