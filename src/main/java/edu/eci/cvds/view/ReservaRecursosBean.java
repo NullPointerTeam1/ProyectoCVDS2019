@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.InvalidSessionException;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -72,8 +73,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventModel.addEvent(eventico);
 			}
 		} catch (ExcepcionServiciosBiblioteca e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			setErrorMessage(e);
 		}
         return eventModel;
     }
@@ -86,7 +86,7 @@ public class ReservaRecursosBean extends BasePageBean {
         this.event = event;
     }
      
-    public void addEvent(String recurrencia) throws ExcepcionServiciosBiblioteca {
+    public void addEvent(String recurrencia) {
         
  
         /*if(event.getId() == null) {
@@ -94,12 +94,22 @@ public class ReservaRecursosBean extends BasePageBean {
         }else {
             eventModel.updateEvent(event);
         }*/
-    	Usuario superUsuarioActual = serviciosReserva.consultarUsuarioPorCorreo((String) SecurityUtils.getSubject().getSession().getAttribute("Correo"));
-    	ZoneId defaultZoneId = ZoneId.systemDefault();
-    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
-    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
-    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual);
-    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
+    	Usuario superUsuarioActual;
+		try {
+			superUsuarioActual = serviciosReserva.consultarUsuarioPorCorreo((String) SecurityUtils.getSubject().getSession().getAttribute("Correo"));
+			ZoneId defaultZoneId = ZoneId.systemDefault();
+	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
+	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
+	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual);
+	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
+		} catch (InvalidSessionException e) {
+			setErrorMessage(e);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		} catch (Exception e) {
+			setErrorMessage(e);
+		}
+    	
         event = new DefaultScheduleEvent();
     }
      
