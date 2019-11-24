@@ -6,12 +6,14 @@ import edu.eci.cvds.samples.entities.*;
 
 import edu.eci.cvds.samples.services.*;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.apache.shiro.SecurityUtils;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -48,13 +50,13 @@ public class ReservaRecursosBean extends BasePageBean {
 	
 	
 	private ScheduleModel eventModel = new DefaultScheduleModel();
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    private ScheduleEvent event = new DefaultScheduleEvent("Ey", fechaInicio, fechaInicio);
  
     private boolean showWeekends = true;
     private boolean tooltip = true;
     private boolean allDaySlot = true;
  
-   
+
  
     public ScheduleModel getEventModel() {
     	eventModel.clear();
@@ -66,6 +68,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setStartDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaInicioReserva().toString()+"T"+recursosReservados.get(i).getHoraInicioReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle("Reservado");
+		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
 		    	eventModel.addEvent(eventico);
 			}
 		} catch (ExcepcionServiciosBiblioteca e) {
@@ -83,7 +86,7 @@ public class ReservaRecursosBean extends BasePageBean {
         this.event = event;
     }
      
-    public void addEvent(String recurrencia) {
+    public void addEvent(String recurrencia) throws ExcepcionServiciosBiblioteca {
         
  
         /*if(event.getId() == null) {
@@ -91,8 +94,12 @@ public class ReservaRecursosBean extends BasePageBean {
         }else {
             eventModel.updateEvent(event);
         }*/
-    	System.out.println(recurrencia);
-        eventModel.addEvent(event);
+    	Usuario superUsuarioActual = serviciosReserva.consultarUsuarioPorCorreo((String) SecurityUtils.getSubject().getSession().getAttribute("Correo"));
+    	ZoneId defaultZoneId = ZoneId.systemDefault();
+    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
+    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
+    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual);
+    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
         event = new DefaultScheduleEvent();
     }
      
@@ -103,19 +110,7 @@ public class ReservaRecursosBean extends BasePageBean {
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent();
     }
-     
-    public void onEventMove(ScheduleEntryMoveEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Delta:");
-         
-        addMessage(message);
-    }
-     
-    public void onEventResize(ScheduleEntryResizeEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Start-Delta:"  + ", End-Delta: " );
-         
-        addMessage(message);
-    }
-     
+
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }

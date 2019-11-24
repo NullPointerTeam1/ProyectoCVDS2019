@@ -18,7 +18,7 @@ public class ShiroSession implements SessionLogger {
             UsernamePasswordToken token = new UsernamePasswordToken(correo, new Sha256Hash(password).toHex(),hist);
 			
             currentUser.getSession().setAttribute("Correo",correo);
-            
+           
             currentUser.login( token ); 
         } catch ( UnknownAccountException a ) {   
             throw new ExcepcionServiciosBiblioteca("Usuario o contraseña incorrectos",a);
