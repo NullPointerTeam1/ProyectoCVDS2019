@@ -13,6 +13,8 @@
 		#{reservado.horaInicioReserva},
 		#{reservado.fechaFinReserva},
 		#{reservado.horaFinReserva},
+		#{reservado.estado},
+		#{reservado.recurrente},
 		#{reservado.usuario.carnet},
 		#{reservado.recurso.id}
 		)
@@ -27,15 +29,20 @@
 		r.horainicioreserva,
 		r.horafinreserva,
 		rc.identificador,
+		r.estado,
+		r.recurrente,
 		rc.nombre,
 		rc.horarioi,
 		rc.horariof,
 		rc.disponibilidad,
 		tr.id,
-		tr.descripcion
-		FROM reservados as r,recursos as rc,tipo_recurso as tr
+		tr.descripcion,
+		u.nombre,
+		u.carrera
+		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
+		AND u.carnet = r.usuario;
 		AND r.recurso=#{id}
 	</select>
 
@@ -47,17 +54,21 @@
 		r.fechainicioreserva,
 		r.horainicioreserva,
 		r.horafinreserva,
+		r.estado,
+		r.recurrente,
 		rc.identificador,
 		rc.nombre,
 		rc.horarioi,
 		rc.horariof,
 		rc.disponibilidad,
 		tr.id,
-		tr.descripcion
-		FROM reservados as r,recursos as rc,
-		tipo_recurso as tr
+		tr.descripcion,
+		u.nombre,
+		u.carrera
+		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
-		AND rc.tiporecurso_id = tr.id;
+		AND rc.tiporecurso_id = tr.id
+		AND u.carnet = r.usuario;
 	</select>
 
 	<select parameterType="map" id="consultarReservasDeUnUsuario"
@@ -77,6 +88,8 @@
 		<result property='horaInicioReserva' column='horainicioreserva' />
 		<result property='fechaFinReserva' column='fechafinreserva' />
 		<result property='horaFinReserva' column='horafinreserva' />
+		<result property='estado' column='estado' />
+		<result property='recurrente' column='recurrente' />
 		<association property="recurso" javaType="Recurso"
 			resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
 		<association property="usuario" javaType="Usuario"

@@ -1,12 +1,11 @@
 package edu.eci.cvds.view;
 
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 
 
 import edu.eci.cvds.samples.services.*;
 
-import javax.annotation.PostConstruct;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -100,7 +99,8 @@ public class ReservaRecursosBean extends BasePageBean {
 			ZoneId defaultZoneId = ZoneId.systemDefault();
 	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
 	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
-	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual);
+	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
+	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual,"activa","si");
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
 		} catch (InvalidSessionException e) {
 			setErrorMessage(e);
@@ -303,14 +303,14 @@ public class ReservaRecursosBean extends BasePageBean {
 		return tipoRecursos;
 	}
 	
-	public void registrarRecursoReservado(int id, LocalDateTime iniTime, LocalDateTime finTime, Recurso recurso, String correo, String recurrencia) {
+	public void registrarRecursoReservado(int id, LocalDateTime iniTime, LocalDateTime finTime, Recurso recurso, String correo, String recurrencia, String estado, String recurrente) {
 		try {
 			LocalDate iniDate = iniTime.toLocalDate();
 			LocalDate finDate = finTime.toLocalDate();
 			LocalTime iniHour = iniTime.toLocalTime();
 			LocalTime finHour = finTime.toLocalTime();
 			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
-			RecursoReservado recursoReservado = new RecursoReservado(id, iniDate, finDate, iniHour, finHour, recurso, usuario);			
+			RecursoReservado recursoReservado = new RecursoReservado(id, iniDate, finDate, iniHour, finHour, recurso, usuario,estado,recurrente);		
 			serviciosReserva.registrarReserva(recursoReservado, recurrencia);	
 			setErrorMessage("El registro de la reserva se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {

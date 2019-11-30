@@ -183,7 +183,9 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 					LocalTime horaFin = recursoReservado.getHoraFinReserva();
 					Recurso recurso = recursoReservado.getRecurso();
 					Usuario usuario = recursoReservado.getUsuario();
-					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario);
+					String estado = recursoReservado.getEstado();
+					String recurrente = recursoReservado.getRecurrente();
+					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario,estado,recurrente);
 					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
 					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
 					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);

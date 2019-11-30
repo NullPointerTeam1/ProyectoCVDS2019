@@ -33,7 +33,7 @@ public class RecursosBibliotecaTest {
 	 * gracias al ORDER BY que realizamos en la consulta.
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void deberiaRegistrarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
@@ -48,7 +48,7 @@ public class RecursosBibliotecaTest {
 	 * No registra un recurso debido a que intentamos registrarlo con una capacidad negativa, por lo que el check establecido en la base de datos
 	 * protege la integridad de los datos.
 	 */
-	/**
+	
 	@Test
 	public void nodeberiaRegistrarUnRecursoPorCheck() {
 		Recurso re;
@@ -66,7 +66,7 @@ public class RecursosBibliotecaTest {
 	 * Mediante el arreglo de consultar recursos verificamos que el recurso que el recurso en la ultima posicion tiene el id igual al recurso anterior mas uno.
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+
 	@Test
 	public void deberiaRegistrarUnRecursoConElIdConsecutivo() throws ExcepcionServiciosBiblioteca {
 		List<Recurso> recursos = serviciosB.consultarRecursos();
@@ -84,7 +84,7 @@ public class RecursosBibliotecaTest {
 	 * "Disponible", "No disponible" y "Ocupado". Al momento de realizar la prueba verificamos que la descripcion del Tipo del recurso sea la restablecida.
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void deberiaActualizarEstadoyConsultar() throws ExcepcionServiciosBiblioteca {
 		serviciosB.actualizarEstadoRecurso(1, "Disponible");
@@ -100,7 +100,7 @@ public class RecursosBibliotecaTest {
 	 * Esta prueba utiliza el servicio consultar recurso y verificamos que el objeto que asignamos no este vacio.
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void deberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 
@@ -112,12 +112,11 @@ public class RecursosBibliotecaTest {
 	 * No consulta el recurso debido a que este id no tiene registro en nuestra base de datos
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void nodeberiaConsultarUnRecurso() throws ExcepcionServiciosBiblioteca {
 		
 		assertTrue (serviciosB.consultarRecurso(10000) == null);
-		
 	}
 	
 	/**
@@ -126,7 +125,7 @@ public class RecursosBibliotecaTest {
 	 * @throws ExcepcionServiciosBiblioteca
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 */
-	/**
+
 	@Test
 	public void deberiaRegistrarUnaReserva() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
 		
@@ -135,9 +134,9 @@ public class RecursosBibliotecaTest {
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		int ultId = serviciosB.consultarReservas().get(serviciosB.consultarReservas().size()-1).getId();
-		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(7),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(7),serviciosB.consultarUsuario(2148781),"activa","no");
 		recurPrueba.getRecurso().getTipo().setId(1);
-		//serviciosB.registrarReserva(recurPrueba);
+		//serviciosB.registrarReserva(recurPrueba,"no");
 		assertTrue(ultId == recurPrueba.getId());
 	} 
 	
@@ -146,14 +145,14 @@ public class RecursosBibliotecaTest {
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void nodeberiaRegistrarReservaPorRecursoReservado() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(15, 30, 00);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso ya reservado");
@@ -169,14 +168,14 @@ public class RecursosBibliotecaTest {
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+
 	@Test
 	public void nodeberiaRegistrarReservaPorLaHora() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(13, 30, 00);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un Equipo de computo por más de dos horas");
@@ -198,7 +197,7 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(12, 30, 00);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(89),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(89),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso Ocupado");
@@ -214,14 +213,14 @@ public class RecursosBibliotecaTest {
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 * @throws ExcepcionServiciosBiblioteca
 	 */
-	/**
+	
 	@Test
 	public void nodeberiaRegistrarReservaPorHorario() throws edu.eci.cvds.sampleprj.dao.PersistenceException, ExcepcionServiciosBiblioteca {
 		
 		LocalTime localTime1 = LocalTime.of(5, 30, 00);
 		LocalTime localTime2 = LocalTime.of(6, 30, 00);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(8),serviciosB.consultarUsuario(2148781));
+		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(8),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar este recurso en un horario no estipulado");
