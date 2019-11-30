@@ -42,8 +42,8 @@
 		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
-		AND u.carnet = r.usuario;
-		AND r.recurso=#{id}
+		AND u.carnet = r.usuario
+		AND r.recurso=#{id};
 	</select>
 
 	<select parameterType="map" id="consultarReservas"

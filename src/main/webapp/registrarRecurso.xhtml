@@ -145,7 +145,7 @@ lang="es">
             <div class="form-group floating-label-form-group controls">
               <h:outputText value="Coloca un ID"/>
               <label>ID</label>
-              <p:inputText placeholder="ID" id="id" data-validation-required-message="Ingresa el ID del recurso" binding="#{superID}" value="0">
+              <p:inputText placeholder="ID" id="id" data-validation-required-message="Ingresa el ID del recurso" binding="#{superID}" value="#{ReservaRecursosBean.idActualEstado}">
               <p:ajax event="keyup" update="itemRentadoRetarded" />
               </p:inputText>
             </div>
@@ -187,12 +187,13 @@ lang="es">
             <p:commandButton actionListener="#{ReservaRecursosBean.actualizarEstadoRecurso(superID.value, superEstado.value)}" value="Registrar" update="@form"></p:commandButton>
           </div>
           <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
-        <p:dataTable id="itemRentadoRetardedchas" var="recurso" value="#{ReservaRecursosBean.consultarRecursos()}"
+        <p:dataTable id="itemRentadoRetardedchas" var="recurso" value="#{ReservaRecursosBean.consultarRecursos()}" selectionMode="single" selection="#{ReservaRecursosBean.idActualEstado}" rowKey="#{recurso}"
                          paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                          rows="10" style="text-align: center;">
               <f:facet name="header">
                     Recursos existentes
                 </f:facet>
+                <p:ajax event="rowSelect" listener="#{ReservaRecursosBean.onRowSelect}" update="@form" oncomplete="PF('eventDialog').hide();"/>
                 <p:column headerText="ID">
                     <h:outputText value="#{recurso.id}" />
                 </p:column>

@@ -22,6 +22,7 @@ lang="es">
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="css/estiloReservas.css" rel="stylesheet" type="text/css"/>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -85,13 +86,16 @@ lang="es">
   <!-- Main Content -->
   
   <div class="container">
-    
     <div class="row">
-
-      <h:form>
-    <p:messages id="messages" showDetail="true" closable="true">
-          <p:autoUpdate />
+      <p>Las reservas rojas son recurrentes, las reservas no recurrentes son azules</p>
+    </div>
+    <div class="row">
+      <h:form id="superMessages">
+      <p:messages id="messages" showDetail="true" closable="true">
         </p:messages>
+      </h:form>
+      <h:form>
+    
       
 
     <h:panelGrid columnClasses="value">
@@ -123,7 +127,7 @@ lang="es">
             </p:selectOneRadio>
  
             <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" action="#{ReservaRecursosBean.addEvent(superRecurrencia.value)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+            <p:commandButton id="addButton" value="Save" action="#{ReservaRecursosBean.addEvent(superRecurrencia.value)}" update="superMessages" oncomplete="PF('eventDialog').hide();PF('myschedule').update();" />
         </h:panelGrid>
     </p:dialog>    
 </h:form>
