@@ -61,3 +61,17 @@ CREATE SEQUENCE TIPO_RECURSO_sequence
   start 1
   increment 1;
 
+create function public.BU_Reservados_Estado()
+	returns trigger
+	language 'plpgsql'
+as $BODY$
+begin
+	new.estado:='Activa';
+	return new;
+end;
+$BODY$
+
+create trigger BU_Reservados_Estado
+before insert on recursos
+for each row
+execute procedure BU_Reservados_Estado();
