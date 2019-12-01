@@ -87,7 +87,11 @@ lang="es">
   
   <div class="container">
     <div class="row">
-      <p>Las reservas rojas son recurrentes, las reservas no recurrentes son azules</p>
+          <ul>
+          <p id="rojo">Reserva Recurrente</p>
+        
+          <p id="azul">Reserva No Recurrente</p>
+          </ul>
     </div>
     <div class="row">
       <h:form id="superMessages">
@@ -127,9 +131,16 @@ lang="es">
             </p:selectOneRadio>
  
             <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" action="#{ReservaRecursosBean.addEvent(superRecurrencia.value)}" update="superMessages" oncomplete="PF('eventDialog').hide();PF('myschedule').update();" />
+            <p:commandButton id="addButton" value="Save" action="#{ReservaRecursosBean.addEvent(superRecurrencia.value)}" update="superMessages" oncomplete="PF('eventDialog').hide();PF('myschedule').update();" >
+              <p:confirm header="Confirmación de Reserva" message="¿Estas seguro de reservar el recurso #{ReservaRecursosBean.recursoActual.nombre}?" icon="pi pi-exclamation-triangle" />
+            </p:commandButton>
+
         </h:panelGrid>
-    </p:dialog>    
+    </p:dialog>
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>     
 </h:form>
     </div>
   </div>

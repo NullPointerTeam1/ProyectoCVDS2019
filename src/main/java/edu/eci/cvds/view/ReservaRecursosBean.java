@@ -79,7 +79,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventModel.addEvent(eventico);
 			}
 		} catch (ExcepcionServiciosBiblioteca e) {
-			System.out.println("Ey");
+			setErrorMessage(e);
 		}
         return eventModel;
     }
@@ -117,6 +117,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
 	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual,"activa","si");
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
+	    	setErrorMessage("La reserva se ha realizado con exito");
 		} catch (InvalidSessionException e) {
 			setErrorMessage(e);
 		} catch (ExcepcionServiciosBiblioteca e) {
