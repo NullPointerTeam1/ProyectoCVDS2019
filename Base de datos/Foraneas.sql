@@ -9,7 +9,3 @@ foreign key (usuario) references usuarios(carnet);
 alter table reservados
 add constraint Fk_reserva_recurso
 foreign key (recurso) references recursos(identificador);
-
-alter table reservados
-add constraint FK_reserva_recurente
-foreign key (recurrente) references reservados(idr);

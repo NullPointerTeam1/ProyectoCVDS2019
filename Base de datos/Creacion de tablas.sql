@@ -16,8 +16,11 @@ create table if not exists RECURSOS(
 	horarioI time,
 	horarioF time,
 	disponibilidad varchar(13) not null,
+	descripcion varchar(360),
 	tiporecurso_id int NOT NULL
 );
+
+
 CREATE table if not exists TIPO_RECURSO (
 	id serial primary key,
 	descripcion VARCHAR(50)  NOT NULL
