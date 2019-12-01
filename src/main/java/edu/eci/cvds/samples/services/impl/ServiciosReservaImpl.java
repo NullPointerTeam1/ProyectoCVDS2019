@@ -12,6 +12,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class ServiciosReservaImpl implements ServiciosReserva {
@@ -173,7 +174,8 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		if (recurrencia.equals("No")) {
 			recursoReservado.setFechaFinReserva(recursoReservado.getFechaInicioReserva());
 			registrarReserva(recursoReservado);
-		} else {
+			
+		}else {
 			LocalDate ini = recursoReservado.getFechaInicioReserva();
 			LocalDate fin = recursoReservado.getFechaFinReserva();
 			while (ini.compareTo(fin) < 0 || ini.compareTo(fin) == 0) {
@@ -194,9 +196,18 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 					} catch (ExcepcionServiciosBiblioteca e) {
 						e.printStackTrace();
 					}
-					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
-					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
-					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);
+					if (recurrencia.equals("Diario")) {
+						ini = ini.plusDays(1);
+					}
+					else if (recurrencia.equals("Semanal")) {
+						ini = ini.plusWeeks(1);
+					}
+					else if (recurrencia.equals("Mensual")) {
+						ini = ini.plusMonths(1);
+					}
+				}
+				else {
+					throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_SUNDAY);
 				}
 			}
 		}
@@ -223,7 +234,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 				   horaFinR.isBefore(recursoHoraI) || horaFinR.isAfter(recursoHoraF)) {
 			throw new ExcepcionServiciosBiblioteca("El recurso sólo está disponible en este horario: " + recursoHoraI + " - " + recursoHoraF);
 		} else if (isReserved(recursoReservado, horaInicioR, horaFinR)) {
-			throw new ExcepcionServiciosBiblioteca(recursoReservado);
+			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RECURSO_YA_RESERVADO);
 		} 
 		try {
 			recursoReservadoDAO.insertarReserva(recursoReservado);

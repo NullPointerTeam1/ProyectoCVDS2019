@@ -206,7 +206,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		return usuarios;
 	}
 
-	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad, Date FechaI, Date FechaF) {
+	public void registrarRecurso(String tipo, String nombre, String ubicacion, String capacidad, Date FechaI, Date FechaF, String Descripcion) {
 		try {
 			TipoRecurso tipoRecurso = null;
 			switch(tipo) {
@@ -224,7 +224,8 @@ public class ReservaRecursosBean extends BasePageBean {
 				}
 			}
 			serviciosReserva
-					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad), FechaI.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), FechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), "Disponible"));
+					.registrarRecurso(new Recurso(tipoRecurso, 1, nombre, ubicacion, Integer.parseInt(capacidad),
+							FechaI.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), FechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalTime(), "Disponible", Descripcion));
 			setErrorMessage("El registro de "+ nombre +" se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);

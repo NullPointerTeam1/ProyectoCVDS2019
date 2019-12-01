@@ -16,6 +16,7 @@
 			#{recurso.horarioI},
 			#{recurso.horarioF},
 			#{recurso.disponibilidad},
+			#{recurso.descripcion},
 			#{recurso.tipo.id}
 			)
 	</insert>
@@ -67,6 +68,7 @@
 	    <result property='horarioI' column='horarioi'/>
 	    <result property='horarioF' column='horariof'/>
 	    <result property='disponibilidad' column='disponibilidad'/>  
+	    <result property='descripcion' column='descripcion'/>
 	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
 	</resultMap>
 </mapper> 
