@@ -9,6 +9,8 @@ import edu.eci.cvds.samples.services.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.component.behavior.Behavior;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -32,7 +34,7 @@ import java.time.ZoneOffset;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
-@ApplicationScoped
+@SessionScoped
 public class ReservaRecursosBean extends BasePageBean {
 
 	/**
@@ -71,6 +73,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle("Reservado");
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		   
 		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
 		    		eventico.setStyleClass("noRecurrente");
 		    	} else {
@@ -123,14 +126,18 @@ public class ReservaRecursosBean extends BasePageBean {
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		} catch (Exception e) {
-			setErrorMessage(e);
+			setErrorMessage("Debe rellenar los campos");
 		}
     	
         event = new DefaultScheduleEvent();
     }
      
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
+        Behavior event = selectEvent.getBehavior();
+        
+        
+        
+        
     }
      
     public void onDateSelect(SelectEvent selectEvent) {

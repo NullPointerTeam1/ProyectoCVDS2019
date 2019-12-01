@@ -122,6 +122,15 @@ lang="es">
             </div>
           </div>
 
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <h5>Descripcion</h5>
+              <label for="descript">Descripcion</label>
+              <p:inputTextarea id="descript" rows="5" cols="30" counter="display" maxlength="360" counterTemplate="{0} characters remaining." autoResize="false" binding="#{superDescripcion}"/>
+              <h:outputText id="display" />
+            </div>
+          </div>
+
           <p:outputLabel for="tipoRecurso" value="Tipo del Recurso:" />
           <p:selectOneRadio id="tipoRecurso" binding="#{superTipo}" unselectable="true">
               <f:selectItem itemLabel="Equipo de Computo" itemValue="1" />
@@ -130,7 +139,7 @@ lang="es">
           </p:selectOneRadio>
 
           <div class="form-group">
-            <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value,superFechaInicio.value,superFechaFin.value)}" value="Registrar"></p:commandButton>
+            <p:commandButton actionListener="#{ReservaRecursosBean.registrarRecurso(superTipo.value, superNombre.value, superUbicacion.value,superCapacidad.value,superFechaInicio.value,superFechaFin.value,superDescripcion.value)}" value="Registrar"></p:commandButton>
           </div>
         </h:form>
         <br/>
