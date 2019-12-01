@@ -170,31 +170,33 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Override
 	@Transactional
 	public void registrarReserva(RecursoReservado recursoReservado, String recurrencia) throws ExcepcionServiciosBiblioteca {
-		if (recurrencia.equals("No")) registrarReserva(recursoReservado);
-		else {
+		if (recurrencia.equals("No")) {
+			recursoReservado.setFechaFinReserva(recursoReservado.getFechaInicioReserva());
+			registrarReserva(recursoReservado);
+		} else {
 			LocalDate ini = recursoReservado.getFechaInicioReserva();
 			LocalDate fin = recursoReservado.getFechaFinReserva();
 			while (ini.compareTo(fin) < 0 || ini.compareTo(fin) == 0) {
-				if (ini.getDayOfWeek() != DayOfWeek.SATURDAY || ini.getDayOfWeek() != DayOfWeek.SUNDAY) {
+				if (ini.getDayOfWeek() != DayOfWeek.SUNDAY) {
 					int id = recursoReservado.getId();
 					LocalDate fechaInicio = ini;
 					LocalDate fechaFin = ini;
-					LocalDate fechaActual = LocalDate.now();
 					LocalTime horaInicio = recursoReservado.getHoraInicioReserva();
 					LocalTime horaFin = recursoReservado.getHoraFinReserva();
 					Recurso recurso = recursoReservado.getRecurso();
 					Usuario usuario = recursoReservado.getUsuario();
 					String estado = recursoReservado.getEstado();
 					String recurrente = recursoReservado.getRecurrente();
-					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, fechaActual, recurso, usuario,estado,recurrente);
-					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
-					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
-					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);
+					LocalDate fechaDeReserva = recursoReservado.getfechadeReserva();
+					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, fechaDeReserva, recurso, usuario,estado,recurrente);					
 					try {
 						registrarReserva(nuevo);
 					} catch (ExcepcionServiciosBiblioteca e) {
 						e.printStackTrace();
 					}
+					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
+					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
+					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);
 				}
 			}
 		}
@@ -205,6 +207,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		if (recursoReservado == null) {
 			throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_NULA);
 		} 
+		condicionesReserva(recursoReservado);
 		LocalTime horaInicioR = recursoReservado.getHoraInicioReserva();
 		LocalTime horaFinR = recursoReservado.getHoraFinReserva();
 		LocalTime recursoHoraI = recursoReservado.getRecurso().getHorarioI();
@@ -253,6 +256,30 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 			}
 		}
 		return res;
+	}
+	
+	private void condicionesReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
+		LocalDate fechaInicioR = recursoReservado.getFechaInicioReserva();
+		LocalDate fechaFinR = recursoReservado.getFechaFinReserva();
+		LocalDate fechaHoy = LocalDate.now();
+		if (fechaFinR.compareTo(fechaInicioR) < 0) {
+			throw new ExcepcionServiciosBiblioteca("La fecha final debe ser después de la fecha inicial.");
+		} else if ((fechaInicioR.getMonthValue() >= 6 && fechaInicioR.getMonthValue() <= 7) ||
+				   (fechaFinR.getMonthValue() >= 6 && fechaFinR.getMonthValue() <= 7)) {
+			throw new ExcepcionServiciosBiblioteca("No puede reservar un recurso en esas fechas.");
+		} else if (fechaHoy.getMonthValue() >= 8 && fechaHoy.getMonthValue() <= 12) {
+			if ((fechaInicioR.getMonthValue() >= 1 && fechaInicioR.getMonthValue() <= 5) ||
+				(fechaFinR.getMonthValue() >= 1 && fechaFinR.getMonthValue() <= 5)) {
+					throw new ExcepcionServiciosBiblioteca("Sólo puede reservar un recurso en el semestre actual.");
+			}
+		} else if (fechaHoy.getMonthValue() >= 1 && fechaHoy.getMonthValue() <= 5) {
+			if ((fechaInicioR.getMonthValue() >= 8 && fechaInicioR.getMonthValue() <= 12) ||
+				(fechaFinR.getMonthValue() >= 8 && fechaFinR.getMonthValue() <= 12)) {
+					throw new ExcepcionServiciosBiblioteca("Sólo puede reservar un recurso en el semestre actual.");
+			}
+		} else if (fechaInicioR.compareTo(fechaHoy) < 0 || fechaFinR.compareTo(fechaHoy) < 0) {
+			throw new ExcepcionServiciosBiblioteca("No puede hacer una reserva antes de la fecha actual.");
+		}
 	}
 
 	@Override
