@@ -6,21 +6,20 @@
 <mapper
 	namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper">
 	<insert parameterType="map" id="registrarReserva">
-		INSERT INTO reservados
+		INSERT INTO reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso)
 		VALUES (
 		nextval('reservados_sequence'),
 		#{reservado.fechaInicioReserva},
 		#{reservado.horaInicioReserva},
 		#{reservado.fechaFinReserva},
 		#{reservado.horaFinReserva},
-		#{reservado.estado},
 		#{reservado.recurrente},
 		#{reservado.usuario.carnet},
 		#{reservado.recurso.id}
 		)
 	</insert>
 
-	<select parameterType="map" id="consultarReserva"
+<select parameterType="map" id="consultarReserva"
 		resultMap="ReservadoResult">
 		SELECT
 		r.idr,
@@ -28,9 +27,10 @@
 		r.fechainicioreserva,
 		r.horainicioreserva,
 		r.horafinreserva,
-		rc.identificador,
+		r.fechadereserva,
 		r.estado,
 		r.recurrente,
+		rc.identificador,
 		rc.nombre,
 		rc.horarioi,
 		rc.horariof,
@@ -43,7 +43,38 @@
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
 		AND u.carnet = r.usuario
+		AND r.idR=#{idR}
+	</select>
+
+	<select parameterType="map" id="consultarReservaRecurso"
+		resultMap="ReservadoResult">
+		SELECT
+		r.idr,
+		r.fechafinreserva,
+		r.fechainicioreserva,
+		r.horainicioreserva,
+		r.horafinreserva,
+		r.fechadereserva,
+		r.estado,
+		r.recurrente,
+		rc.identificador,
+		rc.nombre,
+		rc.horarioi,
+		rc.horariof,
+		rc.disponibilidad,
+		tr.id,
+		tr.descripcion,
+		u.nombre,
+		u.carrera
+		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
+		WHERE r.recurso = rc.identificador
+		AND rc.tiporecurso_id = tr.id
+		AND u.carnet = r.usuario
+<<<<<<< HEAD
+		AND r.recurso=#{id}
+=======
 		AND r.recurso=#{id};
+>>>>>>> 27b57a9202b54d667c9fcdbaffe5caede62c4f7e
 	</select>
 
 	<select parameterType="map" id="consultarReservas"
@@ -54,6 +85,7 @@
 		r.fechainicioreserva,
 		r.horainicioreserva,
 		r.horafinreserva,
+		r.fechadereserva,
 		r.estado,
 		r.recurrente,
 		rc.identificador,
@@ -90,6 +122,7 @@
 		<result property='horaFinReserva' column='horafinreserva' />
 		<result property='estado' column='estado' />
 		<result property='recurrente' column='recurrente' />
+		<result property='fechadereserva' column='fechadereserva' />
 		<association property="recurso" javaType="Recurso"
 			resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoMapper.RecursoResult'></association>
 		<association property="usuario" javaType="Usuario"

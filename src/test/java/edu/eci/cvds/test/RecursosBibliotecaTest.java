@@ -8,7 +8,6 @@ import edu.eci.cvds.samples.services.ExcepcionServiciosBiblioteca;
 import edu.eci.cvds.samples.services.ServiciosReserva;
 import edu.eci.cvds.samples.services.ServiciosReservaFactory;
 import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -25,7 +24,6 @@ public class RecursosBibliotecaTest {
 	public RecursosBibliotecaTest() throws ExcepcionServiciosBiblioteca {
 		serviciosB = ServiciosReservaFactory.getInstance().getServiciosBibliotecaTesting();
 	}
-	
 	
 	/**
 	 * Registra un recurso con los requisitos estipulados, verifica que el id del recurso que insertamos coincida con el ultimo
@@ -133,8 +131,9 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime2 = LocalTime.of(15, 30, 45);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
 		LocalDate localDate2 = LocalDate.of(2019, Month.NOVEMBER, 15);
+		LocalDate now = LocalDate.now();
 		int ultId = serviciosB.consultarReservas().get(serviciosB.consultarReservas().size()-1).getId();
-		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,serviciosB.consultarRecurso(7),serviciosB.consultarUsuario(2148781),"activa","no");
+		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,now,serviciosB.consultarRecurso(7),serviciosB.consultarUsuario(2148781),"activa","no");
 		recurPrueba.getRecurso().getTipo().setId(1);
 		//serviciosB.registrarReserva(recurPrueba,"no");
 		assertTrue(ultId == recurPrueba.getId());
@@ -152,7 +151,8 @@ public class RecursosBibliotecaTest {
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(15, 30, 00);
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781),"activa","no");
+		LocalDate now = LocalDate.now();
+		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,now,serviciosB.consultarRecurso(6),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso ya reservado");
@@ -174,8 +174,9 @@ public class RecursosBibliotecaTest {
 		
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(13, 30, 00);
+		LocalDate now = LocalDate.now();
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781),"activa","no");
+		RecursoReservado recurPrueba = new RecursoReservado(15,localDate1,localDate1,localTime1,localTime2,now,serviciosB.consultarRecurso(10),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un Equipo de computo por más de dos horas");
@@ -196,8 +197,9 @@ public class RecursosBibliotecaTest {
 		
 		LocalTime localTime1 = LocalTime.of(10, 30, 00);
 		LocalTime localTime2 = LocalTime.of(12, 30, 00);
+		LocalDate now = LocalDate.now();
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(89),serviciosB.consultarUsuario(2148781),"activa","no");
+		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,now,serviciosB.consultarRecurso(89),serviciosB.consultarUsuario(2148781),"activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar un recurso Ocupado");
@@ -219,8 +221,9 @@ public class RecursosBibliotecaTest {
 		
 		LocalTime localTime1 = LocalTime.of(5, 30, 00);
 		LocalTime localTime2 = LocalTime.of(6, 30, 00);
+		LocalDate now = LocalDate.now();
 		LocalDate localDate1 = LocalDate.of(2019, Month.NOVEMBER, 15);
-		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,serviciosB.consultarRecurso(8),serviciosB.consultarUsuario(2148781),"activa","no");
+		RecursoReservado recurPrueba = new RecursoReservado(16,localDate1,localDate1,localTime1,localTime2,now,serviciosB.consultarRecurso(8),serviciosB.consultarUsuario(2148781),"Activa","no");
 		try {
 			serviciosB.registrarReserva(recurPrueba, "No");
 			fail("Debe fallar porque no se puede reservar este recurso en un horario no estipulado");
@@ -230,17 +233,24 @@ public class RecursosBibliotecaTest {
 		}		
 	}
 	
-	/*
+	/**
 	@Test
-	public void prueba () throws ExcepcionServiciosBiblioteca {
-		int id = 5;
-		LocalDate fechaInicio = LocalDate.of(2018, 1, 1);
-		LocalDate fechaFin = LocalDate.of(2018, 1, 5);
+	public void deberiaRegistrarReservaRecurrente () throws ExcepcionServiciosBiblioteca {
+		
+		int numReservasInicial = serviciosB.consultarReservas().size();
+		LocalDate fechaInicio = LocalDate.of(2019,12,1);
+		LocalDate fechaFin = LocalDate.of(2019, 12, 3);
 		LocalTime horaInicio = LocalTime.of(9, 30, 00);
 		LocalTime horaFin = LocalTime.of(11, 30, 00);
+		LocalDate actual = LocalDate.now();
 		Recurso recurso = serviciosB.consultarRecurso(1);
-		Usuario usuario = serviciosB.consultarUsuario(2148781);
-		RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario);
+		Usuario usuario = serviciosB.consultarUsuario(2148782);
+		String estado = "activa";
+		String recurrente = "si";
+		RecursoReservado nuevo = new RecursoReservado(1, fechaInicio, fechaFin, horaInicio, horaFin, actual,recurso, usuario,estado,recurrente);
 		serviciosB.registrarReserva(nuevo, "Diario");
-	}*/
+		int numReservasFinal = serviciosB.consultarReservas().size();
+		assertTrue( numReservasInicial == numReservasFinal - 3);
+	}
+	**/
 }

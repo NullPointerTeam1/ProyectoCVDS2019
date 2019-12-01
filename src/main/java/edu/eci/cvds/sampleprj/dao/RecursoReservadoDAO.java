@@ -13,6 +13,7 @@ public interface RecursoReservadoDAO {
 	 * @throws PersistenceException
 	 */
 	public void insertarReserva(RecursoReservado recurso) throws PersistenceException;
+	
 	/**
 	 * Consulta si las reservas de un recurso
 	 * @param id identificador de una reserva
@@ -27,6 +28,7 @@ public interface RecursoReservadoDAO {
 	 * @return Las reservas de un usuario
 	 * @throws PersistenceException
 	 */
+	
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws PersistenceException;
 	/**
 	 * Consulta toda la tabla reserva
@@ -35,5 +37,7 @@ public interface RecursoReservadoDAO {
 	 */
 	
 	public List<RecursoReservado> consultarReservas() throws PersistenceException;
+	
+	public RecursoReservado consultarReserva(long id) throws PersistenceException;
 
 }

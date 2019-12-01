@@ -39,7 +39,9 @@ public interface ServiciosReserva {
 	
 	public void registrarReserva(RecursoReservado recursoReservado, String recurrencia) throws ExcepcionServiciosBiblioteca;
 
-	public List<RecursoReservado> consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
+	public List<RecursoReservado> consultarReservaRecurso(long id) throws ExcepcionServiciosBiblioteca;
+	
+	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca;
 	
 	public List<RecursoReservado> consultarReservas() throws ExcepcionServiciosBiblioteca;
 	
