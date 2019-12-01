@@ -11,12 +11,11 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.RecursoReservadoMapper;
 import edu.eci.cvds.samples.entities.RecursoReservado;
 import edu.eci.cvds.samples.entities.Usuario;
 
-
 public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
-	
+
 	@Inject
 	private RecursoReservadoMapper recursoReservadoMapper;
-	
+
 	@Override
 	public void insertarReserva(RecursoReservado recurso) throws PersistenceException {
 		try {
@@ -54,12 +53,21 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 	}
 
 	@Override
-	public RecursoReservado consultarReserva(long id) {
+	public RecursoReservado consultarReserva(long id) throws PersistenceException {
 		try {
 			return recursoReservadoMapper.consultarReserva(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al consultar la reserva " + id, e);
 		}
 	}
-	
+
+	@Override
+	public void actualizarEstadoReserva(long id, String estado) throws PersistenceException {
+		try {
+			recursoReservadoMapper.actualizarEstadoReserva(id, estado);
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) al actualizar el estado de la reserva" + id, e);
+		}
+	}
+
 }

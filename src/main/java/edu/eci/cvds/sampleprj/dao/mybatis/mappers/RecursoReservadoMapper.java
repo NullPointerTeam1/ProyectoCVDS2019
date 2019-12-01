@@ -23,5 +23,7 @@ public interface RecursoReservadoMapper {
 
 	public RecursoReservado consultarReserva(@Param("idR") long id);
 	
+	public void actualizarEstadoReserva(@Param("id") long id, @Param("estado") String estado);
+	
 
 }

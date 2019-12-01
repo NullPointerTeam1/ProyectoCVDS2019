@@ -320,5 +320,32 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		}
 	}
 
+	@Override
+	public void cancelarReserva(long id, String estado, Usuario usuario) throws ExcepcionServiciosBiblioteca {
+		RecursoReservado reserva;
+		try {
+			reserva = consultarReserva(id);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			throw new ExcepcionServiciosBiblioteca("Error al cancelar la reserva" + id);
+		}
+		long carnet = reserva.getUsuario().getCarnet();
+		if (usuario.getCarnet() != carnet) throw new ExcepcionServiciosBiblioteca("La reserva solo la puede cambiar el usuario " + carnet);
+		LocalDate fechaIni = reserva.getFechaInicioReserva();
+		LocalTime horaIni = reserva.getHoraInicioReserva();
+		LocalTime horaFin = reserva.getHoraFinReserva();
+		LocalDate fechaActual = LocalDate.now();
+		LocalTime horaActual = LocalTime.now();
+		if (fechaIni.equals(fechaActual)) {
+			if (horaActual.isAfter(horaIni) && horaActual.isBefore(horaFin)) {
+				throw new ExcepcionServiciosBiblioteca("No puede cancelar una reserva en progreso");
+			}
+		}
+		try {
+			recursoReservadoDAO.actualizarEstadoReserva(id, estado);
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al cancelar la reserva" + id);
+		}
+	
+	}
 }
 

@@ -39,5 +39,13 @@ public interface RecursoReservadoDAO {
 	public List<RecursoReservado> consultarReservas() throws PersistenceException;
 	
 	public RecursoReservado consultarReserva(long id) throws PersistenceException;
+	
+	/**
+	 * Actuaiza la infomacion de una reserva
+	 * @param id identificador del estado que desea actualizar
+	 * @param estado El nuevo estado de la reserva
+	 * @throws PersistenceException
+	 */
+	public void actualizarEstadoReserva(long id, String estado) throws PersistenceException;
 
 }

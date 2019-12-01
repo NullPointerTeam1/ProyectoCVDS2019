@@ -29,7 +29,7 @@ public interface RecursoDAO {
 	public List<Recurso> consultarRecursos() throws PersistenceException;
 	
 	/**
-	 * Acturliza la infomacion de un recurso
+	 * Actuaiza la infomacion de un recurso
 	 * @param id identificador del estado que desea actualizar
 	 * @param estado El nuevo estado del recurso
 	 * @throws PersistenceException

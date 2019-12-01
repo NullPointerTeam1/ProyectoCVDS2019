@@ -47,6 +47,6 @@ public interface ServiciosReserva {
 	
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca;
 	
-	
+	public void cancelarReserva(long id, String estado, Usuario usuario) throws ExcepcionServiciosBiblioteca;
 
 }

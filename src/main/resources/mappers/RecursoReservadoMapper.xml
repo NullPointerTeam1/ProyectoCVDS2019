@@ -108,6 +108,11 @@
 		#{usuario.carnet}
 	</select>
 
+	<update parameterType="map" id="actualizarEstadoReserva">
+    	UPDATE RESERVADOS SET estado = #{estado}
+    	WHERE idr = #{id}
+    </update>
+
 
 	<resultMap type='RecursoReservado' id='ReservadoResult'>
 		<id property='id' column='idr' />

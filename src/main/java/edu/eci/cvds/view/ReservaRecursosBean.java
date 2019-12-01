@@ -334,7 +334,26 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage("Debe rellenar todos los campos.");
 		}
 	}
-
+	
+	public void consultarReservasDeUnUsuario(String correo) {
+		try {
+			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
+			serviciosReserva.consultarReservasDeUnUsuario(usuario);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		
+	}
+	
+	public void cancelarReserva(long id, String estado, String correo) {
+		try {
+			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
+			serviciosReserva.cancelarReserva(id, estado, usuario);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+	}
+	
 	public void setSelectedUsuario(Usuario usuario) {
 		this.selectedUsuario = usuario;
 	}
