@@ -2,7 +2,7 @@ package edu.eci.cvds.view;
 
 import edu.eci.cvds.samples.entities.*;
 
-
+import org.primefaces.model.SelectableDataModel;
 import edu.eci.cvds.samples.services.*;
 
 
@@ -17,6 +17,7 @@ import org.apache.shiro.session.InvalidSessionException;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
@@ -47,6 +48,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Date fechaInicio;
 	private List<Recurso> recursosFiltrados;
 	private String idRecursoActual;
+	private String idActualEstado ="1";
 	
 	
 	private ScheduleModel eventModel = new DefaultScheduleModel();
@@ -69,6 +71,11 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle("Reservado");
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
+		    		eventico.setStyleClass("noRecurrente");
+		    	} else {
+		    		eventico.setStyleClass("recurrente");
+		    	}
 		    	eventModel.addEvent(eventico);
 			}
 		} catch (ExcepcionServiciosBiblioteca e) {
@@ -76,7 +83,15 @@ public class ReservaRecursosBean extends BasePageBean {
 		}
         return eventModel;
     }
+    
+    public void onRowSelect(SelectEvent event) {
+    	Recurso temporal = (Recurso) event.getObject();
+        idActualEstado = Integer.toString(temporal.getId());
+        
+    }
+ 
 
+    
     public ScheduleEvent getEvent() {
         return event;
     }
@@ -102,6 +117,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
 	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","si");
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
+	    	setErrorMessage("La reserva se ha realizado con exito");
 		} catch (InvalidSessionException e) {
 			setErrorMessage(e);
 		} catch (ExcepcionServiciosBiblioteca e) {
@@ -121,9 +137,7 @@ public class ReservaRecursosBean extends BasePageBean {
         event = new DefaultScheduleEvent();
     }
 
-    private void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+ 
  
     public boolean isShowWeekends() {
         return showWeekends;
@@ -361,6 +375,14 @@ public class ReservaRecursosBean extends BasePageBean {
 	public void setIdRecursoActual(String idRecursoActual) {
 		recursoActual = consultarRecurso(idRecursoActual);
 		this.idRecursoActual = idRecursoActual;
+	}
+
+	public String getIdActualEstado() {
+		return idActualEstado;
+	}
+
+	public void setIdActualEstado(String idActualEstado) {
+		this.idActualEstado = idActualEstado;
 	}
 
 

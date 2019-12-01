@@ -70,7 +70,11 @@
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
 		AND u.carnet = r.usuario
+<<<<<<< HEAD
 		AND r.recurso=#{id}
+=======
+		AND r.recurso=#{id};
+>>>>>>> 27b57a9202b54d667c9fcdbaffe5caede62c4f7e
 	</select>
 
 	<select parameterType="map" id="consultarReservas"

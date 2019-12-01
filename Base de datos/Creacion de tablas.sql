@@ -31,6 +31,7 @@ create table if not exists reservados(
 	horaFinReserva time  not null,
 	recurrente varchar(2),
 	estado varchar(9),
+	fechaDeReserva date,
 	usuario int not null,
 	recurso int not null
 );

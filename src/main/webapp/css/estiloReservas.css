@@ -1,0 +1,19 @@
+.recurrente {
+    background-color: red;
+    border-color: red;
+    color: white;
+    opacity: 1;
+}
+
+#rojo {
+	background-color:red;
+	color:white;
+	font-weight: bold;
+
+}
+
+#azul {
+	background-color:blue;
+	color:white;
+	font-weight: bold;
+}
