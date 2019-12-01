@@ -29,7 +29,7 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 	@Override
 	public List<RecursoReservado> consultarReservado(long id) throws PersistenceException {
 		try {
-			return recursoReservadoMapper.consultarReserva(id);
+			return recursoReservadoMapper.consultarReservaRecurso(id);
 		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error (P) al consultar la reserva " + id, e);
 		}
@@ -52,4 +52,14 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 			throw new PersistenceException("Error (P) al consultar las reservas del usuario " + usuario.getNombre(), e);
 		}
 	}
+
+	@Override
+	public RecursoReservado consultarReserva(long id) {
+		try {
+			return recursoReservadoMapper.consultarReserva(id);
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) al consultar la reserva " + id, e);
+		}
+	}
+	
 }

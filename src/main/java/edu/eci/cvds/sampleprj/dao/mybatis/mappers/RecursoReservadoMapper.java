@@ -15,11 +15,13 @@ public interface RecursoReservadoMapper {
 	
 	public void registrarReserva(@Param("reservado") RecursoReservado reservado);
 
-	public List<RecursoReservado> consultarReserva(@Param("id") long id);
+	public List<RecursoReservado> consultarReservaRecurso(@Param("id") long id);
 	
 	public List<RecursoReservado> consultarReservasDeUnUsuario(@Param("usuario") Usuario usuario);
 	
 	public List<RecursoReservado> consultarReservas();
+
+	public RecursoReservado consultarReserva(@Param("idR") long id);
 	
 
 }

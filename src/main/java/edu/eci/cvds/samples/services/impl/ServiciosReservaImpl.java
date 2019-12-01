@@ -179,13 +179,14 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 					int id = recursoReservado.getId();
 					LocalDate fechaInicio = ini;
 					LocalDate fechaFin = ini;
+					LocalDate fechaActual = LocalDate.now();
 					LocalTime horaInicio = recursoReservado.getHoraInicioReserva();
 					LocalTime horaFin = recursoReservado.getHoraFinReserva();
 					Recurso recurso = recursoReservado.getRecurso();
 					Usuario usuario = recursoReservado.getUsuario();
 					String estado = recursoReservado.getEstado();
 					String recurrente = recursoReservado.getRecurrente();
-					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, recurso, usuario,estado,recurrente);
+					RecursoReservado nuevo = new RecursoReservado(id, fechaInicio, fechaFin, horaInicio, horaFin, fechaActual, recurso, usuario,estado,recurrente);
 					if (recurrencia.equals("Diario")) ini = ini.plusDays(1);
 					else if (recurrencia.equals("Semanal")) ini = ini.plusWeeks(1);
 					else if (recurrencia.equals("Mensual")) ini = ini.plusMonths(1);
@@ -255,7 +256,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	}
 
 	@Override
-	public List<RecursoReservado> consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
+	public List<RecursoReservado> consultarReservaRecurso(long id) throws ExcepcionServiciosBiblioteca {
 		try {
 			return recursoReservadoDAO.consultarReservado(id);
 		} catch (PersistenceException e) {
@@ -283,4 +284,14 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		}
 	}
 
+	@Override
+	public RecursoReservado consultarReserva(long id) throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarReserva(id);
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar la reserva" + id);
+		}
+	}
+
 }
+

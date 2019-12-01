@@ -25,6 +25,7 @@ public class RecursoReservado implements Serializable {
 	private LocalTime horaInicioReserva;
 	private LocalTime horaFinReserva;
 	private LocalDate fechaFinReserva;
+	private LocalDate fechadereserva;
 	private Recurso recurso;
 	private Usuario usuario;
 	private String estado, recurrente;
@@ -42,13 +43,14 @@ public class RecursoReservado implements Serializable {
 	 * @param recurrente, identifica si una reserva es recurrente o no
 	 */
 
-	public RecursoReservado(int id, LocalDate  fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, Recurso recurso,
-						    Usuario usuario, String estado, String recurrente) {
+	public RecursoReservado(int id, LocalDate  fechaInicioReserva, LocalDate fechaFinReserva, LocalTime  horaInicioReserva, LocalTime  horaFinReserva, LocalDate fechadereserva,
+			Recurso recurso, Usuario usuario, String estado, String recurrente) {
 		this.id = id;
 		this.fechaInicioReserva = fechaInicioReserva;
 		this.fechaFinReserva = fechaFinReserva;
 		this.horaFinReserva = horaFinReserva;
 		this.horaInicioReserva = horaInicioReserva;
+		this.fechadereserva = fechadereserva;
 		this.recurso = recurso;
 		this.usuario = usuario;
 		this.estado = estado;
@@ -95,6 +97,15 @@ public class RecursoReservado implements Serializable {
 	public void setFechaFinReserva(LocalDate fechaFinReserva) {
 		this.fechaFinReserva = fechaFinReserva;
 	}
+	
+	public LocalDate getfechadeReserva() {
+		return fechadereserva;
+	}
+
+	public void setfechadereserva(LocalDate fechaDeReserva) {
+		this.fechadereserva = fechaDeReserva;
+	}
+
 
 	public Recurso getRecurso() {
 		return recurso;

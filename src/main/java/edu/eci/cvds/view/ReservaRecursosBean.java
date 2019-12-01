@@ -61,7 +61,7 @@ public class ReservaRecursosBean extends BasePageBean {
     public ScheduleModel getEventModel() {
     	eventModel.clear();
     	try {
-    		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReserva(recursoActual.getId());
+    		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReservaRecurso(recursoActual.getId());
 			for (int i= 0;i<recursosReservados.size();i++) {
 				DefaultScheduleEvent eventico;
 				eventico = new DefaultScheduleEvent();
@@ -100,7 +100,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
 	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
-	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), recursoActual, superUsuarioActual,"activa","si");
+	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","si");
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
 		} catch (InvalidSessionException e) {
 			setErrorMessage(e);
@@ -309,8 +309,9 @@ public class ReservaRecursosBean extends BasePageBean {
 			LocalDate finDate = finTime.toLocalDate();
 			LocalTime iniHour = iniTime.toLocalTime();
 			LocalTime finHour = finTime.toLocalTime();
+			
 			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
-			RecursoReservado recursoReservado = new RecursoReservado(id, iniDate, finDate, iniHour, finHour, recurso, usuario,estado,recurrente);		
+			RecursoReservado recursoReservado = new RecursoReservado(id, iniDate, finDate, iniHour, finHour,LocalDate.now(), recurso, usuario,estado,recurrente);		
 			serviciosReserva.registrarReserva(recursoReservado, recurrencia);	
 			setErrorMessage("El registro de la reserva se hizo correctamente");
 		} catch (ExcepcionServiciosBiblioteca e) {
