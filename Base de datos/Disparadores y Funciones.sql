@@ -67,11 +67,12 @@ create function public.BU_Reservados_Estado()
 as $BODY$
 begin
 	new.estado:='Activa';
+	new.fechaDeReserva:=current_date;
 	return new;
 end;
 $BODY$
 
 create trigger BU_Reservados_Estado
-before insert on recursos
+before insert on reservados
 for each row
 execute procedure BU_Reservados_Estado();
