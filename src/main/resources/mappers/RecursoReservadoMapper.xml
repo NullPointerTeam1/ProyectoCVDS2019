@@ -71,6 +71,8 @@
 		AND rc.tiporecurso_id = tr.id
 		AND u.carnet = r.usuario
 		AND r.recurso=#{id}
+		ORDER BY fechafinreserva DESC,
+		horafinreserva DESC;
 	</select>
 
 	<select parameterType="map" id="consultarReservas"

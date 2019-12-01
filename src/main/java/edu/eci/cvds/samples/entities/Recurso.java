@@ -24,10 +24,8 @@ public class Recurso implements Serializable {
 	private int capacidad;
 	private LocalTime  horarioI;
 	private LocalTime  horarioF;
-	private String disponibilidad;
+	private String disponibilidad, descripcion;
 	
-	public Recurso() {
-	}
 /**
  * Metodo encargado de crear un recurso
  * @param tipo Indica el tipo de un recurso
@@ -39,7 +37,8 @@ public class Recurso implements Serializable {
  * @param horarioF Hora de fin en la cual  el recurso estara disponible
  * @param disponibilidad El estado del recuso, pude ser Disponible, Ocupado, No disponible
  */
-	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, LocalTime  horarioI, LocalTime  horarioF, String disponibilidad) {
+	public Recurso(TipoRecurso tipo, int id, String nombre, String ubicacion, int capacidad, LocalTime  horarioI, LocalTime  horarioF, String disponibilidad,
+			String descripcion) {
 		this.tipo = tipo;
 		this.id = id;
 		this.nombre = nombre;
@@ -48,6 +47,10 @@ public class Recurso implements Serializable {
 		this.horarioI = horarioI;
 		this.horarioF = horarioF;
 		this.disponibilidad = disponibilidad;
+		this.descripcion = descripcion;
+	}
+	
+	public Recurso() {
 	}
 
 	public TipoRecurso getTipo() {
@@ -113,6 +116,14 @@ public class Recurso implements Serializable {
 	public void setHorarioF(LocalTime  horarioF) {
 		this.horarioF = horarioF;
 	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	
 	@Override
 	public String toString() {

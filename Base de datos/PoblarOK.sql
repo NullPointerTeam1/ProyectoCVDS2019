@@ -20,6 +20,11 @@ insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, hora
 insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, horariof, descripcion, tiporecurso_id)values (nextval('recurso_sequence'), 'calculo de una variable james stewart', 'Biblioteca Jorge Álvarez Lleras', 15, '07:00:00', '19:00:00', 'El autor continúa aplicando los mejores elementos de la reforma de las matemáticas (la regla de tres), al combinar los aspectos teóricos tradicionales del cálculo con la enseñanza creativa y las técnicas de aprendizaje', 2);
 insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, horariof, descripcion, tiporecurso_id)values (nextval('recurso_sequence'), 'APRENDIENDO A PROGRAMAR A PARTIR DE CERO', 'Biblioteca Jorge Álvarez Lleras', 15, '07:00:00', '19:00:00', 'Por más de 25 años, la autora de este libro ha estado dedicada a la enseñanza de la programación de computadores dirigida a estudiantes de ingeniería, la mayoría novatos en el tema.', 2);
 insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, horariof, descripcion, tiporecurso_id)values (nextval('recurso_sequence'), 'MODELOS MATEMATICOS', 'Biblioteca Jorge Álvarez Lleras', 15, '07:00:00', '19:00:00', 'En ciencias aplicadas y en tecnología, un modelo matemático es uno de los tipos de modelos científicos que emplea algún tipo de formulismo matemático para expresar relaciones, proposiciones sustantivas', 2);
+insert into recursos(identificador, nombre, ubicacion, capacidad, horarioi, horariof, descripcion, tiporecurso_id)values (nextval('recurso_sequence'), 
+'recursoPRUEBAS', 'UBIPRUEBA', 100,
+'00:00:00', '23:59:00', 
+'RECURSO PARA PRUEBAS ', 1);
+
 
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/10/2019', '8:00:00', '12/10/2019', '10:00:00', 'No', 2148781, 3);
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '01/27/2020', '9:48:00', '01/27/2020', '11:00:00', 'No', 2148781, 2);
@@ -42,7 +47,7 @@ insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinrese
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/10/2019', '13:00:00', '11/5/2019', '15:00:00', 'Si', 2148781, 1);
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/11/2019', '13:00:00', '11/6/2019', '15:00:00', 'Si', 2148781, 1);
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/12/2019', '13:00:00', '11/7/2019', '15:00:00', 'Si', 2148781, 1);
-
+insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/02/2019', '00:15:00', '12/02/2019', '00:30:00', 'No', 2148782, 15);
 
 --alter sequence reservados_sequence restart with 1;
 --delete from reservados;

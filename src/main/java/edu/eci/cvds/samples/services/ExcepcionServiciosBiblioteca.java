@@ -18,6 +18,7 @@ public class ExcepcionServiciosBiblioteca extends Exception {
 	public static final String RESERVA_NULA = "La reserva no puede ser nula";
 	public static final String RECURSO_NO_DISPONIBLE = "El recurso que desea reservar no esta disponible";
 	public static final String RECURSO_YA_RESERVADO = "El recurso que desea reservar ya esta reservado";
+	public static final String RESERVA_SUNDAY = "No se pueden realizar reservas los domingos";
 	
 	public ExcepcionServiciosBiblioteca(String mensaje) {
 		super(mensaje);
