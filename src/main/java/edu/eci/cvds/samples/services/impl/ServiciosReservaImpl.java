@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiciosReservaImpl implements ServiciosReserva {
 
@@ -358,7 +360,18 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al cancelar la reserva" + id);
 		}
-	
 	}
+	/**
+	public List<Recurso> moreFrecuentRecurses() throws ExcepcionServiciosBiblioteca{
+		
+		List<RecursoReservado> reservados = this.consultarReservas();
+		Map<String,String> dictionary = new HashMap<String, String>();
+		for (RecursoReservado rec : reservados) {
+			 
+			 dictionary.put(rec.getId(), )
+		}
+		
+	}
+	**/
 }
 
