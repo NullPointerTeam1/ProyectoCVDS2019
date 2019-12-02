@@ -171,11 +171,7 @@ lang="es">
               <h5>Recurrencia</h5>
               <p:inputText value="#{ReservaRecursosBean.getSuperReserva().recurrente}" disabled="true"/>
             </shiro:user>
-                <p:commandButton value="Registrar Cancelacion" action="#{ReservaRecursosBean.cancelarReserva()}" oncomplete="PF('myschedule').update();PF('eventoSeleccionado').hide();">
-                        
-                </p:commandButton>
-
-
+                
         </h:panelGrid>
     
     </p:dialog>
