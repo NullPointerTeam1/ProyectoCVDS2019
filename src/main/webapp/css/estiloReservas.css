@@ -17,3 +17,16 @@
 	color:white;
 	font-weight: bold;
 }
+
+#amarillo {
+	background-color:yellow;
+	color:white;
+	font-weight: bold;
+}
+
+.cancelado {
+	background-color: yellow;
+    border-color: yellow;
+    color: white;
+    opacity: 1;
+}

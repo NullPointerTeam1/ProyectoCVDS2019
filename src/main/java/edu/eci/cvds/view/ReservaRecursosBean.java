@@ -60,8 +60,54 @@ public class ReservaRecursosBean extends BasePageBean {
     private boolean tooltip = true;
     private boolean allDaySlot = true;
  
-
- 
+    public ScheduleModel todasReservas() {
+    	eventModel.clear();
+    	
+    	try {
+    		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReservas();
+			for (int i= 0;i<recursosReservados.size();i++) {
+				DefaultScheduleEvent eventico;
+				eventico = new DefaultScheduleEvent();
+		    	eventico.setStartDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaInicioReserva().toString()+"T"+recursosReservados.get(i).getHoraInicioReserva()).toInstant(ZoneOffset.ofHours(0))));
+		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
+		    	eventico.setTitle(Integer.toString(recursosReservados.get(i).getId())+" Reservado "+recursosReservados.get(i).getRecurso().getNombre());
+		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		   
+		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
+		    		eventico.setStyleClass("noRecurrente");
+		    	} else {
+		    		eventico.setStyleClass("recurrente");
+		    	}
+		    	eventModel.addEvent(eventico);
+			}
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+        return eventModel;
+    }
+    public RecursoReservado getSuperReserva() {
+    	RecursoReservado reserva = null;
+    	try {
+			reserva = serviciosReserva.consultarReserva(Long.parseLong(idActualEstado));
+		} catch (NumberFormatException e) {
+			setErrorMessage(e);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return reserva;
+    	
+    }
+    public Recurso getSuperRecurso(String id) {
+    	Recurso temp = null;
+    	try {
+			temp = serviciosReserva.consultarRecurso(Long.parseLong(id));
+		} catch (NumberFormatException e) {
+			setErrorMessage(e);
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+    	return temp;
+    }
     public ScheduleModel getEventModel() {
     	eventModel.clear();
     	try {
@@ -71,10 +117,12 @@ public class ReservaRecursosBean extends BasePageBean {
 				eventico = new DefaultScheduleEvent();
 		    	eventico.setStartDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaInicioReserva().toString()+"T"+recursosReservados.get(i).getHoraInicioReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
-		    	eventico.setTitle("Reservado");
+		    	eventico.setTitle(Integer.toString(recursosReservados.get(i).getId())+" Reservado");
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
-		   
-		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
+		    	
+		    	if (recursosReservados.get(i).getEstado().equals("Cancelado")) {
+		    		eventico.setStyleClass("cancelado");
+		    	} else if (recursosReservados.get(i).getRecurrente().equals("No")) {
 		    		eventico.setStyleClass("noRecurrente");
 		    	} else {
 		    		eventico.setStyleClass("recurrente");
@@ -132,13 +180,7 @@ public class ReservaRecursosBean extends BasePageBean {
         event = new DefaultScheduleEvent();
     }
      
-    public void onEventSelect(SelectEvent selectEvent) {
-        Behavior event = selectEvent.getBehavior();
-        
-        
-        
-        
-    }
+  
      
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent();
@@ -353,10 +395,24 @@ public class ReservaRecursosBean extends BasePageBean {
 		
 	}
 	
-	public void cancelarReserva(long id, String estado, String correo) {
+	public void cancelarReserva(String id) {
+		System.out.println("Ey pase por acá");
 		try {
-			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo(correo);
-			serviciosReserva.cancelarReserva(id, estado, usuario);
+			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo((String) SecurityUtils.getSubject().getSession().getAttribute("Correo"));
+			RecursoReservado tempReservado = serviciosReserva.consultarReserva(Long.parseLong(id));
+			System.out.println("Ey pase por acá2");
+			if(SecurityUtils.getSubject().hasRole("U") || usuario.getCarnet()!=tempReservado.getUsuario().getCarnet()) {
+				System.out.println("Ey pase por acá3 NO USUARIO "+usuario.getCarnet()+" "+tempReservado.getUsuario().getCarnet());
+				setErrorMessage("No eres el usuario que realizo la reserva o un administrador");
+			}else if (recursoActual.getId()!=tempReservado.getRecurso().getId()) {
+				System.out.println("Ey pase por acá3NO ID");
+				setErrorMessage("No estas en las reservas del tipo de recurso que tratas de cancelar, dirigete a las reservas de ese recurso (index)");
+			}else {
+				System.out.println("Ey pase por acáYES");
+				serviciosReserva.cancelarReserva(Long.parseLong(id), "Cancelado", usuario);
+				setErrorMessage("La cencelación fue correctamente diligenciada");
+			}
+			System.out.println("Ey pase por acá3");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}

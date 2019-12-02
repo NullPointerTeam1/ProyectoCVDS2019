@@ -57,7 +57,15 @@ public class RecursoReservado implements Serializable {
 		this.recurrente = recurrente;
 		
 	}
-
+	public String dameFechaReserva() {
+		return fechadereserva.toString();
+	}
+	public String dameFechaInicio() {
+		return fechaInicioReserva.toString();
+	}
+	public String dameFechaFin() {
+		return fechaFinReserva.toString();
+	}
 	public int getId() {
 		return id;
 	}
