@@ -194,7 +194,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 					try {
 						registrarReserva(nuevo);
 					} catch (ExcepcionServiciosBiblioteca e) {
-						e.printStackTrace();
+						throw new ExcepcionServiciosBiblioteca(e.getMessage());
 					}
 					if (recurrencia.equals("Diario")) {
 						ini = ini.plusDays(1);
@@ -270,29 +270,31 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	}
 	
 	private void condicionesReserva(RecursoReservado recursoReservado) throws ExcepcionServiciosBiblioteca {
+		
 		LocalDate fechaInicioR = recursoReservado.getFechaInicioReserva();
 		LocalDate fechaFinR = recursoReservado.getFechaFinReserva();
 		LocalDate fechaHoy = LocalDate.now();
 		if (fechaFinR.compareTo(fechaInicioR) < 0) {
 			throw new ExcepcionServiciosBiblioteca("La fecha final debe ser después de la fecha inicial.");
+			
 		} else if ((fechaInicioR.getMonthValue() >= 6 && fechaInicioR.getMonthValue() <= 7) ||
 				   (fechaFinR.getMonthValue() >= 6 && fechaFinR.getMonthValue() <= 7)) {
+			
 			throw new ExcepcionServiciosBiblioteca("No puede reservar un recurso en esas fechas.");
+		} else if (fechaInicioR.compareTo(fechaHoy) < 0 || fechaFinR.compareTo(fechaHoy) < 0) {
+			throw new ExcepcionServiciosBiblioteca("No puede hacer una reserva antes de la fecha actual.");
 		} else if (fechaHoy.getMonthValue() >= 8 && fechaHoy.getMonthValue() <= 12) {
 			if ((fechaInicioR.getMonthValue() >= 1 && fechaInicioR.getMonthValue() <= 5) ||
 				(fechaFinR.getMonthValue() >= 1 && fechaFinR.getMonthValue() <= 5)) {
-					throw new ExcepcionServiciosBiblioteca("Sólo puede reservar un recurso en el semestre actual.");
+					throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.SEMESTRE_ACTUAL);
 			}
 		} else if (fechaHoy.getMonthValue() >= 1 && fechaHoy.getMonthValue() <= 5) {
 			if ((fechaInicioR.getMonthValue() >= 8 && fechaInicioR.getMonthValue() <= 12) ||
 				(fechaFinR.getMonthValue() >= 8 && fechaFinR.getMonthValue() <= 12)) {
-					throw new ExcepcionServiciosBiblioteca("Sólo puede reservar un recurso en el semestre actual.");
+					throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.SEMESTRE_ACTUAL);
 			}
-		} else if (fechaInicioR.compareTo(fechaHoy) < 0 || fechaFinR.compareTo(fechaHoy) < 0) {
-			throw new ExcepcionServiciosBiblioteca("No puede hacer una reserva antes de la fecha actual.");
 		}
 	}
-
 	@Override
 	public List<RecursoReservado> consultarReservaRecurso(long id) throws ExcepcionServiciosBiblioteca {
 		try {
@@ -351,7 +353,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 				throw new ExcepcionServiciosBiblioteca("No puede cancelar una reserva en progreso");
 			}
 		}
-		try {
+		try {                
 			recursoReservadoDAO.actualizarEstadoReserva(id, estado);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosBiblioteca("Error al cancelar la reserva" + id);

@@ -29,6 +29,7 @@
         r.horarioI,
         r.horarioF,
         r.disponibilidad,
+        r.descripcion,
         r.tiporecurso_id,
         tr.descripcion
         FROM recursos AS r, 
@@ -47,6 +48,7 @@
         r.horarioI,
         r.horarioF,
         r.disponibilidad,
+        r.descripcion,
         r.tiporecurso_id,
         tr.descripcion
         FROM recursos AS r, 
