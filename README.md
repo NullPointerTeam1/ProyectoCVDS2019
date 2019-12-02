@@ -13,8 +13,10 @@
 
 
 ## Descripción del producto
+La Plataforma Gestión de Recursos Biblioteca, es una herramienta donde el personal de la biblioteca pertenecientes a la Escuela Colombiana de Ingeniería Julio Garavito, pueden registrar las salas de estudio, equipos de cómputo y demás recursos con los que cuenta la biblioteca, junto con los horarios de disponibilidad y demás información importante. El sistema, brinda a los estudiantes de la escuela una posibilida más fácil para asegurar los espacios y recursos necesarios, en aquellos momentos donde más las necesitan (realizando reservas previamente) así como ofrecer al personal de la biblioteca, generar reportes y registros que les permita tener el control de estos recursos, así como saber la ocupación que están teniendo los mismos para poder saber en qué momento se requieren nuevas adquicisiones de equipos.
 
 ## Arquitectura y diseño detallado
+
 
 ### Modelo E-R (Entidad-Relación)
 ![](img/MODEL.png)
