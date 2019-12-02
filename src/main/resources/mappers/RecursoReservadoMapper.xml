@@ -38,7 +38,9 @@
 		tr.id,
 		tr.descripcion,
 		u.nombre,
-		u.carrera
+		u.carrera,
+		u.carnet,
+		u.correo
 		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
@@ -65,14 +67,15 @@
 		tr.id,
 		tr.descripcion,
 		u.nombre,
-		u.carrera
+		u.carrera,
+		u.carnet,
+		u.correo
 		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id
 		AND u.carnet = r.usuario
 		AND r.recurso=#{id}
-		ORDER BY fechafinreserva DESC,
-		horafinreserva DESC;
+		ORDER BY idr DESC;
 	</select>
 
 	<select parameterType="map" id="consultarReservas"
@@ -94,7 +97,9 @@
 		tr.id,
 		tr.descripcion,
 		u.nombre,
-		u.carrera
+		u.carrera,
+		u.carnet,
+		u.correo
 		FROM reservados as r,recursos as rc,tipo_recurso as tr, usuarios as u
 		WHERE r.recurso = rc.identificador
 		AND rc.tiporecurso_id = tr.id

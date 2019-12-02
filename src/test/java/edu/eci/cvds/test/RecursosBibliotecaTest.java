@@ -29,22 +29,6 @@ public class RecursosBibliotecaTest {
 	}
 	
 	/**
-	 * Registra un recurso con los requisitos estipulados, verifica que el id del recurso que insertamos coincida con el ultimo
-	 * de la lista al momento de realizar la consulta "Consultar recursos" asumiendo que esta en la ultima posición de este arreglo
-	 * gracias al ORDER BY que realizamos en la consulta.
-	 * @throws ExcepcionServiciosBiblioteca
-	 */
-	@Test
-	public void deberiaRegistrarUnRecurso() throws ExcepcionServiciosBiblioteca {
-		
-		Recurso re = new Recurso(serviciosB.consultarTipoRecurso(1),0,"Recursoprueba1","ubiprueba1",10,null,null,"Disponible","Equipo de prueba1 INTEL");
-		serviciosB.registrarRecurso(re);
-		Recurso pruebaRecurso = serviciosB.consultarRecurso(serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
-		assertTrue(pruebaRecurso.getId() == serviciosB.consultarRecursos().get(serviciosB.consultarRecursos().size()-1).getId());
-		
-	} 
-	
-	/**
 	 * No registra un recurso debido a que intentamos registrarlo con una capacidad negativa, por lo que el check establecido en la base de datos
 	 * protege la integridad de los datos.
 	 */
@@ -220,7 +204,6 @@ public class RecursosBibliotecaTest {
 	 * @throws ExcepcionServiciosBiblioteca
 	 * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
 	 */
-	/**
 	@Test
 	public void deberiaRegistrarUnaReserva() throws ExcepcionServiciosBiblioteca, edu.eci.cvds.sampleprj.dao.PersistenceException  {
 		
@@ -235,16 +218,16 @@ public class RecursosBibliotecaTest {
 		int ultId = serviciosB.consultarReservas().get(serviciosB.consultarReservas().size()-1).getId();
 		Recurso recur = serviciosB.consultarRecurso(15);
 		List <RecursoReservado> reservasR = serviciosB.consultarReservaRecurso(recur.getId());
-		LocalTime localTime1 = reservasR.get(reservasR.size()-1).getHoraFinReserva().plusMinutes(15);
+		LocalTime localTime1 = reservasR.get(0).getHoraFinReserva().plusMinutes(15);
 		LocalTime localTime2 = localTime1.plusMinutes(15);
 		RecursoReservado recurPrueba = new RecursoReservado(ultId,localDate1,localDate2,localTime1,localTime2,
-										now,recur ,serviciosB.consultarUsuario(2148782),"Activa","No");
+				now,recur ,serviciosB.consultarUsuario(2148782),"Activa","No");
 		serviciosB.registrarReserva(recurPrueba,"No");
 		assertTrue(ultId == recurPrueba.getId());
 	} 
-
+	
 	@Test
-	public void deberiaRegistrarReservaRecurrente () throws ExcepcionServiciosBiblioteca {
+	public void deberiaRegistrarReservaRecurrenteDiaria () throws ExcepcionServiciosBiblioteca {
 		
 		int numReservasInicial = serviciosB.consultarReservas().size();
 		LocalDate fechaInicio = LocalDate.now();
@@ -253,10 +236,9 @@ public class RecursosBibliotecaTest {
 			fechaInicio = fechaInicio.plusDays(1);
 			fechaFin = fechaFin.plusDays(1);
 		}
-		
 		Recurso recur = serviciosB.consultarRecurso(15);
 		List <RecursoReservado> reservasR = serviciosB.consultarReservaRecurso(recur.getId());
-		LocalTime horaInicio = reservasR.get(reservasR.size()-1).getHoraFinReserva().plusMinutes(15);
+		LocalTime horaInicio = reservasR.get(0).getHoraFinReserva().plusMinutes(15);
 		LocalTime horaFin = horaInicio.plusMinutes(15);
 		LocalDate actual = LocalDate.now();
 		Recurso recurso = serviciosB.consultarRecurso(15);
@@ -266,9 +248,85 @@ public class RecursosBibliotecaTest {
 		RecursoReservado nuevo = new RecursoReservado(1, fechaInicio, fechaFin, horaInicio, horaFin, actual,recurso, usuario,estado,recurrente);
 		serviciosB.registrarReserva(nuevo, "Diario");
 		int numReservasFinal = serviciosB.consultarReservas().size();
-		assertTrue(numReservasInicial  == numReservasFinal - fechaInicio.until(fechaFin, ChronoUnit.DAYS)+1);
+		int dif = (int) fechaInicio.until(fechaFin, ChronoUnit.DAYS);
+		assertTrue(numReservasInicial  == numReservasFinal - (dif +1) );
 	}
-
-	**/
-
+	
+	@Test
+	public void deberiaRegistrarReservaRecurrenteSemanal () throws ExcepcionServiciosBiblioteca {
+		
+		int numReservasInicial = serviciosB.consultarReservas().size();
+		LocalDate fechaInicio = LocalDate.now();
+		LocalDate fechaFin = LocalDate.now().plusWeeks(1);
+		if (fechaInicio.getDayOfWeek() == DayOfWeek.SUNDAY || fechaFin.getDayOfWeek() == DayOfWeek.SUNDAY) {
+			fechaInicio = fechaInicio.plusDays(1);
+			fechaFin = fechaFin.plusDays(1);
+		}
+		Recurso recur = serviciosB.consultarRecurso(15);
+		List <RecursoReservado> reservasR = serviciosB.consultarReservaRecurso(recur.getId());
+		LocalTime horaInicio = reservasR.get(0).getHoraFinReserva().plusMinutes(15);
+		LocalTime horaFin = horaInicio.plusMinutes(15);
+		LocalDate actual = LocalDate.now();
+		Recurso recurso = serviciosB.consultarRecurso(15);
+		Usuario usuario = serviciosB.consultarUsuario(2148782);
+		String estado = "Activa";
+		String recurrente = "Si";
+		RecursoReservado nuevo = new RecursoReservado(1, fechaInicio, fechaFin, horaInicio, horaFin, actual,recurso, usuario,estado,recurrente);
+		serviciosB.registrarReserva(nuevo, "Semanal");
+		int numReservasFinal = serviciosB.consultarReservas().size();
+		int dif = (int) fechaInicio.until(fechaFin, ChronoUnit.WEEKS);
+		assertTrue(numReservasInicial  == numReservasFinal - (dif +1) );
+	}
+	
+	
+	@Test
+	public void nodeberiaRegistrarReservaSemestre() throws ExcepcionServiciosBiblioteca {
+		
+		LocalDate fechaInicio = LocalDate.now();
+		LocalDate fechaFin = LocalDate.now().plusMonths(1);
+		if (fechaInicio.getDayOfWeek() == DayOfWeek.SUNDAY || fechaFin.getDayOfWeek() == DayOfWeek.SUNDAY) {
+			fechaInicio = fechaInicio.plusDays(1);
+			fechaFin = fechaFin.plusDays(1);
+		}
+		Recurso recurso = serviciosB.consultarRecurso(15);
+		List <RecursoReservado> reservasR = serviciosB.consultarReservaRecurso(recurso.getId());
+		LocalTime horaInicio = reservasR.get(0).getHoraFinReserva().plusMinutes(15);
+		LocalTime horaFin = horaInicio.plusMinutes(15);
+		LocalDate actual = LocalDate.now();
+		Usuario usuario = serviciosB.consultarUsuario(2148782);
+		String estado = "Activa";
+		String recurrente = "Si";
+		RecursoReservado nuevo = new RecursoReservado(1, fechaInicio, fechaFin, horaInicio, horaFin, actual,recurso, usuario,estado,recurrente);
+		try{
+			serviciosB.registrarReserva(nuevo, "Mensual");
+			fail("Debe fallar porque la fecha de la reserva no corresponde al semestre actual");
+		}catch(ExcepcionServiciosBiblioteca e) {
+			assertTrue(true);
+		}
+	}	
+	
+	@Test
+	public void nodeberiaRegistrarReservaPorFecha() throws ExcepcionServiciosBiblioteca {
+		
+		LocalDate fechaInicio = LocalDate.of(2019, 11,30);
+		LocalDate fechaFin = fechaInicio;
+		Recurso recurso = serviciosB.consultarRecurso(15);
+		List <RecursoReservado> reservasR = serviciosB.consultarReservaRecurso(recurso.getId());
+		LocalTime horaInicio = reservasR.get(0).getHoraFinReserva().plusMinutes(15);
+		LocalTime horaFin = horaInicio.plusMinutes(15);
+		LocalDate actual = LocalDate.now();
+		Usuario usuario = serviciosB.consultarUsuario(2148782);
+		String estado = "Activa";
+		String recurrente = "No";
+		RecursoReservado nuevo = new RecursoReservado(1, fechaInicio, fechaFin, horaInicio, horaFin, actual,recurso, usuario,estado,recurrente);
+		try {
+			serviciosB.registrarReserva(nuevo,"No");
+			fail("Debe fallar porque la fecha de la reserva es antes de la fecha actual");
+		}catch (ExcepcionServiciosBiblioteca e) {
+			assertTrue(true);
+		}
+		
+	}		
+	
+	
 }
