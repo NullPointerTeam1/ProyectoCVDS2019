@@ -170,7 +170,7 @@ lang="es">
   <h5>Recurso solicitado</h5>
   <p:inputText value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).nombre}" disabled="true"/>
   <h5>Informacion del Recurso</h5>
-  <p:inputTexta value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).descripcion}" disabled="true"/>
+  <p:inputTextarea value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).descripcion}" disabled="true"/>
   <shiro:hasRole name="A">
     <h5>Fecha de solicitud</h5>
     <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaReserva()}" disabled="true"/>
