@@ -41,7 +41,8 @@
 
     
     <select parameterType="map" id="consultarRecursos" resultMap="RecursoResult" >
-    	SELECT r.identificador,
+    	SELECT 
+        r.identificador,
         r.nombre,
         r.ubicacion,
         r.capacidad,
@@ -50,7 +51,7 @@
         r.disponibilidad,
         r.descripcion,
         r.tiporecurso_id,
-        tr.descripcion
+        tr.descripcion as tr_descripcion
         FROM recursos AS r, 
         tipo_recurso as tr 
        	WHERE r.tiporecurso_id =  tr.id
@@ -71,6 +72,7 @@
 	    <result property='horarioF' column='horariof'/>
 	    <result property='disponibilidad' column='disponibilidad'/>  
 	    <result property='descripcion' column='descripcion'/>
-	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'></association> 
+	    <association property="tipo" javaType="TipoRecurso" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoRecursoMapper.TipoRecursoResult'
+        columnPrefix="tr_"></association> 
 	</resultMap>
 </mapper> 
