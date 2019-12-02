@@ -3,17 +3,13 @@
 ## Escuela Colombiana de Ingeniería Julio Garavito
 
 ### Integrantes:
-* Orlando Antonio Gelves Kerguelen
-* Johann Sebastian Páez Campos
-* Johan Sebastian Arias Amador	
-* Jose Luis Gomez Camacho
 |     Nombre    |     Rol         |
 |:--------------:|:-------------: |
-|* Julián Velasco|Product Owner    |
-| Orlando Antonio Gelves Kerguelen |Team Developer       |
-|Johann Sebastian Páez Campos |Team Developer       |
-|Johan Sebastian Arias Amador |Team Developer  |
-|Jose Luis Gomez Camacho |Team Developer    |
+|**Julián Velasco**|Product Owner    |
+|**Orlando Antonio Gelves Kerguelen** |Team Developer       |
+|**Johann Sebastian Páez Campos** |Team Developer       |
+|**Johan Sebastian Arias Amador** |Team Developer  |
+|**Jose Luis Gomez Camacho** |Team Developer    |
 
 ### Profesor:
 * Julián Velasco
