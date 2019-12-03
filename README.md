@@ -60,11 +60,11 @@ También podrá programar una reserva para que todos los días se realice a la m
 
 después de esto el usuario podrá ver los detalles del recurso que reservo.
 
-![](img/Funcionalid7.PNG)
+![](img/Funcionalidad7.PNG)
 
 El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea cancelar el recuso por algún otro motivo.
 
-![](img/Funcionalid8.PNG)
+![](img/Funcionalidad8.PNG)
 
 ## Arquitectura y diseño detallado
 
@@ -103,7 +103,7 @@ El primer  sprint se completó  todas las tareas planteadas. Cada integrante del
 
 ![Grafica](img/GraficaSprint2.PNG)
 
-![Issues](img/sprint21issues.PNG)
+![Issues](img/sprint2issues.PNG)
 
 
 **Conexion POSTGRESQL**
