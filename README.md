@@ -99,12 +99,29 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
 
 ![Issues](img/sprint1issues.PNG)
 
-El primer  sprint se completó  todas las tareas planteadas. Cada integrante del equipo cumplió con los estándares de calidad necesarios y en el tiempo planteado. La página visualmente se ve muy bien, se pude ingresar como administrador o como usuario, se pueden visualizar os recursos disponibles de la biblioteca. Tenemos que corregir fallas pequeñas  en la experiencia de usuario y esperamos para el próximo sprint solucionarlos
+### Retrospectiva
+
+El primer  sprint se completó  todas las tareas planteadas. Cada integrante del equipo cumplió con los estándares de calidad necesarios y en el tiempo planteado. La página visualmente se ve muy bien, se puede ingresar como administrador o como usuario, se pueden visualizar os recursos disponibles de la biblioteca. Tenemos que corregir fallas pequeñas  en la experiencia de usuario y esperamos para el próximo sprint solucionarlos
+
+## Sprint 2
 
 ![Grafica](img/GraficaSprint2.PNG)
 
 ![Issues](img/sprint2issues.PNG)
 
+### Retrospectiva
+
+En le segundo sprint nos tomo mas tiempo de lo esperado las correcciones del sprint uno, aunque tuvimos estos inconvenientes logramos terminar todas las tareas propuesta para el mismo, al final la grafica presenta un progreso insuperado debido a que agregamos el caso de uso “Sprint uno issues” a parte de esto nos olvidamos de mover las tareas al finalizarlas.
+
+## Sprint 3
+
+[Grafica](img/GraficaSprint3.PNG)
+
+![Issues](img/sprint3issues.PNG)
+
+### Retrospectiva
+
+En el tercer sprint no alcanzamos a terminar la historia de uso numero nueve, se arreglaron los issues y se terminaron las demás historias. el trabajo en equipo fue fudamental durante este proyecto, ya que todos  trabajaron en conjuntó para sacar este proyecto adelante.
 
 **Conexion POSTGRESQL**
 
