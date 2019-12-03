@@ -34,7 +34,7 @@ import java.time.ZoneOffset;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
-@ApplicationScoped
+@SessionScoped
 public class ReservaRecursosBean extends BasePageBean {
 
 	/**
@@ -194,7 +194,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
 	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
-	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","si");
+	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","Si");
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
 	    	setErrorMessage("La reserva se ha realizado con exito");
 		} catch (InvalidSessionException e) {

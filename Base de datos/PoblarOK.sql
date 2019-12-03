@@ -47,9 +47,17 @@ insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinrese
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/10/2019', '13:00:00', '11/5/2019', '15:00:00', 'Si', 2148781, 1);
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/11/2019', '13:00:00', '11/6/2019', '15:00:00', 'Si', 2148781, 1);
 insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/12/2019', '13:00:00', '11/7/2019', '15:00:00', 'Si', 2148781, 1);
-insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/02/2019', '00:15:00', '12/02/2019', '00:30:00', 'No', 2148782, 15);
+insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinreserva, horafinreserva, recurrente, usuario, recurso) values (nextval('reservados_sequence'), '12/02/2019', '03:00:00', '12/02/2019', '03:15:00', 'No', 2148782, 15);
 
 --alter sequence reservados_sequence restart with 1;
 --delete from reservados;
 --alter sequence recurso_sequence restart with 1;
 --delete from reservados where idr = (select max(idr) from reservados);
+--alter sequence recurso_sequence restart with 17;
+--alter sequence  reservados_sequence restart with 21;
+--delete from reservados where idr >20;
+--delete from recursos where identificador >20;
+
+
+
+
