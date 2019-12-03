@@ -25,7 +25,7 @@ Para ingresar a los servicios de nuestra aplicación deberá ingresar como admin
 
 Usuario de administrador:
 
-   **Usurio** Jose.gomez-ca@mail.escuelaing.edu.co 
+   **Usurio** jose.gomez-ca@mail.escuelaing.edu.co 
    **Contraseña** 123456789
 
 Para ingresar como usuario es:
@@ -92,9 +92,6 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
    * [Guice (Inyección de Dependencias)](https://github.com/google/guice)
    * [PostgreSQL (DataBase Management)](https://www.postgresql.org)
    
-## Descripción del proceso
-
-
 ## Sprint 1
 
 
@@ -102,8 +99,11 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
 
 ![Issues](img/sprint1issues.PNG)
 
+El primer  sprint se completó  todas las tareas planteadas. Cada integrante del equipo cumplió con los estándares de calidad necesarios y en el tiempo planteado. La página visualmente se ve muy bien, se pude ingresar como administrador o como usuario, se pueden visualizar os recursos disponibles de la biblioteca. Tenemos que corregir fallas pequeñas  en la experiencia de usuario y esperamos para el próximo sprint solucionarlos
 
+![Grafica](img/GraficaSprint2.PNG)
 
+![Issues](img/sprint21issues.PNG)
 
 
 **Conexion POSTGRESQL**
