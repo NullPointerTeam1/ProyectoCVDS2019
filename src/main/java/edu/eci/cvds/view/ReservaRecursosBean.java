@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 
 import org.primefaces.model.SelectableDataModel;
@@ -447,6 +448,68 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 	}
+	
+	
+	public List<RecursoReservado> consultarRecursosMasUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarRecursosMasUsados();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+		
+	}
+
+	
+	public List<RecursoReservado> consultarRecursosMenosUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarRecursosMenosUsados();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarHorariosDeMayorOcupacion();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarHorariosDeMenorOcupacion();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarReservasRecurrentes() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarReservasRecurrentes();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarReservasCanceladas() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarReservasCanceladas();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+	
 	
 	public void setSelectedUsuario(Usuario usuario) {
 		this.selectedUsuario = usuario;

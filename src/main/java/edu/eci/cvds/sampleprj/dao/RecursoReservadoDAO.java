@@ -47,5 +47,21 @@ public interface RecursoReservadoDAO {
 	 * @throws PersistenceException
 	 */
 	public void actualizarEstadoReserva(long id, String estado) throws PersistenceException;
+	
+	
+	/* 
+	 * Consultas necesarias para la Historia de Uso 9
+	 */
+	public List<RecursoReservado> consultarRecursosMasUsados() throws PersistenceException;
+	
+	public List<RecursoReservado> consultarRecursosMenosUsados() throws PersistenceException;
+	
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() throws PersistenceException;
+	
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() throws PersistenceException;
+	
+	public List<RecursoReservado> consultarReservasRecurrentes() throws PersistenceException;
+	
+	public List<RecursoReservado> consultarReservasCanceladas() throws PersistenceException;
 
 }

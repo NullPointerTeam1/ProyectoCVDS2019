@@ -25,5 +25,15 @@ public interface RecursoReservadoMapper {
 	
 	public void actualizarEstadoReserva(@Param("id") long id, @Param("estado") String estado);
 	
-
+	public List<RecursoReservado> consultarRecursosMasUsados();
+	
+	public List<RecursoReservado> consultarRecursosMenosUsados();
+	
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion();
+	
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion();
+	
+	public List<RecursoReservado> consultarReservasRecurrentes();
+	
+	public List<RecursoReservado> consultarReservasCanceladas();
 }

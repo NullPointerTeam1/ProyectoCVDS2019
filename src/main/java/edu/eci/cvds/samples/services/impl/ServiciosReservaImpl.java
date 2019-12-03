@@ -373,5 +373,67 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		
 	}
 	**/
+	
+	// Historia 9
+
+	@Override
+	public List<RecursoReservado> consultarRecursosMasUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarRecursosMasUsados();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar Recursos Mas Usados", e);
+		}
+		
+	}
+
+	@Override
+	public List<RecursoReservado> consultarRecursosMenosUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarRecursosMenosUsados();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error al consultar Recursos Menos Usados", e);
+		}
+		
+	}
+
+	@Override
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarHorariosDeMayorOcupacion();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error consultar Horarios De Mayor Ocupacion", e);
+		}
+		
+	}
+
+	@Override
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarHorariosDeMenorOcupacion();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error consultar Horarios De Menor Ocupacion", e);
+		}
+		
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasRecurrentes() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarReservasRecurrentes();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error consultar Reservas Recurrentes", e);
+		}
+		
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasCanceladas() throws ExcepcionServiciosBiblioteca {
+		try {
+			return recursoReservadoDAO.consultarReservasCanceladas();
+		} catch (PersistenceException e) {
+			throw new ExcepcionServiciosBiblioteca("Error consultar Reservas Canceladas", e);
+		}
+		
+	}
 }
 
