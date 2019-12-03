@@ -100,7 +100,7 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
    
  
  ### Metodologia usada
-    Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion, Orlando Gelves se encargó de la parte de Front-End, Johann Paez Back-end, Johan Arias testing, Jose Goméz data base manager.
+Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion, Orlando Gelves se encargó de la parte de Front-End, Johann Paez Back-end, Johan Arias testing, Jose Goméz data base manager.
    
 ## Sprint 1
 
