@@ -54,9 +54,9 @@ insert into reservados (idr, fechainicioreserva, horainicioreserva, fechafinrese
 --alter sequence recurso_sequence restart with 1;
 --delete from reservados where idr = (select max(idr) from reservados);
 --alter sequence recurso_sequence restart with 17;
---alter sequence  reservados_sequence restart with 21;
---delete from reservados where idr >20;
---delete from recursos where identificador >20;
+--alter sequence  reservados_sequence restart with 22;
+--delete from reservados where idr >21;
+--delete from recursos where identificador >16;
 
 
 
