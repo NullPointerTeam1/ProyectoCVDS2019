@@ -326,8 +326,14 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	public Recurso consultarRecurso(String id) {
 		Recurso recurso = null;
+		String temp = "";
+		if (id.equals("")) {
+			temp = "1";
+		} else {
+			temp = id;
+		}
 		try {
-			recurso = serviciosReserva.consultarRecurso(Long.parseLong(id));
+			recurso = serviciosReserva.consultarRecurso(Long.parseLong(temp));
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
@@ -364,9 +370,17 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public void actualizarEstadoRecurso(String id, String estado) {
+		System.out.println(id);
+		String temp = "";
+		if (id.equals("")) {
+			temp = "1";
+		} else {
+			temp = id;
+		}
+		//idActualEstado = "1";
 		try {
 			
-			serviciosReserva.actualizarEstadoRecurso(Long.parseLong(id), estado);
+			serviciosReserva.actualizarEstadoRecurso(Long.parseLong(temp), estado);
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}

@@ -174,10 +174,12 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 	@Transactional
 	public void registrarReserva(RecursoReservado recursoReservado, String recurrencia) throws ExcepcionServiciosBiblioteca {
 		if (recurrencia.equals("No")) {
+			if (recursoReservado.getFechaInicioReserva().getDayOfWeek() == DayOfWeek.SUNDAY) {
+				throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_SUNDAY);
+			}
 			recursoReservado.setFechaFinReserva(recursoReservado.getFechaInicioReserva());
-			registrarReserva(recursoReservado);
-			
-		}else {
+			registrarReserva(recursoReservado);	
+		} else {
 			LocalDate ini = recursoReservado.getFechaInicioReserva();
 			LocalDate fin = recursoReservado.getFechaFinReserva();
 			while (ini.compareTo(fin) < 0 || ini.compareTo(fin) == 0) {
@@ -207,8 +209,7 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 					else if (recurrencia.equals("Mensual")) {
 						ini = ini.plusMonths(1);
 					}
-				}
-				else {
+				} else {
 					throw new ExcepcionServiciosBiblioteca(ExcepcionServiciosBiblioteca.RESERVA_SUNDAY);
 				}
 			}
@@ -350,6 +351,9 @@ public class ServiciosReservaImpl implements ServiciosReserva {
 		LocalTime horaFin = reserva.getHoraFinReserva();
 		LocalDate fechaActual = LocalDate.now();
 		LocalTime horaActual = LocalTime.now();
+		if (reserva.getEstado().equals("Cancelado")) {
+			throw new ExcepcionServiciosBiblioteca("No puede cancelar una reserva que ya está cancelada.");
+		}
 		if (fechaIni.equals(fechaActual)) {
 			if (horaActual.isAfter(horaIni) && horaActual.isBefore(horaFin)) {
 				throw new ExcepcionServiciosBiblioteca("No puede cancelar una reserva en progreso");
