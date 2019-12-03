@@ -107,7 +107,7 @@ El primer  sprint se completó  todas las tareas planteadas. Cada integrante del
 
 ![Grafica](img/GraficaSprint2.PNG)
 
-![Issues](img/sprint2issues.PNG)
+![Issues](img/sprint3issues.PNG)
 
 ### Retrospectiva
 
@@ -115,9 +115,9 @@ En le segundo sprint nos tomo mas tiempo de lo esperado las correcciones del spr
 
 ## Sprint 3
 
-[Grafica](img/GraficaSprint3.PNG)
+![Grafica](img/GraficaSprint3.PNG)
 
-![Issues](img/sprint3issues.PNG)
+
 
 ### Retrospectiva
 
