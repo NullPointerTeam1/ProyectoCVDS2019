@@ -109,7 +109,7 @@ lang="es">
         #{ReservaRecursosBean.cargarEventosPorUsuario()}
         <p:schedule id="schedule" value="#{ReservaRecursosBean.eventModel}" widgetVar="myschedule" >
  
-            <p:ajax event="dateSelect" listener="#{ReservaRecursosBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            
             <p:ajax event="eventSelect" listener="#{ReservaRecursosBean.onEventSelect}" update="cualquierCosa" oncomplete="PF('eventoSeleccionado').show();" />
             
             
