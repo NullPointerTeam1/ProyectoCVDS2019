@@ -61,8 +61,8 @@ public class ReservaRecursosBean extends BasePageBean {
     private boolean tooltip = true;
     private boolean allDaySlot = true;
  
-    public ScheduleModel todasReservas() {
-    	eventModel.clear();
+    public void todasReservas() {
+    	eventModel = new DefaultScheduleModel();
     	
     	try {
     		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReservas();
@@ -73,6 +73,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle(Integer.toString(recursosReservados.get(i).getId())+" Reservado "+recursosReservados.get(i).getRecurso().getNombre());
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		    	eventico.setData(Integer.toString(recursosReservados.get(i).getId()));
 		   
 		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
 		    		eventico.setStyleClass("noRecurrente");
@@ -84,7 +85,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
-        return eventModel;
+        
     }
     public RecursoReservado getSuperReserva() {
     	RecursoReservado reserva = null;
@@ -195,7 +196,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
 	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
-	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","Si");
+	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa",recurrencia);
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
 	    	setErrorMessage("La reserva se ha realizado con exito");
 		} catch (InvalidSessionException e) {
