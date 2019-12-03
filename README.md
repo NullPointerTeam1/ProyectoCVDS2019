@@ -1,5 +1,6 @@
 # Biblioteca ECI
-## Proyecto final de Ciclos de Vida Del Desarrollo de Software. Periodo 2019-2
+## Proyecto final de Ciclos de Vida Del Desarrollo de Software. 
+## Periodo 2019-2
 ## Escuela Colombiana de Ingeniería Julio Garavito
 
 ### Integrantes:
@@ -32,6 +33,11 @@ Para ingresar como usuario es:
 
    **Usurio** prueba.2019@mail.escuelaing.edu.co
    **Contraseña** 123456789
+   
+**Nota:** un recurso es un elemento de la biblioteca que puede ser (Sala de estudio, Equipo de computo, Equipo de multimedia) el cual tiene un horario para poder ser reservado.
+Una reserva no puede ser realizada sobre una activa del mismo recurso.
+
+   
 ### Funcionalidades
 
 Para poder ingresar nos encontramos con esta diseño de alta calidad y con las últimas tendencias. 
@@ -91,6 +97,10 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
    * [JUnit (Property Based Testing)](https://junit.org/junit5/)
    * [Guice (Inyección de Dependencias)](https://github.com/google/guice)
    * [PostgreSQL (DataBase Management)](https://www.postgresql.org)
+   
+ 
+ ### Metodologia usada
+    Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion, Orlando Gelves se encargó de la parte de Front-End, Johann Paez Back-end, Johan Arias testing, Jose Goméz data base manager.
    
 ## Sprint 1
 
