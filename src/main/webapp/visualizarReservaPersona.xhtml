@@ -9,9 +9,6 @@ xmlns:shiro="http://shiro.apache.org/tags"
 lang="es">
 
 <h:head>
-  <f:metadata>
-    <f:viewParam name="idRecurso" value="#{ReservaRecursosBean.idRecursoActual}"/>
-  </f:metadata>
   <meta charset="utf-8"></meta>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
   <meta name="description" content=""></meta>
@@ -95,7 +92,8 @@ lang="es">
         
           <p id="azul">Reserva No Recurrente</p>
 
-          <p id="amarillo">Cancelado</p>
+          <p id="amarillo">Reserva Cancelada</p>
+          <p id="rosa">Reserva Pasada</p>
           </ul>
     </div>
     <div class="row">
@@ -108,7 +106,7 @@ lang="es">
       
 
     <h:panelGrid columnClasses="value">
-        #{ReservaRecursosBean.cargarEventos()}
+        #{ReservaRecursosBean.cargarEventosPorUsuario()}
         <p:schedule id="schedule" value="#{ReservaRecursosBean.eventModel}" widgetVar="myschedule" >
  
             <p:ajax event="dateSelect" listener="#{ReservaRecursosBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
@@ -188,7 +186,7 @@ lang="es">
             <label>ID</label>
             <p:inputText placeholder="ID" id="id" data-validation-required-message="Ingresa el ID del recurso" binding="#{superID}" value="#{ReservaRecursosBean.idActualEstado}">
             </p:inputText>
-            <p:commandButton value="Registrar Cancelacion" action="#{ReservaRecursosBean.cancelarReserva(superID.value)}" oncomplete="javascript:window.location.href='reservarRecurso.xhtml?idRecurso=2'; return false;">
+            <p:commandButton value="Registrar Cancelacion" action="#{ReservaRecursosBean.cancelarReserva(superID.value)}" oncomplete="PF('myschedule').update();">
               <p:confirm header="Confirmación de Reserva" message="¿Estas seguro de eliminar la reserva del recurso ?" icon="pi pi-exclamation-triangle" />
             </p:commandButton>
           </div>

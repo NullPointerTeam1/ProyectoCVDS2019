@@ -24,9 +24,22 @@
 	font-weight: bold;
 }
 
+#rosa{
+	background-color:hotpink;
+	color:black;
+	font-weight: bold;
+}
+
 .cancelado {
 	background-color: yellow;
     border-color: yellow;
+    color: white;
+    opacity: 1;
+}
+
+.pasada {
+	background-color: hotpink;
+    border-color: hotpink;
     color: white;
     opacity: 1;
 }
