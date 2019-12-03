@@ -34,7 +34,7 @@ import java.time.ZoneOffset;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "ReservaRecursosBean")
-@SessionScoped
+@ApplicationScoped
 public class ReservaRecursosBean extends BasePageBean {
 
 	/**
@@ -50,7 +50,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	private Date fechaInicio;
 	private List<Recurso> recursosFiltrados;
 	private String idRecursoActual;
-	private String idActualEstado ="1";
+	private static String idActualEstado ="1";
 	
 	
 	private ScheduleModel eventModel = new DefaultScheduleModel();
@@ -87,6 +87,7 @@ public class ReservaRecursosBean extends BasePageBean {
     }
     public RecursoReservado getSuperReserva() {
     	RecursoReservado reserva = null;
+    	System.out.println(idActualEstado);
     	try {
 			reserva = serviciosReserva.consultarReserva(Long.parseLong(idActualEstado));
 		} catch (NumberFormatException e) {
@@ -108,8 +109,9 @@ public class ReservaRecursosBean extends BasePageBean {
 		}
     	return temp;
     }
-    public ScheduleModel getEventModel() {
-    	eventModel.clear();
+    
+    public void cargarEventos() {
+    	eventModel = new DefaultScheduleModel();
     	try {
     		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReservaRecurso(recursoActual.getId());
 			for (int i= 0;i<recursosReservados.size();i++) {
@@ -119,6 +121,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle(Integer.toString(recursosReservados.get(i).getId())+" Reservado");
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		    	eventico.setData(Integer.toString(recursosReservados.get(i).getId()));
 		    	
 		    	if (recursosReservados.get(i).getEstado().equals("Cancelado")) {
 		    		eventico.setStyleClass("cancelado");
@@ -132,6 +135,8 @@ public class ReservaRecursosBean extends BasePageBean {
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
+    }
+    public ScheduleModel getEventModel() {
         return eventModel;
     }
     
@@ -181,7 +186,11 @@ public class ReservaRecursosBean extends BasePageBean {
     }
      
   
-     
+    public void onEventSelect(SelectEvent selectEvent) {
+    	event = (ScheduleEvent) selectEvent.getObject();
+    	System.out.println(event.getData());
+    	idActualEstado = (String) event.getData();
+    }
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent();
     }
@@ -396,23 +405,19 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public void cancelarReserva(String id) {
-		System.out.println("Ey pase por acá");
+		System.out.println("Entre");
 		try {
 			Usuario usuario = serviciosReserva.consultarUsuarioPorCorreo((String) SecurityUtils.getSubject().getSession().getAttribute("Correo"));
-			RecursoReservado tempReservado = serviciosReserva.consultarReserva(Long.parseLong(id));
-			System.out.println("Ey pase por acá2");
+			RecursoReservado tempReservado = serviciosReserva.consultarReserva(Long.parseLong(idActualEstado));
+			System.out.println("Pase esta mierda");
 			if(SecurityUtils.getSubject().hasRole("U") || usuario.getCarnet()!=tempReservado.getUsuario().getCarnet()) {
-				System.out.println("Ey pase por acá3 NO USUARIO "+usuario.getCarnet()+" "+tempReservado.getUsuario().getCarnet());
+				System.out.println(usuario.getCarnet()+" "+tempReservado.getUsuario().getCarnet());
 				setErrorMessage("No eres el usuario que realizo la reserva o un administrador");
-			}else if (recursoActual.getId()!=tempReservado.getRecurso().getId()) {
-				System.out.println("Ey pase por acá3NO ID");
-				setErrorMessage("No estas en las reservas del tipo de recurso que tratas de cancelar, dirigete a las reservas de ese recurso (index)");
 			}else {
-				System.out.println("Ey pase por acáYES");
-				serviciosReserva.cancelarReserva(Long.parseLong(id), "Cancelado", usuario);
+				System.out.println("Pase");
+				serviciosReserva.cancelarReserva(Long.parseLong(idActualEstado), "Cancelado", usuario);
 				setErrorMessage("La cencelación fue correctamente diligenciada");
 			}
-			System.out.println("Ey pase por acá3");
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
