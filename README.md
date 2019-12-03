@@ -99,8 +99,17 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
    * [PostgreSQL (DataBase Management)](https://www.postgresql.org)
    
  
- ### Metodologia usada
-Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion, Orlando Gelves se encargó de la parte de Front-End, Johann Paez Back-end, Johan Arias testing, Jose Goméz data base manager.
+## Metodologia usada
+
+Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion los cuales son:
+
+|     Nombre    |     Rol         |
+|:--------------:|:-------------: |
+|**Orlando Antonio Gelves Kerguelen** |Front-End|
+|**Johann Sebastian Páez Campos** |Back-end|
+|**Johan Sebastian Arias Amador** |testing|
+|**Jose Luis Gomez Camacho** |data base manager|
+
    
 ## Sprint 1
 
@@ -132,6 +141,17 @@ En le segundo sprint nos tomo mas tiempo de lo esperado las correcciones del spr
 ### Retrospectiva
 
 En el tercer sprint no alcanzamos a terminar la historia de uso numero nueve, se arreglaron los issues y se terminaron las demás historias. el trabajo en equipo fue fudamental durante este proyecto, ya que todos  trabajaron en conjuntó para sacar este proyecto adelante.
+
+## Análisis estático de código
+
+![analisisCodigo](img/analisisCodigo.PNG)
+
+###
+
+
+
+
+
 
 **Conexion POSTGRESQL**
 
