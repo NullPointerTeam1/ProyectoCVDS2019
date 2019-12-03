@@ -48,15 +48,23 @@ Para el administrador es posible registrar un Nuevo recurso  llenando el formula
 
 También el administrador podrá cambiar el estado de un recurso el cual indicara si el recurso está disponible, ocupado o dañado *(No disponible)*
 
-![](img/Funcionalidad3.PNG)
+![](img/Funcionalidad4.PNG)
 
 Para poder reservar un recurso tendremos la siguiente vista en la cual podrá ver cuáles son las reservas que tiene ese recurso y también podrá reservarlo, desde que cumpla con el horario del recurso y no se cruce con alguna otra reserva. 
 
-![](img/Funcionalidad4.PNG)
+![](img/Funcionalidad5.PNG)
 
 También podrá programar una reserva para que todos los días se realice a la misma hora (Diario), cada semana el mismo día a la misma hora (semanal) o cada mes el mismo día a la misma hora (mensual)
 
-![](img/Funcionalidad5.PNG)
+![](img/Funcionalid6.PNG)
+
+después de esto el usuario podrá ver los detalles del recurso que reservo.
+
+![](img/Funcionalid7.PNG)
+
+El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea cancelar el recuso por algún otro motivo.
+
+![](img/Funcionalid8.PNG)
 
 ## Arquitectura y diseño detallado
 
@@ -93,6 +101,8 @@ También podrá programar una reserva para que todos los días se realice a la m
 ![Grafica](img/GraficaSprint1.PNG)
 
 ![Issues](img/sprint1issues.PNG)
+
+
 
 
 
