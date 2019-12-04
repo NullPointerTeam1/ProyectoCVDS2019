@@ -142,6 +142,10 @@ En le segundo sprint nos tomo mas tiempo de lo esperado las correcciones del spr
 
 En el tercer sprint no alcanzamos a terminar la historia de uso numero nueve, se arreglaron los issues y se terminaron las demás historias. el trabajo en equipo fue fudamental durante este proyecto, ya que todos  trabajaron en conjuntó para sacar este proyecto adelante.
 
+## Cubrimiento de pruebas (Jacoco)
+
+![test](img/test.png)
+
 ## Análisis estático de código
 
 ![analisisCodigo](img/analisisCodigo.PNG)
