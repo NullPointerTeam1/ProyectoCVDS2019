@@ -277,7 +277,10 @@ public class RecursosBibliotecaTest {
 		int dif = (int) fechaInicio.until(fechaFin, ChronoUnit.WEEKS);
 		assertTrue(numReservasInicial  == numReservasFinal - (dif +1) );
 	}
-	
+	/**
+	 * correccion despliegue
+	 * @throws ExcepcionServiciosBiblioteca
+	 */
 	
 	@Test
 	public void nodeberiaRegistrarReservaSemestre() throws ExcepcionServiciosBiblioteca {
