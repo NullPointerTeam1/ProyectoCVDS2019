@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 
 import org.primefaces.model.SelectableDataModel;
@@ -60,8 +61,8 @@ public class ReservaRecursosBean extends BasePageBean {
     private boolean tooltip = true;
     private boolean allDaySlot = true;
  
-    public ScheduleModel todasReservas() {
-    	eventModel.clear();
+    public void todasReservas() {
+    	eventModel = new DefaultScheduleModel();
     	
     	try {
     		List<RecursoReservado> recursosReservados = serviciosReserva.consultarReservas();
@@ -72,6 +73,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		    	eventico.setEndDate(Date.from(LocalDateTime.parse(recursosReservados.get(i).getFechaFinReserva().toString()+"T"+recursosReservados.get(i).getHoraFinReserva()).toInstant(ZoneOffset.ofHours(0))));
 		    	eventico.setTitle(Integer.toString(recursosReservados.get(i).getId())+" Reservado "+recursosReservados.get(i).getRecurso().getNombre());
 		    	eventico.setId(Integer.toString(recursosReservados.get(i).getId()));
+		    	eventico.setData(Integer.toString(recursosReservados.get(i).getId()));
 		   
 		    	if (recursosReservados.get(i).getRecurrente().equals("No")) {
 		    		eventico.setStyleClass("noRecurrente");
@@ -83,7 +85,7 @@ public class ReservaRecursosBean extends BasePageBean {
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
-        return eventModel;
+        
     }
     public RecursoReservado getSuperReserva() {
     	RecursoReservado reserva = null;
@@ -194,7 +196,7 @@ public class ReservaRecursosBean extends BasePageBean {
 	    	LocalDateTime fechaInicioTemp = event.getStartDate().toInstant().atZone(defaultZoneId).toLocalDateTime();
 	    	LocalDateTime fechaFinTemp = event.getEndDate().toInstant().atZone(defaultZoneId).toLocalDateTime(); 
 	    	RecursoReservado recursoReservado = new RecursoReservado(1, fechaInicioTemp.toLocalDate(), fechaFinTemp.toLocalDate(), 
-	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa","Si");
+	    			fechaInicioTemp.toLocalTime(), fechaFinTemp.toLocalTime(), LocalDate.now(),recursoActual, superUsuarioActual,"activa",recurrencia);
 	    	serviciosReserva.registrarReserva(recursoReservado, recurrencia);
 	    	setErrorMessage("La reserva se ha realizado con exito");
 		} catch (InvalidSessionException e) {
@@ -324,8 +326,14 @@ public class ReservaRecursosBean extends BasePageBean {
 
 	public Recurso consultarRecurso(String id) {
 		Recurso recurso = null;
+		String temp = "";
+		if (id.equals("")) {
+			temp = "1";
+		} else {
+			temp = id;
+		}
 		try {
-			recurso = serviciosReserva.consultarRecurso(Long.parseLong(id));
+			recurso = serviciosReserva.consultarRecurso(Long.parseLong(temp));
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
@@ -362,9 +370,17 @@ public class ReservaRecursosBean extends BasePageBean {
 	}
 	
 	public void actualizarEstadoRecurso(String id, String estado) {
+		System.out.println(id);
+		String temp = "";
+		if (id.equals("")) {
+			temp = "1";
+		} else {
+			temp = id;
+		}
+		//idActualEstado = "1";
 		try {
 			
-			serviciosReserva.actualizarEstadoRecurso(Long.parseLong(id), estado);
+			serviciosReserva.actualizarEstadoRecurso(Long.parseLong(temp), estado);
 		} catch (ExcepcionServiciosBiblioteca e) {
 			setErrorMessage(e);
 		}
@@ -447,6 +463,68 @@ public class ReservaRecursosBean extends BasePageBean {
 			setErrorMessage(e);
 		}
 	}
+	
+	
+	public List<RecursoReservado> consultarRecursosMasUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarRecursosMasUsados();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+		
+	}
+
+	
+	public List<RecursoReservado> consultarRecursosMenosUsados() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarRecursosMenosUsados();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarHorariosDeMayorOcupacion();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarHorariosDeMenorOcupacion();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarReservasRecurrentes() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarReservasRecurrentes();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+
+	
+	public List<RecursoReservado> consultarReservasCanceladas() throws ExcepcionServiciosBiblioteca {
+		try {
+			return serviciosReserva.consultarReservasCanceladas();
+		} catch (ExcepcionServiciosBiblioteca e) {
+			setErrorMessage(e);
+		}
+		return null;
+	}
+	
 	
 	public void setSelectedUsuario(Usuario usuario) {
 		this.selectedUsuario = usuario;

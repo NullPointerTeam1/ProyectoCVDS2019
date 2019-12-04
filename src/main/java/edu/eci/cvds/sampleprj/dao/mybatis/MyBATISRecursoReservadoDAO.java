@@ -70,4 +70,60 @@ public class MyBATISRecursoReservadoDAO implements RecursoReservadoDAO {
 		}
 	}
 
+	
+	// CONSULTAS HISOTRIA 9
+	@Override
+	public List<RecursoReservado> consultarRecursosMasUsados() {
+		try {
+			return recursoReservadoMapper.consultarRecursosMasUsados();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) al consultar Recursos Mas Usados", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarRecursosMenosUsados() {
+		try {
+			return recursoReservadoMapper.consultarRecursosMenosUsados();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) al consultar Recursos Menos Usados", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() {
+		try {
+			return recursoReservadoMapper.consultarHorariosDeMayorOcupacion();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) consultar Horarios De Mayor Ocupacion", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() {
+		try {
+			return recursoReservadoMapper.consultarHorariosDeMenorOcupacion();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) consultar Horarios De Menor Ocupacion", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasRecurrentes() {
+		try {
+			return recursoReservadoMapper.consultarReservasRecurrentes();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) consultar Reservas Recurrentes", e);
+		}
+	}
+
+	@Override
+	public List<RecursoReservado> consultarReservasCanceladas() {
+		try {
+			return recursoReservadoMapper.consultarReservasCanceladas();
+		} catch (org.apache.ibatis.exceptions.PersistenceException e) {
+			throw new PersistenceException("Error (P) consultar Reservas Canceladas", e);
+		}
+	}
+
 }

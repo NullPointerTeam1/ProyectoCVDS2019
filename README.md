@@ -1,5 +1,6 @@
 # Biblioteca ECI
-## Proyecto final de Ciclos de Vida Del Desarrollo de Software. Periodo 2019-2
+## Proyecto final de Ciclos de Vida Del Desarrollo de Software. 
+## Periodo 2019-2
 ## Escuela Colombiana de Ingeniería Julio Garavito
 
 ### Integrantes:
@@ -32,6 +33,11 @@ Para ingresar como usuario es:
 
    **Usurio** prueba.2019@mail.escuelaing.edu.co
    **Contraseña** 123456789
+   
+**Nota:** un recurso es un elemento de la biblioteca que puede ser (Sala de estudio, Equipo de computo, Equipo de multimedia) el cual tiene un horario para poder ser reservado.
+Una reserva no puede ser realizada sobre una activa del mismo recurso.
+
+   
 ### Funcionalidades
 
 Para poder ingresar nos encontramos con esta diseño de alta calidad y con las últimas tendencias. 
@@ -92,6 +98,19 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
    * [Guice (Inyección de Dependencias)](https://github.com/google/guice)
    * [PostgreSQL (DataBase Management)](https://www.postgresql.org)
    
+ 
+## Metodologia usada
+
+Utilizamos la metodología Scrum, dividimos el trabajo por roles durante el desarrollo de la aplicacion los cuales son:
+
+|     Nombre    |     Rol         |
+|:--------------:|:-------------: |
+|**Orlando Antonio Gelves Kerguelen** |Front-End|
+|**Johann Sebastian Páez Campos** |Back-end|
+|**Johan Sebastian Arias Amador** |testing|
+|**Jose Luis Gomez Camacho** |data base manager|
+
+   
 ## Sprint 1
 
 
@@ -99,11 +118,39 @@ El usuario podrá cancelar esta reserva si se llegó a equivocar o si desea canc
 
 ![Issues](img/sprint1issues.PNG)
 
-El primer  sprint se completó  todas las tareas planteadas. Cada integrante del equipo cumplió con los estándares de calidad necesarios y en el tiempo planteado. La página visualmente se ve muy bien, se pude ingresar como administrador o como usuario, se pueden visualizar os recursos disponibles de la biblioteca. Tenemos que corregir fallas pequeñas  en la experiencia de usuario y esperamos para el próximo sprint solucionarlos
+### Retrospectiva
+
+El primer  sprint se completó  todas las tareas planteadas. Cada integrante del equipo cumplió con los estándares de calidad necesarios y en el tiempo planteado. La página visualmente se ve muy bien, se puede ingresar como administrador o como usuario, se pueden visualizar os recursos disponibles de la biblioteca. Tenemos que corregir fallas pequeñas  en la experiencia de usuario y esperamos para el próximo sprint solucionarlos
+
+## Sprint 2
 
 ![Grafica](img/GraficaSprint2.PNG)
 
-![Issues](img/sprint2issues.PNG)
+![Issues](img/sprint3issues.PNG)
+
+### Retrospectiva
+
+En le segundo sprint nos tomo mas tiempo de lo esperado las correcciones del sprint uno, aunque tuvimos estos inconvenientes logramos terminar todas las tareas propuesta para el mismo, al final la grafica presenta un progreso insuperado debido a que agregamos el caso de uso “Sprint uno issues” a parte de esto nos olvidamos de mover las tareas al finalizarlas.
+
+## Sprint 3
+
+![Grafica](img/GraficaSprint3.PNG)
+
+
+
+### Retrospectiva
+
+En el tercer sprint no alcanzamos a terminar la historia de uso numero nueve, se arreglaron los issues y se terminaron las demás historias. el trabajo en equipo fue fudamental durante este proyecto, ya que todos  trabajaron en conjuntó para sacar este proyecto adelante.
+
+## Análisis estático de código
+
+![analisisCodigo](img/analisisCodigo.PNG)
+
+###
+
+
+
+
 
 
 **Conexion POSTGRESQL**

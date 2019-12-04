@@ -31,6 +31,7 @@ lang="es">
 </h:head>
 
 <h:body>
+  #{LoginBean.devolver()}
   <shiro:authenticated><script>location.href="/index.xhtml"</script></shiro:authenticated>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

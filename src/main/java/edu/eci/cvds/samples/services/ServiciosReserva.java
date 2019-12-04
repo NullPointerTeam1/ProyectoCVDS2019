@@ -48,5 +48,19 @@ public interface ServiciosReserva {
 	public List<RecursoReservado> consultarReservasDeUnUsuario(Usuario usuario) throws ExcepcionServiciosBiblioteca;
 	
 	public void cancelarReserva(long id, String estado, Usuario usuario) throws ExcepcionServiciosBiblioteca;
+	
+	// Historia 9
+	
+	public List<RecursoReservado> consultarRecursosMasUsados() throws ExcepcionServiciosBiblioteca;
+	
+	public List<RecursoReservado> consultarRecursosMenosUsados() throws ExcepcionServiciosBiblioteca;
+	
+	public List<RecursoReservado> consultarHorariosDeMayorOcupacion() throws ExcepcionServiciosBiblioteca;
+	
+	public List<RecursoReservado> consultarHorariosDeMenorOcupacion() throws ExcepcionServiciosBiblioteca;
+	
+	public List<RecursoReservado> consultarReservasRecurrentes() throws ExcepcionServiciosBiblioteca;
+	
+	public List<RecursoReservado> consultarReservasCanceladas() throws ExcepcionServiciosBiblioteca;
 
 }

@@ -120,6 +120,64 @@
     	WHERE idr = #{id}
     </update>
 
+    <select parameterType="map" id="consultarRecursosMasUsados"
+		resultMap="ReservadoResult">
+		select 
+		nombre, 
+		count(*) as Frecuencia 
+		from reservados, recursos 
+		where recurso = identificador 
+		group by nombre 
+		order by Frecuencia desc;		
+	</select>
+
+	<select parameterType="map" id="consultarRecursosMenosUsados"
+		resultMap="ReservadoResult">
+		select 
+		nombre, 
+		count(*) as Frecuencia 
+		from reservados, recursos 
+		where recurso = identificador 
+		group by nombre 
+		order by Frecuencia;		
+	</select>
+
+	<select parameterType="map" id="consultarHorariosDeMayorOcupacion"
+		resultMap="ReservadoResult">
+		select 
+		horainicioreserva, 
+		count(*) Fecha 
+		from reservados 
+		group by horainicioreserva 
+		order by Fecha desc;	
+	</select>
+
+	<select parameterType="map" id="consultarHorariosDeMenorOcupacion"
+		resultMap="ReservadoResult">
+		select 
+		horainicioreserva, 
+		count(*) Fecha 
+		from reservados 
+		group by horainicioreserva 
+		order by Fecha;	
+	</select>
+
+	<select parameterType="map" id="consultarReservasRecurrentes"
+		resultMap="ReservadoResult">
+		select 
+		* 
+		from reservados 
+		where recurrente = 'Si';
+	</select>
+
+	<select parameterType="map" id="consultarReservasCanceladas"
+		resultMap="ReservadoResult">
+		select 
+		* 
+		from 
+		reservados where estado = 'Cancelado';
+	</select>
+
 
 	<resultMap type='RecursoReservado' id='ReservadoResult'>
 		<id property='id' column='idr' />

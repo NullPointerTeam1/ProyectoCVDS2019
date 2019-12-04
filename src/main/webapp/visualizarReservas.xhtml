@@ -108,9 +108,11 @@ lang="es">
       
 
     <h:panelGrid columnClasses="value">
-        <p:schedule id="schedule" value="#{ReservaRecursosBean.todasReservas()}" widgetVar="myschedule" >
+        #{ReservaRecursosBean.todasReservas()}
+        <p:schedule id="schedule" value="#{ReservaRecursosBean.eventModel}" widgetVar="myschedule" >
  
             <p:ajax event="dateSelect" listener="#{ReservaRecursosBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            <p:ajax event="eventSelect" listener="#{ReservaRecursosBean.onEventSelect}" update="cualquierCosa" oncomplete="PF('eventoSeleccionado').show();" />
             
             
  
@@ -145,42 +147,37 @@ lang="es">
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
         <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-    </p:confirmDialog>     
+    </p:confirmDialog>   
+    <p:dialog widgetVar="eventoSeleccionado" header="Event Details" showEffect="clip" hideEffect="clip">
+    <h:panelGrid id="cualquierCosa" columns="2">
+ 
+            <h5>Recurso solicitado</h5>
+            <p:inputText value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).nombre}" disabled="true"/>
+            <h5>Informacion del Recurso</h5>
+            <p:inputTextarea value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).descripcion}" disabled="true"/>
+            <shiro:hasRole name="A">
+              <h5>Fecha de solicitud</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaReserva()}" disabled="true"/>
+              <h5>Usuario que lo solicita</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().usuario.correo}" disabled="true"/>
+              <h5>Programa del usuario que lo solicita</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().usuario.carrera}" disabled="true"/>
+            </shiro:hasRole>
+            <shiro:user>
+            <h5>Fecha Inicio</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaInicio()}" disabled="true"/>
+              <h5>Fecha Fin</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaFin()}" disabled="true"/>
+              <h5>Recurrencia</h5>
+              <p:inputText value="#{ReservaRecursosBean.getSuperReserva().recurrente}" disabled="true"/>
+            </shiro:user>
+                
+        </h:panelGrid>
+    
+    </p:dialog>
   </h:form>
-  <h:form>
-        <div class="control-group">
-          <div class="form-group floating-label-form-group controls">
-            <h:outputText value="Coloca el ID de la reserva (Aparece antes del nombre)"/>
-            <label>ID</label>
-            <p:inputText placeholder="ID" id="id" data-validation-required-message="Ingresa el ID del recurso" binding="#{superID}" value="#{ReservaRecursosBean.idActualEstado}">
-            <p:ajax event="keyup" update="visualizarCosa" />
-            </p:inputText>
-          </div>
-        </div>
-  </h:form>
-  <h:form id="visualizarCosa">
-  <h5>Recurso solicitado</h5>
-  <p:inputText value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).nombre}" disabled="true"/>
-  <h5>Informacion del Recurso</h5>
-  <p:inputTextarea value="#{ReservaRecursosBean.getSuperRecurso(ReservaRecursosBean.getSuperReserva().recurso.id).descripcion}" disabled="true"/>
-  <shiro:hasRole name="A">
-    <h5>Fecha de solicitud</h5>
-    <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaReserva()}" disabled="true"/>
-    <h5>Usuario que lo solicita</h5>
-    <p:inputText value="#{ReservaRecursosBean.getSuperReserva().usuario.correo}" disabled="true"/>
-    <h5>Programa del usuario que lo solicita</h5>
-    <p:inputText value="#{ReservaRecursosBean.getSuperReserva().usuario.carrera}" disabled="true"/>
-  </shiro:hasRole>
-  <shiro:user>
-
-  <h5>Fecha Inicio</h5>
-  <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaInicio()}" disabled="true"/>
-  <h5>Fecha Fin</h5>
-  <p:inputText value="#{ReservaRecursosBean.getSuperReserva().dameFechaFin()}" disabled="true"/>
-  <h5>Recurrencia</h5>
-  <p:inputText value="#{ReservaRecursosBean.getSuperReserva().recurrente}" disabled="true"/>
-  </shiro:user>
-  </h:form>
+  
+   
     </div>
   </div>
 
